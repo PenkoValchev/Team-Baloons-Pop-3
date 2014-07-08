@@ -57,13 +57,18 @@
                 }
             }
 
-            Person player = new Person();
-            player.Score = gameBoard.ShootCounter;
 
+            //TODO Checking is top score should not depend of creating instance of player.
+            //This takes useless memory. Need to be changed.
+
+            Console.WriteLine(ENTER_PLAYER_NAME);
+            string playerName = Console.ReadLine();
+            int playerScore = gameBoard.ShootCounter;
+
+            Player player = new Player(playerName, playerScore);
+            
             if (topScore.IsTopScore(player))
             {
-                Console.WriteLine(ENTER_PLAYER_NAME);
-                player.Name = Console.ReadLine();
                 topScore.AddToTopScoreList(player);
             }
 

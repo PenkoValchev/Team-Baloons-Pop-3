@@ -1,24 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BalloonsPops.Entities
+﻿namespace BalloonsPops.Entities
 {
-    class Person
+    using System;
+
+    public class Player
     {
-        string name;
-        int score;
+        private string _name;
+        private int _score;
+
+        public Player(string name)
+            : this(name, 0)
+        { }
+
+        public Player(string name, int score)
+        {
+            this.Name = name;
+            this.Score = score;
+        }
+
 
         public string Name
         {
             get
             {
-                return name;
+                return this._name;
             }
             set
             {
-                name = value;
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Name value should have at least one symbol.");
+                }
+                
+                this._name = value;
             }
         }
 
@@ -26,22 +39,27 @@ namespace BalloonsPops.Entities
         {
             get
             {
-                return score;
+                return this._score;
             }
             set
             {
-                score = value;
+                if (value < 0)
+                {
+                    throw new ArgumentException("Score can't be less than zero.");
+                }
+
+                this._score = value;
             }
         }
 
-        public static bool operator <(Person x, Person y)
+        public static bool operator <(Player firstPlayer, Player secondPlayer)
         {
-            return x.Score < y.Score;
+            return firstPlayer.Score < secondPlayer.Score;
         }
 
-        public static bool operator >(Person x, Person y)
+        public static bool operator >(Player firstPlayer, Player secondPlayer)
         {
-            return x.Score > y.Score;
+            return firstPlayer.Score > secondPlayer.Score;
         }
     }
 }

@@ -6,9 +6,9 @@ using BalloonsPops.Entities;
 
 namespace BalloonsPops.Actions
 {
-    class PersonScoreComparer : IComparer<Person>
+    class PersonScoreComparer : IComparer<Player>
     {
-        public int Compare(Person x, Person y)
+        public int Compare(Player x, Player y)
         {
             return x.Score.CompareTo(y.Score);
         }
