@@ -1,54 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BalloonsPops.Actions;
-using BalloonsPops.Entities;
-
-namespace BalloonsPops
+﻿namespace BalloonsPops
 {
-    class Engine
-    {
-        static void Main(string[] args)
-        {
-            GameBoard gb = new GameBoard();
-            gb.GenerateNewGame();
-            gb.PrintGameBoard();
-            TopScore ts = new TopScore();
+    using BalloonsPops.Actions;
+    using BalloonsPops.Entities;
+    using System;
 
-            ts.OpenTopScoreList();
+    public class Engine
+    {
+        private const string TOP = "top";
+        private const string RESTART = "restart";
+        private const string EXIT = "exit";
+        private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
+
+        static void Main()
+        {
+            GameBoard gameBoard = new GameBoard();
+            gameBoard.GenerateNewGame();
+            gameBoard.PrintGameBoard();
+            TopScore topScore = new TopScore();
+
+            topScore.OpenTopScoreList();
 
             bool isCoordinates;
             Coordinates coordinates = new Coordinates();
             Command command = new Command();
-            while (gb.RemainingBaloons > 0)
+
+            while (gameBoard.RemainingBaloons > 0)
             {
-                if (gb.ReadInput(out isCoordinates, ref coordinates, ref command))
+                if (gameBoard.ReadInput(out isCoordinates, ref coordinates, ref command))
                 {
                     if (isCoordinates)
                     {
-                        gb.Shoot(coordinates);
-                        gb.PrintGameBoard();
+                        gameBoard.Shoot(coordinates);
+                        gameBoard.PrintGameBoard();
                     }
                     else
                     {
                         switch (command.Value)
                         {
-                            case "top":
-                                {
-                                    ts.PrintScoreList();
-                                }
+                            case TOP:
+                                topScore.PrintScoreList();
                                 break;
-                            case "restart":
-                                {
-                                    gb.GenerateNewGame();
-                                    gb.PrintGameBoard();
-                                }
+                            case RESTART:
+                                gameBoard.GenerateNewGame();
+                                gameBoard.PrintGameBoard();
                                 break;
-                            case "exit":
-                                {
-                                    return;
-                                }
+                            case EXIT:
+                                return;
+                            default:
+                                throw new ArgumentException("Command value is not correct");
                         }
                     }
                 }
@@ -59,15 +58,16 @@ namespace BalloonsPops
             }
 
             Person player = new Person();
-            player.Score = gb.ShootCounter;
+            player.Score = gameBoard.ShootCounter;
 
-            if (ts.IsTopScore(player))
+            if (topScore.IsTopScore(player))
             {
-                Console.WriteLine("Please enter your name for the top scoreboard: ");
+                Console.WriteLine(ENTER_PLAYER_NAME);
                 player.Name = Console.ReadLine();
-                ts.AddToTopScoreList(player);
+                topScore.AddToTopScoreList(player);
             }
-            ts.SaveTopScoreList();
+
+            topScore.SaveTopScoreList();
         }
     }
 }
