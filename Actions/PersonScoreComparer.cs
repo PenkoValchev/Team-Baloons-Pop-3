@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BalloonsPops.Entities;
 
-namespace BalloonsPops
+namespace BalloonsPops.Actions
 {
     class PersonScoreComparer : IComparer<Person>
     {

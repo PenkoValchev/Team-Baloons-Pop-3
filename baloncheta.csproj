@@ -43,14 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="Coordinates.cs" />
+    <Compile Include="Actions\Command.cs" />
+    <Compile Include="Entities\Coordinates.cs" />
     <Content Include="TopScore.txt" />
-    <Compile Include="GameBoard.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PersonScoreComparer.cs" />
-    <Compile Include="baloncheta.cs" />
-    <Compile Include="TopScore.cs" />
+    <Compile Include="Entities\GameBoard.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Actions\PersonScoreComparer.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="Actions\TopScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
