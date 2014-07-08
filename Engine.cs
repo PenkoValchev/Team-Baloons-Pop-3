@@ -6,9 +6,6 @@
 
     public class Engine
     {
-        private const string TOP = "top";
-        private const string RESTART = "restart";
-        private const string EXIT = "exit";
         private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
 
         static void Main()
@@ -35,16 +32,16 @@
                     }
                     else
                     {
-                        switch (command.Value)
+                        switch (command.Name)
                         {
-                            case TOP:
+                            case Command.TOP:
                                 topScore.PrintScoreList();
                                 break;
-                            case RESTART:
+                            case Command.RESTART:
                                 gameBoard.GenerateNewGame();
                                 gameBoard.PrintGameBoard();
                                 break;
-                            case EXIT:
+                            case Command.EXIT:
                                 return;
                             default:
                                 throw new ArgumentException("Command value is not correct");

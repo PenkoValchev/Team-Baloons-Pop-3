@@ -53,9 +53,9 @@ namespace BalloonsPops.Actions
                     int substringsCount = substrings.Count<string>();
                     if (substringsCount > 0)
                     {
-                        Player player = new Player();
-                        player.Name = substrings[1];
-                        player.Score = int.Parse(substrings[substringsCount - 2]);
+                        string playerName = substrings[1];
+                        int playerScore = int.Parse(substrings[substringsCount - 2]);
+                        Player player = new Player(playerName, playerScore);
                         topScoreList.Add(player);
                     }
                     line = TopScoreStreamReader.ReadLine();

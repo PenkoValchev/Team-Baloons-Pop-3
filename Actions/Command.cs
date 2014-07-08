@@ -1,44 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BalloonsPops.Actions
+﻿namespace BalloonsPops.Actions
 {
-    class Command
+    public class Command
     {
+        public const string TOP = "top";
+        public const string RESTART = "restart";
+        public const string EXIT = "exit";
 
-        string c;
-
-        public string Value
-        {
-            get
-            {
-                return this.c;
-            }
-            set
-            {
-                this.c = value;
-            }
-        }
+        public string Name { get; set; }
 
         public static bool TryParse(string input, ref Command result)
         {
-            if (input == "top")
+            if (input == TOP)
             {
-                result.Value = input;
+                result.Name = input;
                 return true;
             }
 
-            if (input == "restart")
+            if (input == RESTART)
             {
-                result.Value = input;
+                result.Name = input;
                 return true;
             }
 
-            if (input == "exit")
+            if (input == EXIT)
             {
-                result.Value = input;
+                result.Name = input;
                 return true;
             }
 
