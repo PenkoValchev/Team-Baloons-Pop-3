@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Actions
+﻿namespace BalloonsPops.Game.Actions
 {
     public class Command
     {

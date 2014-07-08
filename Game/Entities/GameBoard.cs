@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BalloonsPops.Actions;
+using BalloonsPops.Game.Actions;
 
-namespace BalloonsPops.Entities
+namespace BalloonsPops.Game.Entities
 {
     class GameBoard
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using BalloonsPops.Entities;
+using BalloonsPops.Game.Entities;
 
-namespace BalloonsPops.Actions
+namespace BalloonsPops.Game.Actions
 {
     class TopScore
     {

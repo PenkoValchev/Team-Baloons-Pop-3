@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Entities
+﻿namespace BalloonsPops.Game.Entities
 {
     using System;
 

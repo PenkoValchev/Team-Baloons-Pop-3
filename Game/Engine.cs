@@ -1,7 +1,7 @@
-﻿namespace BalloonsPops
+﻿namespace BalloonsPops.Game
 {
-    using BalloonsPops.Actions;
-    using BalloonsPops.Entities;
+    using BalloonsPops.Game.Actions;
+    using BalloonsPops.Game.Entities;
     using System;
 
     public class Engine

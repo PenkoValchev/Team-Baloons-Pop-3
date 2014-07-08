@@ -43,17 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Command.cs" />
-    <Compile Include="Entities\Coordinates.cs" />
+    <Compile Include="Game\Actions\Command.cs" />
+    <Compile Include="Game\Entities\Coordinates.cs" />
     <Content Include="TopScore.txt" />
-    <Compile Include="Entities\GameBoard.cs" />
-    <Compile Include="Entities\Player.cs" />
-    <Compile Include="Actions\PersonScoreComparer.cs" />
-    <Compile Include="Engine.cs" />
-    <Compile Include="Actions\TopScore.cs" />
+    <Compile Include="Game\Entities\GameBoard.cs" />
+    <Compile Include="Game\Entities\Player.cs" />
+    <Compile Include="Game\Actions\PersonScoreComparer.cs" />
+    <Compile Include="Game\Engine.cs" />
+    <Compile Include="Game\Actions\TopScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

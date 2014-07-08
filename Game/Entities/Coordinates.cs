@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BalloonsPops.Entities
+namespace BalloonsPops.Game.Entities
 {
     class Coordinates
     {
