@@ -8,13 +8,19 @@
 
     public sealed class GameBoard
     {
-        char[,] gb = new char[25, 8];
-        int count = 0;
-        int balloonsCount = 50;
+        private const int GAME_BOARD_WIDTH = 25;
+        private const int GAME_BOARD_HEIGHT = 8;
+
+        private char[,] _gameBoard;
+        private int count = 0;
+        private int balloonsCount = 50;
 
         private static readonly GameBoard _gameBoardInstance = new GameBoard();
 
-        private GameBoard() { }
+        private GameBoard() 
+        {
+            _gameBoard = new char[GAME_BOARD_WIDTH, GAME_BOARD_HEIGHT];
+        }
 
         public static GameBoard Instance
         {
@@ -22,6 +28,35 @@
             {
                 return _gameBoardInstance;
             }
+        }
+
+        public int Width
+        {
+            get 
+            {
+                return this._gameBoard.GetLength(0);
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return this._gameBoard.GetLength(1);
+            }
+        }
+
+        public char[,] Board
+        {
+            get
+            {
+                return this._gameBoard;
+            }
+        }
+
+        public void SetGameBoardValues(char boardValue) 
+        {
+            throw new NotImplementedException();
         }
 
         public int ShootCounter
@@ -58,21 +93,6 @@
                     AddNewBaloonToGameBoard(c, (char)(random.Next(1, 5) + (int)'0'));
                 }
             }
-        }
-
-        public void PrintGameBoard()
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 25; j++)
-                {
-
-
-                    Console.Write(gb[j, i]);
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
         }
 
         public void Shoot(Balloon balloon)
@@ -160,7 +180,7 @@
             int xPosition, yPosition;
             xPosition = 4 + c.Column * 2;
             yPosition = 2 + c.Row;
-            gb[xPosition, yPosition] = value;
+            _gameBoard[xPosition, yPosition] = value;
         }
 
         private char get(Balloon c)
@@ -171,7 +191,7 @@
 
 
             yPosition = 2 + c.Row;
-            return gb[xPosition, yPosition];
+            return _gameBoard[xPosition, yPosition];
         }
 
         private void FillBlankGameBoard()
@@ -182,14 +202,14 @@
                 for (int j = 0; j < 25; j++)
                 {
 
-                    gb[j, i] = ' ';
+                    _gameBoard[j, i] = ' ';
                 }
             }
 
             //printing firs row
             for (int i = 0; i < 4; i++)
             {
-                gb[i, 0] = ' ';
+                _gameBoard[i, 0] = ' ';
             }
 
             char counter = '0';
@@ -197,14 +217,14 @@
 
             for (int i = 4; i < 25; i++)
             {
-                if ((i % 2 == 0) && counter <= '9') gb[i, 0] = (char)counter++;
-                else gb[i, 0] = ' ';
+                if ((i % 2 == 0) && counter <= '9') _gameBoard[i, 0] = (char)counter++;
+                else _gameBoard[i, 0] = ' ';
             }
 
             //printing second row
             for (int i = 3; i < 24; i++)
             {
-                gb[i, 1] = '-';
+                _gameBoard[i, 1] = '-';
             }
 
 
@@ -215,25 +235,25 @@
             {
                 if (counter <= '4')
                 {
-                    gb[0, i] = counter++;
-                    gb[1, i] = ' ';
+                    _gameBoard[0, i] = counter++;
+                    _gameBoard[1, i] = ' ';
 
 
-                    gb[2, i] = '|';
-                    gb[3, i] = ' ';
+                    _gameBoard[2, i] = '|';
+                    _gameBoard[3, i] = ' ';
                 }
             }
 
             //printing down game board wall
             for (int i = 3; i < 24; i++)
             {
-                gb[i, 7] = '-';
+                _gameBoard[i, 7] = '-';
             }
 
             //printing right game board wall
             for (int i = 2; i < 7; i++)
             {
-                gb[24, i] = '|';
+                _gameBoard[24, i] = '|';
             }
         }
 

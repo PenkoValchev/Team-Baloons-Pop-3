@@ -3,6 +3,7 @@
     using BalloonsPops.Core.Actions;
     using BalloonsPops.Core.Entities;
     using BalloonsPops.Core.Interfaces;
+    using BalloonsPops.UI;
     using System;
 
     public class Engine
@@ -13,7 +14,7 @@
         {
             GameBoard gameBoard = GameBoard.Instance;
             gameBoard.GenerateNewGame();
-            gameBoard.PrintGameBoard();
+            ConsolePrint.PrintGameBoard();
             TopScore topScore = new TopScore();
 
             topScore.OpenTopScoreList();
@@ -29,7 +30,7 @@
                     if (isCoordinates)
                     {
                         gameBoard.Shoot(balloon);
-                        gameBoard.PrintGameBoard();
+                        ConsolePrint.PrintGameBoard();
                     }
                     else
                     {
@@ -40,7 +41,7 @@
                                 break;
                             case Command.RESTART:
                                 gameBoard.GenerateNewGame();
-                                gameBoard.PrintGameBoard();
+                                ConsolePrint.PrintGameBoard();
                                 break;
                             case Command.EXIT:
                                 return;
