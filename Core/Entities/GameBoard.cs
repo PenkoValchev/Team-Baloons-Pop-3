@@ -10,10 +10,11 @@
     {
         private const int GAME_BOARD_WIDTH = 25;
         private const int GAME_BOARD_HEIGHT = 8;
+        public const int INITIAL_BALLOONS_COUNT = 50;
 
         private char[,] _gameBoard;
         private int count = 0;
-        private int balloonsCount = 50;
+        private int _balloonsCount = INITIAL_BALLOONS_COUNT;
 
         private static readonly GameBoard _gameBoardInstance = new GameBoard();
 
@@ -52,11 +53,22 @@
             {
                 return this._gameBoard;
             }
+            set
+            {
+                this._gameBoard = value;
+            }
         }
 
-        public void SetGameBoardValues(char boardValue) 
+        public int BalloonsCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return this._balloonsCount;
+            }
+            set
+            {
+                this._balloonsCount = value;
+            }
         }
 
         public int ShootCounter
@@ -67,38 +79,10 @@
             }
         }
 
-        public int RemainingBaloons
-        {
-            get
-            {
-                return balloonsCount;
-            }
-        }
-
-        public void GenerateNewGame()
-        {
-            Console.WriteLine("Welcome to “Balloons Pops” game. Please try to pop the balloons. Use 'top' to view the top scoreboard, 'restart' to start a new game and 'exit' to quit the game.");
-            balloonsCount = 50;
-            FillBlankGameBoard();
-            Random random = new Random();
-            Balloon c = new Balloon();
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    c.Column = i;
-                    c.Row = j;
-
-
-                    AddNewBaloonToGameBoard(c, (char)(random.Next(1, 5) + (int)'0'));
-                }
-            }
-        }
-
         public void Shoot(Balloon balloon)
         {
             char currentBaloon;
-            currentBaloon = get(balloon);
+            currentBaloon = Get(balloon);
             Balloon tempCoordinates = new Balloon();
 
             if (currentBaloon < '1' || currentBaloon > '4')
@@ -107,40 +91,40 @@
             }
 
             AddNewBaloonToGameBoard(balloon, '.');
-            balloonsCount--;
+            this.BalloonsCount--;
 
             tempCoordinates.Column = balloon.Column - 1;
             tempCoordinates.Row = balloon.Row;
-            while (currentBaloon == get(tempCoordinates))
+            while (currentBaloon == Get(tempCoordinates))
             {
                 AddNewBaloonToGameBoard(tempCoordinates, '.');
-                balloonsCount--;
+                this.BalloonsCount--;
                 tempCoordinates.Column--;
             }
 
             tempCoordinates.Column = balloon.Column + 1; tempCoordinates.Row = balloon.Row;
-            while (currentBaloon == get(tempCoordinates))
+            while (currentBaloon == Get(tempCoordinates))
             {
                 AddNewBaloonToGameBoard(tempCoordinates, '.');
-                balloonsCount--;
+                this.BalloonsCount--;
                 tempCoordinates.Column++;
             }
 
             tempCoordinates.Column = balloon.Column;
             tempCoordinates.Row = balloon.Row - 1;
-            while (currentBaloon == get(tempCoordinates))
+            while (currentBaloon == Get(tempCoordinates))
             {
                 AddNewBaloonToGameBoard(tempCoordinates, '.');
-                balloonsCount--;
+                this.BalloonsCount--;
                 tempCoordinates.Row--;
             }
 
             tempCoordinates.Column = balloon.Column;
             tempCoordinates.Row = balloon.Row + 1;
-            while (currentBaloon == get(tempCoordinates))
+            while (currentBaloon == Get(tempCoordinates))
             {
                 AddNewBaloonToGameBoard(tempCoordinates, '.');
-                balloonsCount--;
+                this.BalloonsCount--;
                 tempCoordinates.Row++;
             }
 
@@ -175,15 +159,16 @@
             }
         }
 
-        private void AddNewBaloonToGameBoard(Balloon c, char value)
+
+        //TODO: Think about right position of this method 
+        public void AddNewBaloonToGameBoard(Balloon balloon, char value)
         {
-            int xPosition, yPosition;
-            xPosition = 4 + c.Column * 2;
-            yPosition = 2 + c.Row;
+            int xPosition = 4 + balloon.Column * 2;
+            int yPosition = 2 + balloon.Row;
             _gameBoard[xPosition, yPosition] = value;
         }
 
-        private char get(Balloon c)
+        private char Get(Balloon c)
         {
             int xPosition, yPosition;
             if (c.Column < 0 || c.Row < 0 || c.Column > 9 || c.Row > 4) return 'e';
@@ -194,73 +179,10 @@
             return _gameBoard[xPosition, yPosition];
         }
 
-        private void FillBlankGameBoard()
-        {
-            //printing blank spaces
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 25; j++)
-                {
-
-                    _gameBoard[j, i] = ' ';
-                }
-            }
-
-            //printing firs row
-            for (int i = 0; i < 4; i++)
-            {
-                _gameBoard[i, 0] = ' ';
-            }
-
-            char counter = '0';
-
-
-            for (int i = 4; i < 25; i++)
-            {
-                if ((i % 2 == 0) && counter <= '9') _gameBoard[i, 0] = (char)counter++;
-                else _gameBoard[i, 0] = ' ';
-            }
-
-            //printing second row
-            for (int i = 3; i < 24; i++)
-            {
-                _gameBoard[i, 1] = '-';
-            }
-
-
-            //printing left game board wall
-            counter = '0';
-
-            for (int i = 2; i < 8; i++)
-            {
-                if (counter <= '4')
-                {
-                    _gameBoard[0, i] = counter++;
-                    _gameBoard[1, i] = ' ';
-
-
-                    _gameBoard[2, i] = '|';
-                    _gameBoard[3, i] = ' ';
-                }
-            }
-
-            //printing down game board wall
-            for (int i = 3; i < 24; i++)
-            {
-                _gameBoard[i, 7] = '-';
-            }
-
-            //printing right game board wall
-            for (int i = 2; i < 7; i++)
-            {
-                _gameBoard[24, i] = '|';
-            }
-        }
-
         private void Swap(Balloon c, Balloon c1)
         {
-            char tmp = get(c);
-            AddNewBaloonToGameBoard(c, get(c1));
+            char tmp = Get(c);
+            AddNewBaloonToGameBoard(c, Get(c1));
             AddNewBaloonToGameBoard(c1, tmp);
 
 
@@ -275,7 +197,7 @@
                 {
                     c.Column = i;
                     c.Row = j;
-                    if (get(c) == '.')
+                    if (Get(c) == '.')
                     {
                         for (int k = j; k > 0; k--)
                         {

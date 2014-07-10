@@ -13,7 +13,7 @@
         static void Main()
         {
             GameBoard gameBoard = GameBoard.Instance;
-            gameBoard.GenerateNewGame();
+            ConsolePrint.GenerateNewGame();
             ConsolePrint.PrintGameBoard();
             TopScore topScore = new TopScore();
 
@@ -23,7 +23,7 @@
             Balloon balloon = new Balloon();
             Command command = new Command();
 
-            while (gameBoard.RemainingBaloons > 0)
+            while (gameBoard.BalloonsCount > 0)
             {
                 if (gameBoard.ReadInput(out isCoordinates, ref balloon, ref command))
                 {
@@ -40,7 +40,7 @@
                                 topScore.PrintScoreList();
                                 break;
                             case Command.RESTART:
-                                gameBoard.GenerateNewGame();
+                                ConsolePrint.GenerateNewGame();
                                 ConsolePrint.PrintGameBoard();
                                 break;
                             case Command.EXIT:
