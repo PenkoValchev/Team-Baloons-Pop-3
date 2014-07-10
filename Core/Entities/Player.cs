@@ -1,6 +1,6 @@
-﻿namespace BalloonsPops.Game.Entities
+﻿namespace BalloonsPops.Core.Entities
 {
-    using BalloonsPops.Game.Interfaces;
+    using BalloonsPops.Core.Interfaces;
     using System;
 
     public class Player : IPlayer

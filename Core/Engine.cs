@@ -1,8 +1,8 @@
-﻿namespace BalloonsPops.Game
+﻿namespace BalloonsPops.Core
 {
-    using BalloonsPops.Game.Actions;
-    using BalloonsPops.Game.Entities;
-    using BalloonsPops.Game.Interfaces;
+    using BalloonsPops.Core.Actions;
+    using BalloonsPops.Core.Entities;
+    using BalloonsPops.Core.Interfaces;
     using System;
 
     public class Engine
@@ -19,16 +19,16 @@
             topScore.OpenTopScoreList();
 
             bool isCoordinates;
-            Coordinates coordinates = new Coordinates();
+            Balloon balloon = new Balloon();
             Command command = new Command();
 
             while (gameBoard.RemainingBaloons > 0)
             {
-                if (gameBoard.ReadInput(out isCoordinates, ref coordinates, ref command))
+                if (gameBoard.ReadInput(out isCoordinates, ref balloon, ref command))
                 {
                     if (isCoordinates)
                     {
-                        gameBoard.Shoot(coordinates);
+                        gameBoard.Shoot(balloon);
                         gameBoard.PrintGameBoard();
                     }
                     else

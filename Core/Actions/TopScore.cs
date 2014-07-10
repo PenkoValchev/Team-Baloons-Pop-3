@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using BalloonsPops.Game.Entities;
-using BalloonsPops.Game.Interfaces;
-
-namespace BalloonsPops.Game.Actions
+﻿namespace BalloonsPops.Core.Actions
 {
-    class TopScore
+    using BalloonsPops.Core.Entities;
+    using BalloonsPops.Core.Interfaces;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    public class TopScore
     {
         public const int MAX_TOP_SCORE_COUNT = 5;
         List<IPlayer> topScoreList = new List<IPlayer>();
@@ -47,7 +46,7 @@ namespace BalloonsPops.Game.Actions
 
         public void OpenTopScoreList()
         {
-            using (StreamReader TopScoreStreamReader = new StreamReader("..\\..\\TopScore.txt"))
+            using (StreamReader TopScoreStreamReader = new StreamReader(@"..\..\Content\TopScore.txt"))
             {
                 string line = TopScoreStreamReader.ReadLine();
                 while (line != null)
@@ -72,7 +71,7 @@ namespace BalloonsPops.Game.Actions
             if (topScoreList.Count > 0)
             {
                 string toWrite = "";
-                using (StreamWriter TopScoreStreamWriter = new StreamWriter("..\\..\\TopScore.txt"))
+                using (StreamWriter TopScoreStreamWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
                 {
                     for (int i = 0; i < topScoreList.Count; i++)
                     {

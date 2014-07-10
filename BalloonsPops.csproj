@@ -43,21 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\Actions\Command.cs" />
-    <Compile Include="Game\Entities\Coordinates.cs" />
-    <Compile Include="Game\Interfaces\IPlayer.cs" />
-    <Content Include="TopScore.txt" />
-    <Compile Include="Game\Entities\GameBoard.cs" />
-    <Compile Include="Game\Entities\Player.cs" />
-    <Compile Include="Game\Actions\PersonScoreComparer.cs" />
-    <Compile Include="Game\Engine.cs" />
-    <Compile Include="Game\Actions\TopScore.cs" />
+    <Compile Include="Core\Actions\Command.cs" />
+    <Compile Include="Core\Entities\BalloonTypes.cs" />
+    <Compile Include="Core\Entities\Balloon.cs" />
+    <Compile Include="Core\Interfaces\IPlayer.cs" />
+    <Compile Include="UI\ConsolePrint.cs" />
+    <Content Include="Content\TopScore.txt" />
+    <Compile Include="Core\Entities\GameBoard.cs" />
+    <Compile Include="Core\Entities\Player.cs" />
+    <Compile Include="Core\Actions\PersonScoreComparer.cs" />
+    <Compile Include="Core\Engine.cs" />
+    <Compile Include="Core\Actions\TopScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
+    <None Include="Content\Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

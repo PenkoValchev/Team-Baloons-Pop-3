@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Game.Interfaces
+﻿namespace BalloonsPops.Core.Interfaces
 {
     public interface IPlayer
     {

@@ -1,40 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BalloonsPops.Game.Entities
+﻿namespace BalloonsPops.Core.Entities
 {
-    public class Coordinates
+    using System;
+    using System.Linq;
+
+    public class Balloon
     {
-        private int x;
-        private int y;
+        private const int MAX_COLUMN_VALUE = 9;
+        private const int MAX_ROW_VALUE = 4;
+        private const int MIN_VALUE = 0;
 
-        public int X
+        private int _column;
+        private int _row;
+
+        public Balloon() { }
+
+        public int Column
         {
             get
             {
-                return x;
+                return this._column;
             }
             set
             {
-                if (value >= 0 && value <= 9) x = value;
+                if (MIN_VALUE > value || value > MAX_COLUMN_VALUE)
+                {
+                    throw new ArgumentException("Wrong column value for the Balloon");
+                }
+
+                this._column = value;
             }
         }
 
-        public int Y
+        public int Row
         {
             get
             {
-                return y;
+                return this._row;
             }
             set
             {
-                if (value >= 0 && value <= 4) y = value;
+                if (MIN_VALUE > value || value > MAX_ROW_VALUE)
+                {
+                    throw new ArgumentException("Wrong row value for the Balloon");
+                }
+
+                this._row = value;
             }
         }
 
-        public static bool TryParse(string input, ref Coordinates result)
+        public static bool TryParse(string input, ref Balloon result)
         {
             char[] separators = { ' ', ',' };
 
@@ -52,7 +66,7 @@ namespace BalloonsPops.Game.Entities
             {
                 if (x >= 0 && x <= 9)
                 {
-                    result.X = x;
+                    result.Column = x;
                 }
                 else
                 {
@@ -72,7 +86,7 @@ namespace BalloonsPops.Game.Entities
             {
                 if (y >= 0 && y <= 4)
                 {
-                    result.Y = y;
+                    result.Row = y;
                 }
                 else
                 {
