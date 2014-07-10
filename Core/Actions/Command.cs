@@ -1,30 +1,16 @@
 ﻿namespace BalloonsPops.Core.Actions
 {
-    public class Command
+    using System;
+
+    public static class Command
     {
-        public const string TOP = "top";
-        public const string RESTART = "restart";
-        public const string EXIT = "exit";
-
-        public string Name { get; set; }
-
-        public static bool TryParse(string input, ref Command result)
+        public static bool IsValidType(string input)
         {
-            if (input == TOP)
-            {
-                result.Name = input;
-                return true;
-            }
+            CommandTypes currentType;
+            bool isCorrectEnum = Enum.TryParse(input, true, out currentType);
 
-            if (input == RESTART)
+            if (isCorrectEnum)
             {
-                result.Name = input;
-                return true;
-            }
-
-            if (input == EXIT)
-            {
-                result.Name = input;
                 return true;
             }
 

@@ -7,28 +7,19 @@
     {
         private const int MAX_COLUMN_VALUE = 9;
         private const int MAX_ROW_VALUE = 4;
-        private const int MIN_VALUE = 0;
+        private const int MIN_VALUE = default(int);
 
         private int _column;
         private int _row;
 
-        public Balloon() { }
+        public Balloon()
+            : this(MIN_VALUE, MIN_VALUE)
+        { }
 
-        public int Column
+        public Balloon(int row, int col) 
         {
-            get
-            {
-                return this._column;
-            }
-            set
-            {
-                if (MIN_VALUE > value || value > MAX_COLUMN_VALUE)
-                {
-                    throw new ArgumentException("Wrong column value for the Balloon");
-                }
-
-                this._column = value;
-            }
+            this.Row = row;
+            this.Column = col;
         }
 
         public int Row
@@ -48,59 +39,61 @@
             }
         }
 
-        public static bool TryParse(string input, ref Balloon result)
+        public int Column
         {
-            char[] separators = { ' ', ',' };
-
-            string[] substrings = input.Split(separators);
-
-            if (substrings.Count<string>() != 2)
+            get
             {
-                Console.WriteLine("Invalid move or command!");
-                return false;
+                return this._column;
             }
-
-            string coordinate = substrings[1].Trim();
-            int x;
-            if (int.TryParse(coordinate, out x))
+            set
             {
-                if (x >= 0 && x <= 9)
+                if (MIN_VALUE > value || value > MAX_COLUMN_VALUE)
                 {
-                    result.Column = x;
+                    throw new ArgumentException("Wrong column value for the Balloon");
                 }
-                else
-                {
-                    Console.WriteLine("Wrong x coordinates");
-                    return false;
-                }
+
+                this._column = value;
             }
-            else
+        }
+
+        public static Balloon Parse(string input)
+        {
+            char[] separators = { ' ', ',', '.', '-' };
+
+            string[] coordinates = input.Split(separators);
+
+            if (coordinates.Length != 2)
             {
-                Console.WriteLine("Invalid move or command!");
-                return false;
+                throw new InvalidOperationException("Invalid move or command!");
             }
 
-            coordinate = substrings[0].Trim();
-            int y;
-            if (int.TryParse(coordinate, out y))
+            string rowInput = coordinates[0].Trim();
+            int row;
+
+            if (!int.TryParse(rowInput, out row))
             {
-                if (y >= 0 && y <= 4)
-                {
-                    result.Row = y;
-                }
-                else
-                {
-                    Console.WriteLine("Wrong y coordinates");
-                    return false;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid move or command!");
-                return false;
+                throw new InvalidOperationException("Invalid move or command!");
             }
 
-            return true;
+            if (row < 0 && row > 4)
+            {
+                throw new ArgumentException("Wrong row coordinates");
+            }
+
+            string columnInput = coordinates[1].Trim();
+            int column;
+
+            if (!int.TryParse(columnInput, out column))
+            {
+                throw new InvalidOperationException("Invalid move or command!");
+            }
+
+            if (column < 0 || column > 9)
+            {
+                throw new ArgumentException("Wrong column value");
+            }
+
+            return new Balloon(row, column);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BalloonsPops.UI
 {
+    using BalloonsPops.Core.Actions;
     using BalloonsPops.Core.Entities;
     using System;
 
@@ -28,17 +29,24 @@
             _gameBoard.BalloonsCount = GameBoard.INITIAL_BALLOONS_COUNT;
             FillBlankGameBoard();
             Random random = new Random();
-            Balloon c = new Balloon();
-            for (int i = 0; i < 10; i++)
+            
+            for (int col = 0; col < 10; col++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int row = 0; row < 5; row++)
                 {
-                    c.Column = i;
-                    c.Row = j;
+                    Balloon balloon = new Balloon(row, col);
 
-                    _gameBoard.AddNewBaloonToGameBoard(c, (char)(random.Next(1, 5) + (int)'0'));
+                    _gameBoard.AddNewBaloonToGameBoard(balloon, (char)(random.Next(1, 5) + (int)'0'));
                 }
             }
+        }
+
+        public static string ReadInput()
+        {
+            Console.Write("Enter a row and column: ");
+            string consoleInput = Console.ReadLine();
+
+            return consoleInput;
         }
 
         private static void FillBlankGameBoard()

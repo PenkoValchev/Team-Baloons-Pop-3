@@ -18,7 +18,7 @@
 
         private static readonly GameBoard _gameBoardInstance = new GameBoard();
 
-        private GameBoard() 
+        private GameBoard()
         {
             _gameBoard = new char[GAME_BOARD_WIDTH, GAME_BOARD_HEIGHT];
         }
@@ -33,7 +33,7 @@
 
         public int Width
         {
-            get 
+            get
             {
                 return this._gameBoard.GetLength(0);
             }
@@ -93,6 +93,10 @@
             AddNewBaloonToGameBoard(balloon, '.');
             this.BalloonsCount--;
 
+
+            //TODO: This logic check if it's possible to shoot neighbours balloons but don't check for out of range exception
+            //Should be changed!!!
+
             tempCoordinates.Column = balloon.Column - 1;
             tempCoordinates.Row = balloon.Row;
             while (currentBaloon == Get(tempCoordinates))
@@ -132,34 +136,6 @@
             LandFlyingBaloons();
         }
 
-        public bool ReadInput(out bool IsCoordinates, ref Balloon coordinates, ref Command command)
-        {
-            Console.Write("Enter a row and column: ");
-            string consoleInput = Console.ReadLine();
-
-            coordinates = new Balloon();
-            command = new Command();
-
-            if (Command.TryParse(consoleInput, ref command))
-            {
-                IsCoordinates = false;
-                return true;
-            }
-            else if (Balloon.TryParse(consoleInput, ref coordinates))
-            {
-                IsCoordinates = true;
-                return true;
-            }
-
-
-            else
-            {
-                IsCoordinates = false;
-                return false;
-            }
-        }
-
-
         //TODO: Think about right position of this method 
         public void AddNewBaloonToGameBoard(Balloon balloon, char value)
         {
@@ -184,35 +160,27 @@
             char tmp = Get(c);
             AddNewBaloonToGameBoard(c, Get(c1));
             AddNewBaloonToGameBoard(c1, tmp);
-
-
         }
 
         private void LandFlyingBaloons()
         {
-            Balloon c = new Balloon();
-            for (int i = 0; i < 10; i++)
+
+            for (int col = 0; col < 10; col++)
             {
-                for (int j = 0; j <= 4; j++)
+                for (int row = 0; row <= 4; row++)
                 {
-                    c.Column = i;
-                    c.Row = j;
-                    if (Get(c) == '.')
+                    Balloon balloon = new Balloon(row, col);
+
+                    if (Get(balloon) == '.')
                     {
-                        for (int k = j; k > 0; k--)
+                        for (int k = row; k > 0; k--)
                         {
-                            Balloon tempCoordinates = new Balloon();
-                            Balloon tempCoordinates1 = new Balloon();
-                            tempCoordinates.Column = i;
-                            tempCoordinates.Row = k;
-                            tempCoordinates1.Column = i;
-                            tempCoordinates1.Row = k - 1;
+                            Balloon tempCoordinates = new Balloon(k, col);
+                            Balloon tempCoordinates1 = new Balloon(k - 1, col);
                             Swap(tempCoordinates, tempCoordinates1);
                         }
                     }
                 }
-
-
             }
         }
     }

@@ -19,40 +19,47 @@
 
             topScore.OpenTopScoreList();
 
-            bool isCoordinates;
-            Balloon balloon = new Balloon();
-            Command command = new Command();
-
             while (gameBoard.BalloonsCount > 0)
             {
-                if (gameBoard.ReadInput(out isCoordinates, ref balloon, ref command))
+                var input = ConsolePrint.ReadInput();
+                var isCommand = Command.IsValidType(input);
+
+                try
                 {
-                    if (isCoordinates)
+                    if (isCommand)
                     {
-                        gameBoard.Shoot(balloon);
-                        ConsolePrint.PrintGameBoard();
-                    }
-                    else
-                    {
-                        switch (command.Name)
+                        CommandTypes currentType;
+                        Enum.TryParse(input, true, out currentType);
+
+                        switch (currentType)
                         {
-                            case Command.TOP:
+                            case CommandTypes.TOP:
                                 topScore.PrintScoreList();
                                 break;
-                            case Command.RESTART:
+                            case CommandTypes.RESTART:
                                 ConsolePrint.GenerateNewGame();
                                 ConsolePrint.PrintGameBoard();
                                 break;
-                            case Command.EXIT:
+                            case CommandTypes.EXIT:
                                 return;
                             default:
                                 throw new ArgumentException("Command value is not correct");
                         }
                     }
+                    else
+                    {
+                        Balloon balloon = Balloon.Parse(input);
+                        gameBoard.Shoot(balloon);
+                        ConsolePrint.PrintGameBoard();
+                    }
                 }
-                else
+                catch (ArgumentException ex)
                 {
-                    Console.WriteLine("Wrong Input!");
+                    Console.WriteLine(ex.Message);
+                }
+                catch (InvalidOperationException ioEx)
+                {
+                    Console.WriteLine(ioEx.Message);
                 }
             }
 
@@ -65,7 +72,7 @@
             int playerScore = gameBoard.ShootCounter;
 
             IPlayer player = new Player(playerName, playerScore);
-            
+
             if (topScore.IsTopScore(player))
             {
                 topScore.AddToTopScoreList(player);
