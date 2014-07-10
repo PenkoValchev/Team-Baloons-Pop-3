@@ -149,7 +149,7 @@ namespace BalloonsPops.Game.Entities
 
             if (currentBaloon < '1' || currentBaloon > '4')
             {
-                Console.WriteLine("Illegal move: cannot pop missing ballon!");return;
+                Console.WriteLine("Illegal move: cannot pop missing ballon!"); return;
             }
 
 

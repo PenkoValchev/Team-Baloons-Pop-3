@@ -1,8 +1,9 @@
 ﻿namespace BalloonsPops.Game.Entities
 {
+    using BalloonsPops.Game.Interfaces;
     using System;
 
-    public class Player
+    public class Player : IPlayer
     {
         private string _name;
         private int _score;
@@ -24,13 +25,13 @@
             {
                 return this._name;
             }
-            set
+            private set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("Name value should have at least one symbol.");
                 }
-                
+
                 this._name = value;
             }
         }

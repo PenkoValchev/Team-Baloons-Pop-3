@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BalloonsPops.Game.Entities;
+using BalloonsPops.Game.Interfaces;
 
 namespace BalloonsPops.Game.Actions
 {
-    class PersonScoreComparer : IComparer<Player>
+    public class PersonScoreComparer : IComparer<IPlayer>
     {
-        public int Compare(Player x, Player y)
+        public int Compare(IPlayer x, IPlayer y)
         {
             return x.Score.CompareTo(y.Score);
         }

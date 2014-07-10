@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Game\Actions\Command.cs" />
     <Compile Include="Game\Entities\Coordinates.cs" />
+    <Compile Include="Game\Interfaces\IPlayer.cs" />
     <Content Include="TopScore.txt" />
     <Compile Include="Game\Entities\GameBoard.cs" />
     <Compile Include="Game\Entities\Player.cs" />

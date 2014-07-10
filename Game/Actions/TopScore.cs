@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using BalloonsPops.Game.Entities;
+using BalloonsPops.Game.Interfaces;
 
 namespace BalloonsPops.Game.Actions
 {
     class TopScore
     {
         public const int MAX_TOP_SCORE_COUNT = 5;
-        List<Player> topScoreList = new List<Player>();
+        List<IPlayer> topScoreList = new List<IPlayer>();
 
-        public bool IsTopScore(Player person)
+        public bool IsTopScore(IPlayer person)
         {
             if (topScoreList.Count >= MAX_TOP_SCORE_COUNT)
             {
                 PersonScoreComparer comparer = new PersonScoreComparer();
                 topScoreList.Sort(comparer);
-                if (topScoreList[MAX_TOP_SCORE_COUNT - 1] > person)
+
+                Player player = person as Player;
+                Player playerWithMaxScore = topScoreList[MAX_TOP_SCORE_COUNT - 1] as Player;
+                if (playerWithMaxScore > player)
                 {
                     return true;
                 }
@@ -30,7 +34,7 @@ namespace BalloonsPops.Game.Actions
             return true;
         }
 
-        public void AddToTopScoreList(Player person)
+        public void AddToTopScoreList(IPlayer person)
         {
             topScoreList.Add(person);
             PersonScoreComparer comparer = new PersonScoreComparer();

@@ -2,6 +2,7 @@
 {
     using BalloonsPops.Game.Actions;
     using BalloonsPops.Game.Entities;
+    using BalloonsPops.Game.Interfaces;
     using System;
 
     public class Engine
@@ -62,7 +63,7 @@
             string playerName = Console.ReadLine();
             int playerScore = gameBoard.ShootCounter;
 
-            Player player = new Player(playerName, playerScore);
+            IPlayer player = new Player(playerName, playerScore);
             
             if (topScore.IsTopScore(player))
             {
