@@ -11,7 +11,7 @@
 
         static void Main()
         {
-            GameBoard gameBoard = new GameBoard();
+            GameBoard gameBoard = GameBoard.Instance;
             gameBoard.GenerateNewGame();
             gameBoard.PrintGameBoard();
             TopScore topScore = new TopScore();
