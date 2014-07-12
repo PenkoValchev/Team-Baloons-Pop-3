@@ -12,8 +12,12 @@
         private const int GAME_BOARD_HEIGHT = 8;
         public const int INITIAL_BALLOONS_COUNT = 50;
 
+        //Should separete game board and real playing field
+        private const int PLAYING_FIELD_WIDTH = 10;
+        private const int PLAYING_FIELD_HEIGHT = 5;
+
         private char[,] _gameBoard;
-        private int count = 0;
+        private int shootCounts = 0;
         private int _balloonsCount = INITIAL_BALLOONS_COUNT;
 
         private static readonly GameBoard _gameBoardInstance = new GameBoard();
@@ -75,7 +79,7 @@
         {
             get
             {
-                return count;
+                return shootCounts;
             }
         }
 
@@ -83,57 +87,120 @@
         {
             char currentBaloon;
             currentBaloon = Get(balloon);
-            Balloon tempCoordinates = new Balloon();
 
             if (currentBaloon < '1' || currentBaloon > '4')
             {
-                Console.WriteLine("Illegal move: cannot pop missing ballon!"); return;
+                throw new InvalidOperationException("Illegal move: cannot pop missing ballon!");
+            }
+
+            //TODO: Need to implement interfaces, char value for current balloon should be changed to Enumeration
+
+            var directionsValues = Enum.GetValues(typeof(Directions));
+
+            foreach (var direction in directionsValues)
+            {
+                Balloon baseBalloon = (Balloon)balloon.Clone();
+                while (true)
+                {
+                    if (!TryPopNeighbourBallonByDirection(ref baseBalloon, currentBaloon, (Directions)direction))
+                    {
+                        break;
+                    }
+                }
             }
 
             AddNewBaloonToGameBoard(balloon, '.');
             this.BalloonsCount--;
 
-
-            //TODO: This logic check if it's possible to shoot neighbours balloons but don't check for out of range exception
-            //Should be changed!!!
-
-            tempCoordinates.Column = balloon.Column - 1;
-            tempCoordinates.Row = balloon.Row;
-            while (currentBaloon == Get(tempCoordinates))
-            {
-                AddNewBaloonToGameBoard(tempCoordinates, '.');
-                this.BalloonsCount--;
-                tempCoordinates.Column--;
-            }
-
-            tempCoordinates.Column = balloon.Column + 1; tempCoordinates.Row = balloon.Row;
-            while (currentBaloon == Get(tempCoordinates))
-            {
-                AddNewBaloonToGameBoard(tempCoordinates, '.');
-                this.BalloonsCount--;
-                tempCoordinates.Column++;
-            }
-
-            tempCoordinates.Column = balloon.Column;
-            tempCoordinates.Row = balloon.Row - 1;
-            while (currentBaloon == Get(tempCoordinates))
-            {
-                AddNewBaloonToGameBoard(tempCoordinates, '.');
-                this.BalloonsCount--;
-                tempCoordinates.Row--;
-            }
-
-            tempCoordinates.Column = balloon.Column;
-            tempCoordinates.Row = balloon.Row + 1;
-            while (currentBaloon == Get(tempCoordinates))
-            {
-                AddNewBaloonToGameBoard(tempCoordinates, '.');
-                this.BalloonsCount--;
-                tempCoordinates.Row++;
-            }
-
-            count++;
+            shootCounts++;
             LandFlyingBaloons();
+        }
+
+        private bool IsPopNeighbourSuccessful(char searchedBalloon, Balloon neighbourBalloon)
+        {
+            if (searchedBalloon == Get(neighbourBalloon))
+            {
+                AddNewBaloonToGameBoard(neighbourBalloon, '.');
+                this.BalloonsCount--;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool TryPopNeighbourBallonByDirection(ref Balloon balloon, char searchedBalloon, Directions direction)
+        {
+            Balloon neighbourBalloon = new Balloon();
+
+            if (direction == Directions.Up)
+            {
+                if (balloon.Row > 0)
+                {
+                    neighbourBalloon.Column = balloon.Column;
+                    neighbourBalloon.Row = balloon.Row - 1;
+
+                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                    {
+                        balloon.Row--;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            if (direction == Directions.Down)
+            {
+                if (balloon.Row < PLAYING_FIELD_HEIGHT - 1)
+                {
+                    neighbourBalloon.Column = balloon.Column;
+                    neighbourBalloon.Row = balloon.Row + 1;
+
+                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                    {
+                        balloon.Row++;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            if (direction == Directions.Left)
+            {
+                if (balloon.Column > 0)
+                {
+                    neighbourBalloon.Column = balloon.Column - 1;
+                    neighbourBalloon.Row = balloon.Row;
+
+                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                    {
+                        balloon.Column--;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+            if (direction == Directions.Right)
+            {
+                if (balloon.Column < PLAYING_FIELD_WIDTH - 1)
+                {
+                    neighbourBalloon.Column = balloon.Column + 1;
+                    neighbourBalloon.Row = balloon.Row;
+
+                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                    {
+                        balloon.Column++;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return false;
         }
 
         //TODO: Think about right position of this method 

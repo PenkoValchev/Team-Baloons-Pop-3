@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    public class Balloon
+    public class Balloon : ICloneable
     {
         private const int MAX_COLUMN_VALUE = 9;
         private const int MAX_ROW_VALUE = 4;
@@ -94,6 +94,15 @@
             }
 
             return new Balloon(row, column);
+        }
+
+        public object Clone()
+        {
+            Balloon newBalloon = new Balloon();
+            newBalloon.Column = this.Column;
+            newBalloon.Row = this.Row;
+
+            return newBalloon;
         }
     }
 }
