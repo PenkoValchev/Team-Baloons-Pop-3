@@ -46,9 +46,9 @@
 
         public void OpenTopScoreList()
         {
-            using (StreamReader TopScoreStreamReader = new StreamReader(@"..\..\Content\TopScore.txt"))
+            using (StreamReader topScoreStreamReader = new StreamReader(@"..\..\Content\TopScore.txt"))
             {
-                string line = TopScoreStreamReader.ReadLine();
+                string line = topScoreStreamReader.ReadLine();
                 while (line != null)
                 {
                     char[] separators = { ' ' };
@@ -61,7 +61,7 @@
                         Player player = new Player(playerName, playerScore);
                         topScoreList.Add(player);
                     }
-                    line = TopScoreStreamReader.ReadLine();
+                    line = topScoreStreamReader.ReadLine();
                 }
             }
         }

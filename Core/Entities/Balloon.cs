@@ -60,7 +60,7 @@
         {
             char[] separators = { ' ', ',', '.', '-' };
 
-            string[] coordinates = input.Split(separators);
+            string[] coordinates = input.Split(separators,StringSplitOptions.RemoveEmptyEntries);
 
             if (coordinates.Length != 2)
             {
