@@ -96,6 +96,18 @@
             return new Balloon(row, column);
         }
 
+        public void ChangePositionByDirection(bool isMoveUpDown, int value)
+        {
+            if (isMoveUpDown)
+            {
+                this.Row += value;
+            }
+            else
+            {
+                this.Column += value;
+            }
+        }
+
         public object Clone()
         {
             Balloon newBalloon = new Balloon();

@@ -102,7 +102,7 @@
                 Balloon baseBalloon = (Balloon)balloon.Clone();
                 while (true)
                 {
-                    if (!TryPopNeighbourBallonByDirection(ref baseBalloon, currentBaloon, (Directions)direction))
+                    if (!AllocatePopingByDirection(baseBalloon, currentBaloon, (Directions)direction))
                     {
                         break;
                     }
@@ -129,75 +129,44 @@
             return false;
         }
 
-        private bool TryPopNeighbourBallonByDirection(ref Balloon balloon, char searchedBalloon, Directions direction)
+        private bool TryPopNeighbours(bool isMoveUpDown, int value, Balloon balloon, char searchedBalloon)
         {
-            Balloon neighbourBalloon = new Balloon();
+            Balloon neighbourBalloon = new Balloon(balloon.Row, balloon.Column);
+            try
+            {
+                neighbourBalloon.ChangePositionByDirection(isMoveUpDown, value);
 
+                if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                {
+                    balloon.ChangePositionByDirection(isMoveUpDown, value);
+                    return true;
+                }
+            }
+            catch (ArgumentException ex)
+            { }
+
+            return false;
+        }
+
+        private bool AllocatePopingByDirection(Balloon balloon, char searchedBalloon, Directions direction)
+        {
             if (direction == Directions.Up)
             {
-                if (balloon.Row > 0)
-                {
-                    neighbourBalloon.Column = balloon.Column;
-                    neighbourBalloon.Row = balloon.Row - 1;
-
-                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
-                    {
-                        balloon.Row--;
-                        return true;
-                    }
-                }
-
-                return false;
+                return TryPopNeighbours(true, -1, balloon, searchedBalloon);
             }
 
             if (direction == Directions.Down)
             {
-                if (balloon.Row < PLAYING_FIELD_HEIGHT - 1)
-                {
-                    neighbourBalloon.Column = balloon.Column;
-                    neighbourBalloon.Row = balloon.Row + 1;
-
-                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
-                    {
-                        balloon.Row++;
-                        return true;
-                    }
-                }
-
-                return false;
+                return TryPopNeighbours(true, 1, balloon, searchedBalloon);
             }
 
             if (direction == Directions.Left)
             {
-                if (balloon.Column > 0)
-                {
-                    neighbourBalloon.Column = balloon.Column - 1;
-                    neighbourBalloon.Row = balloon.Row;
-
-                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
-                    {
-                        balloon.Column--;
-                        return true;
-                    }
-                }
-
-                return false;
+                return TryPopNeighbours(false, -1, balloon, searchedBalloon);
             }
             if (direction == Directions.Right)
             {
-                if (balloon.Column < PLAYING_FIELD_WIDTH - 1)
-                {
-                    neighbourBalloon.Column = balloon.Column + 1;
-                    neighbourBalloon.Row = balloon.Row;
-
-                    if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
-                    {
-                        balloon.Column++;
-                        return true;
-                    }
-                }
-
-                return false;
+                return TryPopNeighbours(false, 1, balloon, searchedBalloon);
             }
 
             return false;
