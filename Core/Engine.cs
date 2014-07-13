@@ -9,6 +9,7 @@
     public class Engine
     {
         private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
+        public static Random random = new Random();
 
         static void Main()
         {

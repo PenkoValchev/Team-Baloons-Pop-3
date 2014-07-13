@@ -3,6 +3,7 @@
     using BalloonsPops.Core.Actions;
     using BalloonsPops.Core.Entities;
     using System;
+    using System.Text;
 
     public static class ConsolePrint
     {
@@ -10,35 +11,87 @@
 
         private static GameBoard _gameBoard = GameBoard.Instance;
 
+        private static string PrintBorder()
+        {
+            StringBuilder border = new StringBuilder();
+            border.Append(new String(' ', 3));
+            border.Append(new String('-', 21));
+            border.AppendLine();
+
+            return border.ToString();
+        }
+
+        private static string PrintGameFieldHeader()
+        {
+            StringBuilder header = new StringBuilder();
+            //Header
+            header.AppendLine();
+            header.Append(new String(' ', 4));
+            int counter = 0;
+            for (int i = 0, len = _gameBoard.Width * 2; i < len; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    header.Append(' ');
+                }
+                else
+                {
+                    header.Append(counter);
+                    counter++;
+                }
+            }
+            header.AppendLine();
+            header.Append(PrintBorder());
+
+            return header.ToString();
+        }
+
+        private static string PrintGameFieldBody()
+        {
+            StringBuilder body = new StringBuilder();
+            for (int row = 0; row < _gameBoard.Height; row++)
+            {
+                body.Append(row);
+                body.Append(' ');
+                body.Append('|');
+                var colCounter = 0;
+                for (int j = 0, len = (int)(_gameBoard.Width * 2.5); j < len; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        body.Append(' ');
+                    }
+                    else
+                    {
+                        body.Append(_gameBoard.Board[row, colCounter]);
+                        colCounter++;
+                        if (colCounter >= _gameBoard.Width)
+                        {
+                            break;
+                        }
+                    }
+                }
+                body.AppendFormat("{0}{1}", ' ', '|');
+                body.AppendLine();
+            }
+
+            body.Append(PrintBorder());
+
+            return body.ToString();
+        }
+
         public static void PrintGameBoard()
         {
-            for (int i = 0; i < _gameBoard.Height; i++)
-            {
-                for (int j = 0; j < _gameBoard.Width; j++)
-                {
-                    Console.Write(_gameBoard.Board[j, i]);
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
+            StringBuilder outPut = new StringBuilder();
+            outPut.Append(PrintGameFieldHeader());
+            outPut.Append(PrintGameFieldBody());
+
+            Console.WriteLine(outPut.ToString());
         }
 
         public static void GenerateNewGame()
         {
             Console.WriteLine(BALLOON_GAME_WELCOME_MESSAGE);
-            _gameBoard.BalloonsCount = GameBoard.INITIAL_BALLOONS_COUNT;
-            FillBlankGameBoard();
-            Random random = new Random();
-            
-            for (int col = 0; col < 10; col++)
-            {
-                for (int row = 0; row < 5; row++)
-                {
-                    Balloon balloon = new Balloon(row, col);
-
-                    _gameBoard.AddNewBaloonToGameBoard(balloon, (char)(random.Next(1, 5) + (int)'0'));
-                }
-            }
         }
 
         public static string ReadInput()
@@ -47,69 +100,6 @@
             string consoleInput = Console.ReadLine();
 
             return consoleInput;
-        }
-
-        private static void FillBlankGameBoard()
-        {
-            var gameBoard = _gameBoard.Board;
-
-            //printing blank spaces
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 25; j++)
-                {
-                    gameBoard[j, i] = ' ';
-                }
-            }
-
-            //printing firs row
-            for (int i = 0; i < 4; i++)
-            {
-                gameBoard[i, 0] = ' ';
-            }
-
-            char counter = '0';
-
-
-            for (int i = 4; i < 25; i++)
-            {
-                if ((i % 2 == 0) && counter <= '9') gameBoard[i, 0] = (char)counter++;
-                else gameBoard[i, 0] = ' ';
-            }
-
-            //printing second row
-            for (int i = 3; i < 24; i++)
-            {
-                gameBoard[i, 1] = '-';
-            }
-
-            //printing left game board wall
-            counter = '0';
-
-            for (int i = 2; i < 8; i++)
-            {
-                if (counter <= '4')
-                {
-                    gameBoard[0, i] = counter++;
-                    gameBoard[1, i] = ' ';
-
-
-                    gameBoard[2, i] = '|';
-                    gameBoard[3, i] = ' ';
-                }
-            }
-
-            //printing down game board wall
-            for (int i = 3; i < 24; i++)
-            {
-                gameBoard[i, 7] = '-';
-            }
-
-            //printing right game board wall
-            for (int i = 2; i < 7; i++)
-            {
-                gameBoard[24, i] = '|';
-            }
         }
     }
 }
