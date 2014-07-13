@@ -58,7 +58,7 @@
 
         public static Balloon Parse(string input)
         {
-            char[] separators = { ' ', ',', '.', '-' };
+            char[] separators = { ' ', ',', '.' };
 
             string[] coordinates = input.Split(separators,StringSplitOptions.RemoveEmptyEntries);
 

@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
 
     public class TopScore
     {
@@ -52,12 +53,12 @@
                 while (line != null)
                 {
                     char[] separators = { ' ' };
-                    string[] substrings = line.Split(separators);
-                    int substringsCount = substrings.Count<string>();
+                    string[] playerList = line.Split(separators);
+                    int substringsCount = playerList.Count<string>();
                     if (substringsCount > 0)
                     {
-                        string playerName = substrings[1];
-                        int playerScore = int.Parse(substrings[substringsCount - 2]);
+                        string playerName = playerList[1];
+                        int playerScore = int.Parse(playerList[substringsCount - 2]);
                         Player player = new Player(playerName, playerScore);
                         topScoreList.Add(player);
                     }
@@ -71,12 +72,12 @@
             if (topScoreList.Count > 0)
             {
                 string toWrite = "";
-                using (StreamWriter TopScoreStreamWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
+                using (StreamWriter topScoreStreamWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
                 {
                     for (int i = 0; i < topScoreList.Count; i++)
                     {
                         toWrite += i.ToString() + ". " + topScoreList[i].Name + " --> " + topScoreList[i].Score.ToString() + " moves";
-                        TopScoreStreamWriter.WriteLine(toWrite);
+                        topScoreStreamWriter.WriteLine(toWrite);
                         toWrite = "";
                     }
                 }
@@ -86,18 +87,24 @@
 
         public void PrintScoreList()
         {
-            Console.WriteLine("Scoreboard:");
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Scoreboard:");
+            builder.AppendLine();
+            //Console.WriteLine("Scoreboard:");
             if (topScoreList.Count > 0)
             {
                 for (int i = 0; i < topScoreList.Count; i++)
                 {
-                    Console.WriteLine(i.ToString() + ". " + topScoreList[i].Name + " --> " + topScoreList[i].Score.ToString() + "moves");
+                    builder.AppendFormat(string.Format("{0}. {1} --> {2}  moves", i+1, topScoreList[i].Name, topScoreList[i].Score));
+                    builder.AppendLine();
                 }
             }
             else
             {
-                Console.WriteLine("Scoreboard is empty");
+                builder.Append("Scoreboard is empty");
+                builder.AppendLine();
             }
+            Console.WriteLine(builder.ToString());
         }
     }
 }
