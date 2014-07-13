@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Core.Entities
 {
-    enum BalloonTypes
+    public enum BalloonTypes
     {
         Red,
         Green,

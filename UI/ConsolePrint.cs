@@ -21,6 +21,25 @@
             return border.ToString();
         }
 
+        private static char ParseBalloonToChar(BalloonTypes balloonType)
+        {
+            switch (balloonType)
+            {
+                case BalloonTypes.Red:
+                    return '1';
+                case BalloonTypes.Green:
+                    return '2';
+                case BalloonTypes.Blue:
+                    return '3';
+                case BalloonTypes.Yellow:
+                    return '4';
+                case BalloonTypes.Deflated:
+                    return '.';
+                default:
+                    throw new ArgumentException("Wrong balloon type.");
+            }
+        }
+
         private static string PrintGameFieldHeader()
         {
             StringBuilder header = new StringBuilder();
@@ -63,7 +82,8 @@
                     }
                     else
                     {
-                        body.Append(_gameBoard.Board[row, colCounter]);
+                        char balloonType = ParseBalloonToChar(_gameBoard.Board[row, colCounter].Type);
+                        body.Append(balloonType);
                         colCounter++;
                         if (colCounter >= _gameBoard.Width)
                         {

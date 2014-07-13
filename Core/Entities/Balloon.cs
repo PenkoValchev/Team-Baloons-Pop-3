@@ -16,7 +16,7 @@
             : this(MIN_VALUE, MIN_VALUE)
         { }
 
-        public Balloon(int row, int col) 
+        public Balloon(int row, int col)
         {
             this.Row = row;
             this.Column = col;
@@ -56,11 +56,13 @@
             }
         }
 
+        public BalloonTypes Type { get; set; }
+
         public static Balloon Parse(string input)
         {
             char[] separators = { ' ', ',', '.' };
 
-            string[] coordinates = input.Split(separators,StringSplitOptions.RemoveEmptyEntries);
+            string[] coordinates = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
             if (coordinates.Length != 2)
             {

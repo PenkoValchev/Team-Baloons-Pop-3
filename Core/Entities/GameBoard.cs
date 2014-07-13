@@ -14,7 +14,7 @@
 
         //TODO change underscore for private fields 
 
-        private char[,] _gameBoard;
+        private Balloon[,] _gameBoard;
         private int shootCounts = 0;
         private int _balloonsCount = INITIAL_BALLOONS_COUNT;
 
@@ -22,7 +22,7 @@
 
         private GameBoard()
         {
-            _gameBoard = new char[GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH];
+            _gameBoard = new Balloon[GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH];
             this.BalloonsCount = INITIAL_BALLOONS_COUNT;
             GenerateContent();
         }
@@ -51,7 +51,7 @@
             }
         }
 
-        public char[,] Board
+        public Balloon[,] Board
         {
             get
             {
@@ -85,15 +85,14 @@
 
         public void Shoot(Balloon balloon)
         {
-            char currentBaloon = this.Board[balloon.Row, balloon.Column];
-            //currentBaloon = Get(balloon);
+            BalloonTypes currentBallonType = this.Board[balloon.Row, balloon.Column].Type;
 
-            if (currentBaloon < '1' || currentBaloon > '4')
+            if (currentBallonType == BalloonTypes.Deflated)
             {
-                throw new InvalidOperationException("Illegal move: cannot pop missing ballon!");
+                throw new InvalidOperationException("Wrong move: Cannot pop missing balloon!");
             }
 
-            //TODO: Need to implement interfaces, char value for current balloon should be changed to Enumeration
+            //TODO: Need to implement interfaces
 
             var directionsValues = Enum.GetValues(typeof(Directions));
 
@@ -102,25 +101,25 @@
                 Balloon baseBalloon = (Balloon)balloon.Clone();
                 while (true)
                 {
-                    if (!AllocatePopingByDirection(baseBalloon, currentBaloon, (Directions)direction))
+                    if (!AllocatePopingByDirection(baseBalloon, (Directions)direction))
                     {
                         break;
                     }
                 }
             }
 
-            AddNewBaloonToGameBoard(balloon, '.');
+            AddNewBaloonToGameBoard(balloon, BalloonTypes.Deflated);
             this.BalloonsCount--;
 
             shootCounts++;
             LandFlyingBaloons();
         }
 
-        private bool IsPopNeighbourSuccessful(char searchedBalloon, Balloon neighbourBalloon)
+        private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, Balloon neighbourBalloon)
         {
-            if (searchedBalloon == this.Board[neighbourBalloon.Row, neighbourBalloon.Column])
+            if (balloonType == this.Board[neighbourBalloon.Row, neighbourBalloon.Column].Type)
             {
-                AddNewBaloonToGameBoard(neighbourBalloon, '.');
+                AddNewBaloonToGameBoard(neighbourBalloon, BalloonTypes.Deflated);
                 this.BalloonsCount--;
 
                 return true;
@@ -129,14 +128,15 @@
             return false;
         }
 
-        private bool TryPopNeighbours(bool isMoveUpDown, int value, Balloon balloon, char searchedBalloon)
+        private bool TryPopNeighbours(bool isMoveUpDown, int value, Balloon balloon)
         {
+
             Balloon neighbourBalloon = new Balloon(balloon.Row, balloon.Column);
             try
             {
                 neighbourBalloon.ChangePositionByDirection(isMoveUpDown, value);
 
-                if (IsPopNeighbourSuccessful(searchedBalloon, neighbourBalloon))
+                if (IsPopNeighbourSuccessful(balloon.Type, neighbourBalloon))
                 {
                     balloon.ChangePositionByDirection(isMoveUpDown, value);
                     return true;
@@ -148,58 +148,68 @@
             return false;
         }
 
-        private bool AllocatePopingByDirection(Balloon balloon, char searchedBalloon, Directions direction)
+        private bool AllocatePopingByDirection(Balloon balloon, Directions direction)
         {
             if (direction == Directions.Up)
             {
-                return TryPopNeighbours(true, -1, balloon, searchedBalloon);
+                return TryPopNeighbours(true, -1, balloon);
             }
 
             if (direction == Directions.Down)
             {
-                return TryPopNeighbours(true, 1, balloon, searchedBalloon);
+                return TryPopNeighbours(true, 1, balloon);
             }
 
             if (direction == Directions.Left)
             {
-                return TryPopNeighbours(false, -1, balloon, searchedBalloon);
+                return TryPopNeighbours(false, -1, balloon);
             }
             if (direction == Directions.Right)
             {
-                return TryPopNeighbours(false, 1, balloon, searchedBalloon);
+                return TryPopNeighbours(false, 1, balloon);
             }
 
             return false;
         }
 
         //TODO: Think about right position of this method 
-        public void AddNewBaloonToGameBoard(Balloon balloon, char value)
+        public void AddNewBaloonToGameBoard(Balloon balloon, BalloonTypes balloonType)
         {
-            this.Board[balloon.Row, balloon.Column] = value;
+            balloon.Type = balloonType;
+            SetBalloonToGameBoard(balloon);
         }
 
-        private void Swap(Balloon c, Balloon c1)
+        public void SetBalloonToGameBoard(Balloon balloon)
         {
-            char tmp = this.Board[c.Row, c.Column];
-            AddNewBaloonToGameBoard(c, this.Board[c1.Row, c1.Column]);
-            AddNewBaloonToGameBoard(c1, tmp);
+            this.Board[balloon.Row, balloon.Column] = balloon;
+        }
+
+        private void SwapBalloons(Balloon firstBalloon, Balloon secondBalloon)
+        {
+            firstBalloon.Type = secondBalloon.Type;
+            secondBalloon.Type = BalloonTypes.Deflated;
+
+            SetBalloonToGameBoard(firstBalloon);
+            SetBalloonToGameBoard(secondBalloon);
         }
 
         private void LandFlyingBaloons()
         {
-            for (int col = 0; col < 10; col++)
+            for (int row = 0; row < GAME_BOARD_HEIGHT; row++)
             {
-                for (int row = 0; row <= 4; row++)
+                for (int col = 0; col < GAME_BOARD_WIDTH; col++)
                 {
-                    Balloon balloon = new Balloon(row, col);
-
-                    if (this.Board[balloon.Row, balloon.Column] == '.')
+                    if (this.Board[row, col].Type == BalloonTypes.Deflated)
                     {
-                        for (int k = row; k > 0; k--)
+                        for (int swapingRow = row; swapingRow > 0; swapingRow--)
                         {
-                            Balloon tempCoordinates = new Balloon(k, col);
-                            Balloon tempCoordinates1 = new Balloon(k - 1, col);
-                            Swap(tempCoordinates, tempCoordinates1);
+                            Balloon upperOfDeflatedBalloon = this.Board[swapingRow - 1, col];
+
+                            if (upperOfDeflatedBalloon.Type != BalloonTypes.Deflated)
+                            {
+                                Balloon deflatedBalloon = this.Board[swapingRow, col];
+                                SwapBalloons(deflatedBalloon, upperOfDeflatedBalloon);
+                            }
                         }
                     }
                 }
@@ -213,18 +223,18 @@
                 for (int col = 0; col < this.Width; col++)
                 {
                     Balloon balloon = new Balloon(row, col);
-                    //TODO: Board should contein balloons not chars
-                    char randomBalloon = GenerateRandomBalloon();
-                    AddNewBaloonToGameBoard(balloon, randomBalloon);
+                    BalloonTypes balloonType = GenerateRandomBalloonType();
+                    balloon.Type = balloonType;
+
+                    SetBalloonToGameBoard(balloon);
                 }
             }
         }
 
-        private char GenerateRandomBalloon()
+        private BalloonTypes GenerateRandomBalloonType()
         {
-            var randomNumber = Engine.random.Next(1, 5);
-            var randomBalloon = (char)(randomNumber+ (int)'0');
-            return randomBalloon;
+            var randomNumber = Engine.random.Next(0, 4);
+            return (BalloonTypes)randomNumber;
         }
     }
 }
