@@ -7,11 +7,18 @@
         public static bool IsValidType(string input)
         {
             CommandTypes currentType;
-            bool isCorrectEnum = Enum.TryParse(input, true, out currentType);
+            
+            int inputAsInt;
+            bool isInputInteger = int.TryParse(input, out inputAsInt);
 
-            if (isCorrectEnum)
+            if (!isInputInteger)
             {
-                return true;
+                bool isCorrectEnum = Enum.TryParse(input, true, out currentType);
+
+                if (isCorrectEnum)
+                {
+                    return true;
+                }
             }
 
             return false;
