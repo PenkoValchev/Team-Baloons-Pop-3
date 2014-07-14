@@ -10,18 +10,18 @@
 
     public class TopScore
     {
-        public const int MAX_TOP_SCORE_COUNT = 5;
+        public const int TOP_SCORE_LIMIT = 5;
         List<IPlayer> topScoreList = new List<IPlayer>();
 
         public bool IsTopScore(IPlayer person)
         {
-            if (topScoreList.Count >= MAX_TOP_SCORE_COUNT)
+            if (topScoreList.Count >= TOP_SCORE_LIMIT)
             {
                 PersonScoreComparer comparer = new PersonScoreComparer();
                 topScoreList.Sort(comparer);
 
                 Player player = person as Player;
-                Player playerWithMaxScore = topScoreList[MAX_TOP_SCORE_COUNT - 1] as Player;
+                Player playerWithMaxScore = topScoreList[TOP_SCORE_LIMIT - 1] as Player;
                 if (playerWithMaxScore > player)
                 {
                     return true;
@@ -39,30 +39,30 @@
             topScoreList.Add(person);
             PersonScoreComparer comparer = new PersonScoreComparer();
             topScoreList.Sort(comparer);
-            while (topScoreList.Count > 5)
+            while (topScoreList.Count > TOP_SCORE_LIMIT)
             {
-                topScoreList.RemoveAt(5);
+                topScoreList.RemoveAt(TOP_SCORE_LIMIT);
             }
         }
 
         public void OpenTopScoreList()
         {
-            using (StreamReader topScoreStreamReader = new StreamReader(@"..\..\Content\TopScore.txt"))
+            using (StreamReader topScoreReader = new StreamReader(@"..\..\Content\TopScore.txt"))
             {
-                string line = topScoreStreamReader.ReadLine();
+                string line = topScoreReader.ReadLine();
                 while (line != null)
                 {
                     char[] separators = { ' ' };
                     string[] playerList = line.Split(separators);
-                    int substringsCount = playerList.Count<string>();
-                    if (substringsCount > 0)
+                    int palyersCount = playerList.Count<string>();
+                    if (palyersCount > 0)
                     {
                         string playerName = playerList[1];
-                        int playerScore = int.Parse(playerList[substringsCount - 2]);
+                        int playerScore = int.Parse(playerList[palyersCount - 2]);
                         Player player = new Player(playerName, playerScore);
                         topScoreList.Add(player);
                     }
-                    line = topScoreStreamReader.ReadLine();
+                    line = topScoreReader.ReadLine();
                 }
             }
         }
@@ -72,12 +72,12 @@
             if (topScoreList.Count > 0)
             {
                 string toWrite = "";
-                using (StreamWriter topScoreStreamWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
+                using (StreamWriter topScoreWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
                 {
                     for (int i = 0; i < topScoreList.Count; i++)
                     {
                         toWrite += i.ToString() + ". " + topScoreList[i].Name + " --> " + topScoreList[i].Score.ToString() + " moves";
-                        topScoreStreamWriter.WriteLine(toWrite);
+                        topScoreWriter.WriteLine(toWrite);
                         toWrite = "";
                     }
                 }
@@ -90,7 +90,7 @@
             StringBuilder builder = new StringBuilder();
             builder.Append("Scoreboard:");
             builder.AppendLine();
-            //Console.WriteLine("Scoreboard:");
+
             if (topScoreList.Count > 0)
             {
                 for (int i = 0; i < topScoreList.Count; i++)
