@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Core\Actions\Command.cs" />
     <Compile Include="Core\Actions\CommandTypes.cs" />
+    <Compile Include="Core\Actions\Utils.cs" />
     <Compile Include="Core\Entities\BalloonTypes.cs" />
     <Compile Include="Core\Entities\Balloon.cs" />
     <Compile Include="Core\Entities\Directions.cs" />
+    <Compile Include="Core\Interfaces\IBalloon.cs" />
     <Compile Include="Core\Interfaces\IPlayer.cs" />
     <Compile Include="UI\ConsolePrint.cs" />
     <Content Include="Content\TopScore.txt" />

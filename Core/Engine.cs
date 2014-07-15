@@ -49,7 +49,7 @@
                     }
                     else
                     {
-                        Balloon balloon = Balloon.Parse(input);
+                        IBalloon balloon = Utils.ParseBalloon(input);
                         gameBoard.Shoot(balloon);
                         ConsolePrint.PrintGameBoard();
                     }
