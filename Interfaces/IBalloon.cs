@@ -1,7 +1,7 @@
-﻿namespace BalloonsPops.Core.Interfaces
+﻿namespace BalloonsPops.Common.Interfaces
 {
     using System;
-    using BalloonsPops.Core.Entities;
+    using BalloonsPops.Common.Entities;
 
     public interface IBalloon: ICloneable
     {

@@ -1,6 +1,6 @@
-﻿namespace BalloonsPops.Core.Actions
+﻿namespace BalloonsPops.Common.Actions
 {
-    ﻿using BalloonsPops.Core.Interfaces;
+    ﻿using BalloonsPops.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;

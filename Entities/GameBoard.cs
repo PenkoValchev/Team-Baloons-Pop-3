@@ -1,11 +1,11 @@
-﻿namespace BalloonsPops.Core.Entities
+﻿namespace BalloonsPops.Common.Entities
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BalloonsPops.Core.Actions;
-    using BalloonsPops.Core.Interfaces;
+    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Interfaces;
 
     public sealed class GameBoard
     {
@@ -233,7 +233,7 @@
 
         private BalloonTypes GenerateRandomBalloonType()
         {
-            var randomNumber = Engine.random.Next(0, 4);
+            var randomNumber = Utils.random.Next(0, 4);
             return (BalloonTypes)randomNumber;
         }
     }

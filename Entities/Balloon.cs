@@ -1,6 +1,6 @@
-﻿namespace BalloonsPops.Core.Entities
+﻿namespace BalloonsPops.Common.Entities
 {
-    using BalloonsPops.Core.Interfaces;
+    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Linq;
 
