@@ -3,7 +3,7 @@
     using System;
     using BalloonsPops.Common.Entities;
 
-    public interface IBalloon: ICloneable
+    public interface IBalloon
     {
         int Row { get; set; }
 

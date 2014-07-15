@@ -97,8 +97,7 @@
 
             foreach (var direction in directionsValues)
             {
-
-                IBalloon baseBalloon = (IBalloon)balloon.Clone();
+                IBalloon baseBalloon = ((Balloon)balloon).Clone();
                 while (true)
                 {
                     if (!AllocatePopingByDirection(baseBalloon, (Directions)direction))

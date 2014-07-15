@@ -4,7 +4,7 @@
     using System;
     using System.Linq;
 
-    public class Balloon : IBalloon
+    public class Balloon : BalloonPrototype, IBalloon
     {
         private const int MAX_COLUMN_VALUE = 9;
         private const int MAX_ROW_VALUE = 4;
@@ -71,9 +71,9 @@
             }
         }
 
-        public object Clone()
+        public override Balloon Clone()
         {
-            return new Balloon(this.Row, this.Column);
+            return this.MemberwiseClone() as Balloon;
         }
     }
 }

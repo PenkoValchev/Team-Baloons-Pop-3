@@ -49,6 +49,7 @@
     <Compile Include="Actions\Command.cs" />
     <Compile Include="Actions\CommandTypes.cs" />
     <Compile Include="Actions\Utils.cs" />
+    <Compile Include="Entities\BalloonPrototype.cs" />
     <Compile Include="Entities\BalloonTypes.cs" />
     <Compile Include="Entities\Balloon.cs" />
     <Compile Include="Entities\Directions.cs" />
