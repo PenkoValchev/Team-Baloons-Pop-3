@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Core.Actions;
-    using BalloonsPops.Core.Entities;
+    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Entities;
     using System;
     using System.Text;
 

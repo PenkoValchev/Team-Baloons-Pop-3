@@ -1,15 +1,13 @@
-﻿namespace BalloonsPops.Core
+﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Core.Actions;
-    using BalloonsPops.Core.Entities;
-    using BalloonsPops.Core.Interfaces;
-    using BalloonsPops.UI;
+    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
     using System;
 
     public class Engine
     {
         private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
-        public static Random random = new Random();
 
         static void Main()
         {
@@ -49,7 +47,7 @@
                     }
                     else
                     {
-                        Balloon balloon = Balloon.Parse(input);
+                        IBalloon balloon = Utils.ParseBalloon(input);
                         gameBoard.Shoot(balloon);
                         ConsolePrint.PrintGameBoard();
                     }

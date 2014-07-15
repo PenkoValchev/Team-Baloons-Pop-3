@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Core.Entities
+﻿namespace BalloonsPops.Common.Entities
 {
     public enum BalloonTypes
     {

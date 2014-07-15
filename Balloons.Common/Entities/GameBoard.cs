@@ -1,10 +1,11 @@
-﻿namespace BalloonsPops.Core.Entities
+﻿namespace BalloonsPops.Common.Entities
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BalloonsPops.Core.Actions;
+    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Interfaces;
 
     public sealed class GameBoard
     {
@@ -14,7 +15,7 @@
 
         //TODO change underscore for private fields 
 
-        private Balloon[,] _gameBoard;
+        private IBalloon[,] _gameBoard;
         private int shootCounts = 0;
         private int _balloonsCount = INITIAL_BALLOONS_COUNT;
 
@@ -51,7 +52,7 @@
             }
         }
 
-        public Balloon[,] Board
+        public IBalloon[,] Board
         {
             get
             {
@@ -83,7 +84,7 @@
             }
         }
 
-        public void Shoot(Balloon balloon)
+        public void Shoot(IBalloon balloon)
         {
             BalloonTypes currentBallonType = this.Board[balloon.Row, balloon.Column].Type;
 
@@ -92,13 +93,12 @@
                 throw new InvalidOperationException("Wrong move: Cannot pop missing balloon!");
             }
 
-            //TODO: Need to implement interfaces
-
             var directionsValues = Enum.GetValues(typeof(Directions));
 
             foreach (var direction in directionsValues)
             {
-                Balloon baseBalloon = (Balloon)balloon.Clone();
+
+                IBalloon baseBalloon = (IBalloon)balloon.Clone();
                 while (true)
                 {
                     if (!AllocatePopingByDirection(baseBalloon, (Directions)direction))
@@ -108,18 +108,18 @@
                 }
             }
 
-            AddNewBaloonToGameBoard(balloon, BalloonTypes.Deflated);
+            SetBalloonToGameBoard(balloon, BalloonTypes.Deflated);
             this.BalloonsCount--;
 
             shootCounts++;
             LandFlyingBaloons();
         }
 
-        private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, Balloon neighbourBalloon)
+        private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, IBalloon neighbourBalloon)
         {
             if (balloonType == this.Board[neighbourBalloon.Row, neighbourBalloon.Column].Type)
             {
-                AddNewBaloonToGameBoard(neighbourBalloon, BalloonTypes.Deflated);
+                SetBalloonToGameBoard(neighbourBalloon, BalloonTypes.Deflated);
                 this.BalloonsCount--;
 
                 return true;
@@ -128,10 +128,10 @@
             return false;
         }
 
-        private bool TryPopNeighbours(bool isMoveUpDown, int value, Balloon balloon)
+        private bool TryPopNeighbours(bool isMoveUpDown, int value, IBalloon balloon)
         {
 
-            Balloon neighbourBalloon = new Balloon(balloon.Row, balloon.Column);
+            IBalloon neighbourBalloon = new Balloon(balloon.Row, balloon.Column);
             try
             {
                 neighbourBalloon.ChangePositionByDirection(isMoveUpDown, value);
@@ -148,7 +148,7 @@
             return false;
         }
 
-        private bool AllocatePopingByDirection(Balloon balloon, Directions direction)
+        private bool AllocatePopingByDirection(IBalloon balloon, Directions direction)
         {
             if (direction == Directions.Up)
             {
@@ -173,18 +173,18 @@
         }
 
         //TODO: Think about right position of this method 
-        public void AddNewBaloonToGameBoard(Balloon balloon, BalloonTypes balloonType)
+        public void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
         {
             balloon.Type = balloonType;
             SetBalloonToGameBoard(balloon);
         }
 
-        public void SetBalloonToGameBoard(Balloon balloon)
+        public void SetBalloonToGameBoard(IBalloon balloon)
         {
             this.Board[balloon.Row, balloon.Column] = balloon;
         }
 
-        private void SwapBalloons(Balloon firstBalloon, Balloon secondBalloon)
+        private void SwapBalloons(IBalloon firstBalloon, IBalloon secondBalloon)
         {
             firstBalloon.Type = secondBalloon.Type;
             secondBalloon.Type = BalloonTypes.Deflated;
@@ -203,11 +203,11 @@
                     {
                         for (int swapingRow = row; swapingRow > 0; swapingRow--)
                         {
-                            Balloon upperOfDeflatedBalloon = this.Board[swapingRow - 1, col];
+                            IBalloon upperOfDeflatedBalloon = this.Board[swapingRow - 1, col];
 
                             if (upperOfDeflatedBalloon.Type != BalloonTypes.Deflated)
                             {
-                                Balloon deflatedBalloon = this.Board[swapingRow, col];
+                                IBalloon deflatedBalloon = this.Board[swapingRow, col];
                                 SwapBalloons(deflatedBalloon, upperOfDeflatedBalloon);
                             }
                         }
@@ -222,7 +222,7 @@
             {
                 for (int col = 0; col < this.Width; col++)
                 {
-                    Balloon balloon = new Balloon(row, col);
+                    IBalloon balloon = new Balloon(row, col);
                     BalloonTypes balloonType = GenerateRandomBalloonType();
                     balloon.Type = balloonType;
 
@@ -233,7 +233,7 @@
 
         private BalloonTypes GenerateRandomBalloonType()
         {
-            var randomNumber = Engine.random.Next(0, 4);
+            var randomNumber = Utils.random.Next(0, 4);
             return (BalloonTypes)randomNumber;
         }
     }

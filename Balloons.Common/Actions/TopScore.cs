@@ -1,11 +1,12 @@
-﻿namespace BalloonsPops.Core.Actions
+﻿namespace BalloonsPops.Common.Actions
 {
-    using BalloonsPops.Core.Entities;
-    using BalloonsPops.Core.Interfaces;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
 
     public class TopScore
@@ -47,22 +48,25 @@
 
         public void OpenTopScoreList()
         {
-            using (StreamReader topScoreReader = new StreamReader(@"..\..\Content\TopScore.txt"))
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BalloonsPops.Common.Content.TopScore.txt"))
             {
-                string line = topScoreReader.ReadLine();
-                while (line != null)
+                using (StreamReader topScoreReader = new StreamReader(stream))
                 {
-                    char[] separators = { ' ' };
-                    string[] playerList = line.Split(separators);
-                    int palyersCount = playerList.Count<string>();
-                    if (palyersCount > 0)
+                    string line = topScoreReader.ReadLine();
+                    while (line != null)
                     {
-                        string playerName = playerList[1];
-                        int playerScore = int.Parse(playerList[palyersCount - 2]);
-                        Player player = new Player(playerName, playerScore);
-                        topScoreList.Add(player);
+                        char[] separators = { ' ' };
+                        string[] playerList = line.Split(separators);
+                        int palyersCount = playerList.Count<string>();
+                        if (palyersCount > 0)
+                        {
+                            string playerName = playerList[1];
+                            int playerScore = int.Parse(playerList[palyersCount - 2]);
+                            Player player = new Player(playerName, playerScore);
+                            topScoreList.Add(player);
+                        }
+                        line = topScoreReader.ReadLine();
                     }
-                    line = topScoreReader.ReadLine();
                 }
             }
         }
@@ -72,13 +76,17 @@
             if (topScoreList.Count > 0)
             {
                 string toWrite = "";
-                using (StreamWriter topScoreWriter = new StreamWriter(@"..\..\Content\TopScore.txt"))
+
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BalloonsPops.Common.Content.TopScore.txt"))
                 {
-                    for (int i = 0; i < topScoreList.Count; i++)
+                    using (StreamWriter topScoreWriter = new StreamWriter(stream))
                     {
-                        toWrite += i.ToString() + ". " + topScoreList[i].Name + " --> " + topScoreList[i].Score.ToString() + " moves";
-                        topScoreWriter.WriteLine(toWrite);
-                        toWrite = "";
+                        for (int i = 0; i < topScoreList.Count; i++)
+                        {
+                            toWrite += i.ToString() + ". " + topScoreList[i].Name + " --> " + topScoreList[i].Score.ToString() + " moves";
+                            topScoreWriter.WriteLine(toWrite);
+                            toWrite = "";
+                        }
                     }
                 }
             }
@@ -95,7 +103,7 @@
             {
                 for (int i = 0; i < topScoreList.Count; i++)
                 {
-                    builder.AppendFormat(string.Format("{0}. {1} --> {2}  moves", i+1, topScoreList[i].Name, topScoreList[i].Score));
+                    builder.AppendFormat(string.Format("{0}. {1} --> {2}  moves", i + 1, topScoreList[i].Name, topScoreList[i].Score));
                     builder.AppendLine();
                 }
             }

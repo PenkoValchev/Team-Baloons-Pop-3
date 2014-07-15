@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Core.Actions
+﻿namespace BalloonsPops.Common.Actions
 {
     using System;
 
