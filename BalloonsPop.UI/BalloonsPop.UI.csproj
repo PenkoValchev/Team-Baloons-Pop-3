@@ -49,7 +49,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Team-Baloons\BalloonsPops.Common.csproj">
+    <ProjectReference Include="..\Balloons.Common\BalloonsPops.Common.csproj">
       <Project>{a1269ef5-33bd-4caa-927a-afa7c821b940}</Project>
       <Name>BalloonsPops.Common</Name>
     </ProjectReference>

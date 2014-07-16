@@ -3,7 +3,7 @@
     using System;
     using BalloonsPops.Common.Entities;
 
-    public interface IBalloon
+    public interface IBalloon : IPlayGroundItem
     {
         int Row { get; set; }
 

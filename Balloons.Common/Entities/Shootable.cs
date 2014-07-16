@@ -1,38 +1,27 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
+    using System;
 
-    public sealed class GameBoard
+    public class Shootable : Decorator
     {
-        private const int GAME_BOARD_WIDTH = 10;
-        private const int GAME_BOARD_HEIGHT = 5;
-        public const int INITIAL_BALLOONS_COUNT = 50;
-
-        //TODO change underscore for private fields 
-
-        private IBalloon[,] _gameBoard;
         private int shootCounts = 0;
-        private int _balloonsCount = INITIAL_BALLOONS_COUNT;
+        public const int INITIAL_BALLOONS_COUNT = 50;
+        private int balloonsCount = INITIAL_BALLOONS_COUNT;
 
-        private static readonly GameBoard _gameBoardInstance = new GameBoard();
+        public Shootable(PlayGround playGround)
+            : base(playGround)
+        { }
 
-        private GameBoard()
-        {
-            _gameBoard = new Balloon[GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH];
-            this.BalloonsCount = INITIAL_BALLOONS_COUNT;
-            GenerateContent();
-        }
-
-        public static GameBoard Instance
+        public int ItemsCount
         {
             get
             {
-                return _gameBoardInstance;
+                return this.balloonsCount;
+            }
+            set
+            {
+                this.balloonsCount = value;
             }
         }
 
@@ -40,7 +29,7 @@
         {
             get
             {
-                return this._gameBoard.GetLength(1);
+                return this.PlayGround.Field.GetLength(1);
             }
         }
 
@@ -48,31 +37,7 @@
         {
             get
             {
-                return this._gameBoard.GetLength(0);
-            }
-        }
-
-        public IBalloon[,] Board
-        {
-            get
-            {
-                return this._gameBoard;
-            }
-            set
-            {
-                this._gameBoard = value;
-            }
-        }
-
-        public int BalloonsCount
-        {
-            get
-            {
-                return this._balloonsCount;
-            }
-            set
-            {
-                this._balloonsCount = value;
+                return this.PlayGround.Field.GetLength(0);
             }
         }
 
@@ -86,7 +51,7 @@
 
         public void Shoot(IBalloon balloon)
         {
-            BalloonTypes currentBallonType = this.Board[balloon.Row, balloon.Column].Type;
+            BalloonTypes currentBallonType = ((IBalloon)this.PlayGround.Field[balloon.Row, balloon.Column]).Type;
 
             if (currentBallonType == BalloonTypes.Deflated)
             {
@@ -108,7 +73,7 @@
             }
 
             SetBalloonToGameBoard(balloon, BalloonTypes.Deflated);
-            this.BalloonsCount--;
+            this.ItemsCount--;
 
             shootCounts++;
             LandFlyingBaloons();
@@ -116,10 +81,10 @@
 
         private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, IBalloon neighbourBalloon)
         {
-            if (balloonType == this.Board[neighbourBalloon.Row, neighbourBalloon.Column].Type)
+            if (balloonType == ((IBalloon)this.PlayGround.Field[neighbourBalloon.Row, neighbourBalloon.Column]).Type)
             {
                 SetBalloonToGameBoard(neighbourBalloon, BalloonTypes.Deflated);
-                this.BalloonsCount--;
+                this.ItemsCount--;
 
                 return true;
             }
@@ -171,18 +136,6 @@
             return false;
         }
 
-        //TODO: Think about right position of this method 
-        public void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
-        {
-            balloon.Type = balloonType;
-            SetBalloonToGameBoard(balloon);
-        }
-
-        public void SetBalloonToGameBoard(IBalloon balloon)
-        {
-            this.Board[balloon.Row, balloon.Column] = balloon;
-        }
-
         private void SwapBalloons(IBalloon firstBalloon, IBalloon secondBalloon)
         {
             firstBalloon.Type = secondBalloon.Type;
@@ -194,19 +147,19 @@
 
         private void LandFlyingBaloons()
         {
-            for (int row = 0; row < GAME_BOARD_HEIGHT; row++)
+            for (int row = 0; row < this.Height; row++)
             {
-                for (int col = 0; col < GAME_BOARD_WIDTH; col++)
+                for (int col = 0; col < this.Width; col++)
                 {
-                    if (this.Board[row, col].Type == BalloonTypes.Deflated)
+                    if (((IBalloon)this.PlayGround.Field[row, col]).Type == BalloonTypes.Deflated)
                     {
                         for (int swapingRow = row; swapingRow > 0; swapingRow--)
                         {
-                            IBalloon upperOfDeflatedBalloon = this.Board[swapingRow - 1, col];
+                            IBalloon upperOfDeflatedBalloon = (IBalloon)this.PlayGround.Field[swapingRow - 1, col];
 
                             if (upperOfDeflatedBalloon.Type != BalloonTypes.Deflated)
                             {
-                                IBalloon deflatedBalloon = this.Board[swapingRow, col];
+                                IBalloon deflatedBalloon = (IBalloon)this.PlayGround.Field[swapingRow, col];
                                 SwapBalloons(deflatedBalloon, upperOfDeflatedBalloon);
                             }
                         }
@@ -215,25 +168,15 @@
             }
         }
 
-        private void GenerateContent()
+        public void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
         {
-            for (int row = 0; row < this.Height; row++)
-            {
-                for (int col = 0; col < this.Width; col++)
-                {
-                    IBalloon balloon = new Balloon(row, col);
-                    BalloonTypes balloonType = GenerateRandomBalloonType();
-                    balloon.Type = balloonType;
-
-                    SetBalloonToGameBoard(balloon);
-                }
-            }
+            balloon.Type = balloonType;
+            SetBalloonToGameBoard(balloon);
         }
 
-        private BalloonTypes GenerateRandomBalloonType()
+        public void SetBalloonToGameBoard(IBalloon balloon)
         {
-            var randomNumber = Utils.random.Next(0, 4);
-            return (BalloonTypes)randomNumber;
+            this.Field[balloon.Row, balloon.Column] = balloon;
         }
     }
 }

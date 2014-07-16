@@ -52,9 +52,14 @@
     <Compile Include="Entities\BalloonPrototype.cs" />
     <Compile Include="Entities\BalloonTypes.cs" />
     <Compile Include="Entities\Balloon.cs" />
+    <Compile Include="Entities\Decorator.cs" />
     <Compile Include="Entities\Directions.cs" />
+    <Compile Include="Entities\PlayGround.cs" />
+    <Compile Include="Entities\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IPlayGround.cs" />
+    <Compile Include="Interfaces\IPlayGroundItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,7 +69,7 @@
     <EmbeddedResource Include="Content\TopScore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Compile Include="Entities\GameBoard.cs" />
+    <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Actions\PersonScoreComparer.cs" />
     <Compile Include="Actions\TopScore.cs" />

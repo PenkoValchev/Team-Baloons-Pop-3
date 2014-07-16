@@ -2,6 +2,7 @@
 {
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Text;
 
@@ -9,7 +10,7 @@
     {
         private const string BALLOON_GAME_WELCOME_MESSAGE = "Welcome to “Balloons Pops” game. Please try to pop the balloons. Use 'top' to view the top scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
 
-        private static GameBoard _gameBoard = GameBoard.Instance;
+        private static BalloonBoard balloonBoard = BalloonBoard.Instance;
 
         private static string PrintBorder()
         {
@@ -47,7 +48,7 @@
             header.AppendLine();
             header.Append(new String(' ', 4));
             int counter = 0;
-            for (int i = 0, len = _gameBoard.Width * 2; i < len; i++)
+            for (int i = 0, len = balloonBoard.Width * 2; i < len; i++)
             {
                 if (i % 2 != 0)
                 {
@@ -68,13 +69,13 @@
         private static string PrintGameFieldBody()
         {
             StringBuilder body = new StringBuilder();
-            for (int row = 0; row < _gameBoard.Height; row++)
+            for (int row = 0; row < balloonBoard.Height; row++)
             {
                 body.Append(row);
                 body.Append(' ');
                 body.Append('|');
                 var colCounter = 0;
-                for (int j = 0, len = (int)(_gameBoard.Width * 2.5); j < len; j++)
+                for (int j = 0, len = (int)(balloonBoard.Width * 2.5); j < len; j++)
                 {
                     if (j % 2 == 0)
                     {
@@ -82,10 +83,10 @@
                     }
                     else
                     {
-                        char balloonType = ParseBalloonToChar(_gameBoard.Board[row, colCounter].Type);
+                        char balloonType = ParseBalloonToChar(((IBalloon)balloonBoard.Field[row, colCounter]).Type);
                         body.Append(balloonType);
                         colCounter++;
-                        if (colCounter >= _gameBoard.Width)
+                        if (colCounter >= balloonBoard.Width)
                         {
                             break;
                         }

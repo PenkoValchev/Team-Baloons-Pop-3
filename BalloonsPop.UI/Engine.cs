@@ -11,14 +11,16 @@
 
         static void Main()
         {
-            GameBoard gameBoard = GameBoard.Instance;
+            BalloonBoard balloonBoard = BalloonBoard.Instance;
+            Shootable shootableBalloonBoard = new Shootable(balloonBoard);
+
             ConsolePrint.GenerateNewGame();
             ConsolePrint.PrintGameBoard();
             TopScore topScore = new TopScore();
 
             topScore.OpenTopScoreList();
 
-            while (gameBoard.BalloonsCount > 0)
+            while (shootableBalloonBoard.ItemsCount > 0)
             {
                 var input = ConsolePrint.ReadInput();
                 var isCommand = Command.IsValidType(input);
@@ -48,7 +50,7 @@
                     else
                     {
                         IBalloon balloon = Utils.ParseBalloon(input);
-                        gameBoard.Shoot(balloon);
+                        shootableBalloonBoard.Shoot(balloon);
                         ConsolePrint.PrintGameBoard();
                     }
                 }
@@ -68,7 +70,7 @@
 
             Console.WriteLine(ENTER_PLAYER_NAME);
             string playerName = Console.ReadLine();
-            int playerScore = gameBoard.ShootCounter;
+            int playerScore = shootableBalloonBoard.ShootCounter;
 
             IPlayer player = new Player(playerName, playerScore);
 
