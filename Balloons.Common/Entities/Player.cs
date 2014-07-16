@@ -29,7 +29,17 @@
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Name value should have at least one symbol.");
+                    throw new ArgumentNullException("Name could not be empty or null!");
+                }
+
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name could not be only whitespace!");
+                }
+
+                if (value.Length<2)
+                {
+                    throw new ArgumentException("Name could not be less 2 letters!");
                 }
 
                 this._name = value;
