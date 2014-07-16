@@ -58,7 +58,6 @@
     <Compile Include="Entities\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
-    <Compile Include="Interfaces\IPlayGround.cs" />
     <Compile Include="Interfaces\IPlayGroundItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
