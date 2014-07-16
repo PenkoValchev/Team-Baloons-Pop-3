@@ -3,6 +3,7 @@
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
+    using BalloonsPopUI;
     using System;
 
     public class Engine
@@ -17,7 +18,7 @@
             ConsolePrint.GenerateNewGame();
             ConsolePrint.PrintGameBoard();
 
-            Score.InitScoreList();
+            ScoreHandler.InitScoreList();
 
             while (shootableBalloonBoard.ItemsCount > 0)
             {
@@ -69,9 +70,9 @@
 
             IPlayer player = new Player(playerName, playerScore);
 
-            if (Score.TryAdd(player))
+            if (Score.TryAddItem(player))
             {
-                Score.Save();
+                ScoreHandler.Save();
             }
             
             ConsolePrint.PrintScoreList();

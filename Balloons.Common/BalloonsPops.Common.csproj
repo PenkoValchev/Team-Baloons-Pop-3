@@ -65,9 +65,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <EmbeddedResource Include="Content\TopScore.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Actions\Score.cs" />

@@ -15,7 +15,7 @@
 
         private static IList<IPlayer> scoreList = new List<IPlayer>();
 
-        public static bool TryAdd(IPlayer player)
+        public static bool TryAddItem(IPlayer player)
         {
             if (IsTopScore(player))
             {
@@ -34,53 +34,12 @@
             return false;
         }
 
-        public static void InitScoreList()
+        public static void AddItem(IPlayer player)
         {
-            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(SCORE_RESOURCE))
-            {
-                using (StreamReader scoreReader = new StreamReader(stream))
-                {
-                    string line = scoreReader.ReadLine();
-
-                    while (line != null)
-                    {
-                        char[] separators = { ' ' };
-                        string[] playerList = line.Split(separators);
-                        int palyersCount = playerList.Count<string>();
-
-                        if (palyersCount > 0)
-                        {
-                            string playerName = playerList[1];
-                            int playerScore = int.Parse(playerList[palyersCount - 2]);
-                            IPlayer player = new Player(playerName, playerScore);
-                            scoreList.Add(player);
-                        }
-
-                        line = scoreReader.ReadLine();
-                    }
-                }
-            }
+            scoreList.Add(player);
         }
 
-        public static void Save()
-        {
-            if (scoreList.Count > 0)
-            {
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(SCORE_RESOURCE))
-                {
-                    using (StreamWriter scoreWriter = new StreamWriter(stream))
-                    {
-                        for (int i = 0; i < scoreList.Count; i++)
-                        {
-                            string scoreContent = String.Format("{0}. {1} --> {2} moves", i.ToString(), scoreList[i].Name, scoreList[i].Score.ToString());
-                            scoreWriter.WriteLine(scoreContent);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static IList<IPlayer> Get()
+        public static IList<IPlayer> GetItems()
         {
             IList<IPlayer> copyScoreList = new List<IPlayer>(scoreList);
             return copyScoreList;

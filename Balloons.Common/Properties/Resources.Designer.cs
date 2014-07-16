@@ -59,14 +59,5 @@ namespace BalloonsPops.Common.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string TopScore {
-            get {
-                return ResourceManager.GetString("TopScore", resourceCulture);
-            }
-        }
     }
 }

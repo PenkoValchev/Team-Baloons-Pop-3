@@ -125,7 +125,7 @@
 
         public static void PrintScoreList()
         {
-            var scoreList = Score.Get();
+            var scoreList = Score.GetItems();
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Scoreboard:");
