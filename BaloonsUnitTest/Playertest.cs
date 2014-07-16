@@ -67,17 +67,18 @@ namespace BaloonsUnitTest
              bool expected = true;
              Player firstPlayer = new Player("Pesho",10);
              Player secondPlayer = new Player("Gosho",6);
-             Assert.AreEqual(expected, firstPlayer > secondPlayer);
+             Assert.AreEqual(expected, firstPlayer.ScoreCompare(secondPlayer));
          }
 
 
          [TestMethod]
          public void PlayerIsLessThanAnother()
          {
-             bool expected = true;
-             Player firstPlayer = new Player("Pesho", 1);
-             Player secondPlayer = new Player("Gosho", 6);
-             Assert.AreEqual(expected, firstPlayer < secondPlayer);
+             int expected = 0;
+             IPlayer firstPlayer = new Player("Pesho", 6);
+             IPlayer secondPlayer = new Player("Gosho", 6);
+
+             Assert.AreEqual(expected, Player.Compare(firstPlayer, secondPlayer));
          }
         
         
