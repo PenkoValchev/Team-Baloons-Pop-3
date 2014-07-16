@@ -70,8 +70,7 @@
     </EmbeddedResource>
     <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Actions\PersonScoreComparer.cs" />
-    <Compile Include="Actions\TopScore.cs" />
+    <Compile Include="Actions\Score.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

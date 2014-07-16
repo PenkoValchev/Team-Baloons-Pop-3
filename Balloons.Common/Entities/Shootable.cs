@@ -168,13 +168,13 @@
             }
         }
 
-        public void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
+        private void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
         {
             balloon.Type = balloonType;
             SetBalloonToGameBoard(balloon);
         }
 
-        public void SetBalloonToGameBoard(IBalloon balloon)
+        private void SetBalloonToGameBoard(IBalloon balloon)
         {
             this.Field[balloon.Row, balloon.Column] = balloon;
         }

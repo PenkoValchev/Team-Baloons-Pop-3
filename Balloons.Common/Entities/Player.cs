@@ -37,7 +37,7 @@
                     throw new ArgumentException("Name could not be only whitespace!");
                 }
 
-                if (value.Length<2)
+                if (value.Length < 2)
                 {
                     throw new ArgumentException("Name could not be less 2 letters!");
                 }
@@ -63,14 +63,15 @@
             }
         }
 
-        public static bool operator <(Player firstPlayer, Player secondPlayer)
+        public bool ScoreCompare(IPlayer player)
         {
-            return firstPlayer.Score < secondPlayer.Score;
+            return this.Score > player.Score;
         }
 
-        public static bool operator >(Player firstPlayer, Player secondPlayer)
+
+        public static int Compare(IPlayer firstPlayer, IPlayer secondPlayer)
         {
-            return firstPlayer.Score > secondPlayer.Score;
+            return firstPlayer.Score.CompareTo(secondPlayer.Score);
         }
     }
 }

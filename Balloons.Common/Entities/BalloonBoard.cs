@@ -79,7 +79,7 @@
             return (BalloonTypes)randomNumber;
         }
 
-        public void SetBalloonToGameBoard(IBalloon balloon)
+        private void SetBalloonToGameBoard(IBalloon balloon)
         {
             this.Field[balloon.Row, balloon.Column] = balloon;
         }

@@ -16,9 +16,8 @@
 
             ConsolePrint.GenerateNewGame();
             ConsolePrint.PrintGameBoard();
-            TopScore topScore = new TopScore();
 
-            topScore.OpenTopScoreList();
+            Score.InitScoreList();
 
             while (shootableBalloonBoard.ItemsCount > 0)
             {
@@ -35,7 +34,7 @@
                         switch (currentType)
                         {
                             case CommandTypes.TOP:
-                                topScore.PrintScoreList();
+                                ConsolePrint.PrintScoreList();
                                 break;
                             case CommandTypes.RESTART:
                                 ConsolePrint.GenerateNewGame();
@@ -64,22 +63,18 @@
                 }
             }
 
-
-            //TODO Checking is top score should not depend of creating instance of player.
-            //This takes useless memory. Need to be changed.
-
             Console.WriteLine(ENTER_PLAYER_NAME);
             string playerName = Console.ReadLine();
             int playerScore = shootableBalloonBoard.ShootCounter;
 
             IPlayer player = new Player(playerName, playerScore);
 
-            if (topScore.IsTopScore(player))
+            if (Score.TryAdd(player))
             {
-                topScore.AddToTopScoreList(player);
+                Score.Save();
             }
-
-            topScore.SaveTopScoreList();
+            
+            ConsolePrint.PrintScoreList();
         }
     }
 }
