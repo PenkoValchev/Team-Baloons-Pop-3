@@ -21,6 +21,14 @@
             }
             set
             {
+                if(value<0)
+                {
+                    throw new ArgumentOutOfRangeException("Count cant be less than 0");
+                }
+                if(value>1000)
+                {
+                    throw new ArgumentOutOfRangeException("Count cant be greater than 1000");
+                }
                 this.balloonsCount = value;
             }
         }

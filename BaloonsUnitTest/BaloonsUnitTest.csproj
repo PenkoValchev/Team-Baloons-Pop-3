@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Playertest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShootableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Balloons.Common\BalloonsPops.Common.csproj">
