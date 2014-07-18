@@ -54,9 +54,12 @@
     <Compile Include="Entities\Balloon.cs" />
     <Compile Include="Entities\Decorator.cs" />
     <Compile Include="Entities\Directions.cs" />
+    <Compile Include="Entities\BalloonGameEngine.cs" />
     <Compile Include="Entities\PlayGround.cs" />
     <Compile Include="Entities\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
+    <Compile Include="Interfaces\IGameEngine.cs" />
+    <Compile Include="Interfaces\IGameRender.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlayGroundItem.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

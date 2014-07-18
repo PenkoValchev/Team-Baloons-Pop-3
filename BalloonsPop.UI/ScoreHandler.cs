@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
 
     public static class ScoreHandler
     {
@@ -55,6 +56,31 @@
                     }
                 }
             }
+        }
+
+        public static void PrintScoreList()
+        {
+            var scoreList = Score.GetItems();
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Scoreboard:");
+            builder.AppendLine();
+
+            if (scoreList.Count > 0)
+            {
+                for (int i = 0; i < scoreList.Count; i++)
+                {
+                    builder.AppendFormat(string.Format("{0}. {1} --> {2}  moves", i + 1, scoreList[i].Name, scoreList[i].Score));
+                    builder.AppendLine();
+                }
+            }
+            else
+            {
+                builder.Append("Scoreboard is empty");
+                builder.AppendLine();
+            }
+
+            Console.WriteLine(builder.ToString());
         }
     }
 }
