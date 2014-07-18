@@ -1,9 +1,8 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
-    using BalloonsPopUI;
+    using BalloonsPops.UI;
     using System;
 
     public class Engine

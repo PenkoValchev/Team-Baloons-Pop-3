@@ -1,4 +1,4 @@
-﻿namespace BalloonsPopUI
+﻿namespace BalloonsPops.UI
 {
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Entities;
