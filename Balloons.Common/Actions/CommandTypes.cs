@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
-    public enum CommandTypes
+    internal enum CommandTypes
     {
         TOP,
         RESTART,

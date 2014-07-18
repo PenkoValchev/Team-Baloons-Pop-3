@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static class Command
+    internal static class Command
     {
         public static bool IsValidType(string input)
         {

@@ -5,7 +5,7 @@
     using BalloonsPops.UI;
     using System;
 
-    public class Engine
+    internal class Engine
     {
         static void Main()
         {

@@ -74,9 +74,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Content\Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

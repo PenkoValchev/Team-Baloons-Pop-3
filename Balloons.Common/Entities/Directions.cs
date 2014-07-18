@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    enum Directions
+    internal enum Directions
     {
         Up,
         Down,

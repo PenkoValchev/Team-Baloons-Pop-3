@@ -9,7 +9,7 @@
     using System.Linq;
     using System.Text;
 
-    public static class ScoreHandler
+    internal static class ScoreHandler
     {
         //May Be Adapter or Proxy for here
         private const string SCORE_RESOURCE = @"../../Content/TopScore.txt";

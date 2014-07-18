@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    public abstract class BalloonPrototype
+    internal abstract class BalloonPrototype
     {
         public abstract Balloon Clone();
     }

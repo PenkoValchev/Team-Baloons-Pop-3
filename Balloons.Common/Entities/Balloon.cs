@@ -4,7 +4,7 @@
     using System;
     using System.Linq;
 
-    public class Balloon : BalloonPrototype, IBalloon
+    internal class Balloon : BalloonPrototype, IBalloon
     {
         private const int MAX_COLUMN_VALUE = 9;
         private const int MAX_ROW_VALUE = 4;
