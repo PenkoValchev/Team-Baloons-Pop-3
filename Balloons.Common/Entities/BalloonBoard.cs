@@ -58,6 +58,11 @@
             }
         }
 
+        public void RePopulate()
+        {
+            GenerateContent();
+        }
+
         private void GenerateContent()
         {
             for (int row = 0; row < this.Height; row++)

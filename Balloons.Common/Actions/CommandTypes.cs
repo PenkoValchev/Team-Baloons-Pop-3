@@ -2,8 +2,8 @@
 {
     internal enum CommandTypes
     {
-        TOP,
-        RESTART,
-        EXIT
+        Top,
+        Restart,
+        Exit
     }
 }

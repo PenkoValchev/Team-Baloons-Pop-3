@@ -15,7 +15,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,12 +56,14 @@
     <Compile Include="Entities\Directions.cs" />
     <Compile Include="Entities\BalloonGameEngine.cs" />
     <Compile Include="Entities\PlayGround.cs" />
+    <Compile Include="Entities\ScoreBoardProxy.cs" />
     <Compile Include="Entities\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
     <Compile Include="Interfaces\IGameEngine.cs" />
     <Compile Include="Interfaces\IGameRender.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlayGroundItem.cs" />
+    <Compile Include="Interfaces\IScoreBoard.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,7 +72,7 @@
     </Compile>
     <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Actions\Score.cs" />
+    <Compile Include="Actions\ScoreBoard.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

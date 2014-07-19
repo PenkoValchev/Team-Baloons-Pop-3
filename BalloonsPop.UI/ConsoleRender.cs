@@ -1,6 +1,5 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
     using System;
@@ -8,10 +7,9 @@
 
     internal class ConsoleRender : IGameRender
     {
-        private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
         private const string BALLOON_GAME_WELCOME_MESSAGE = "Welcome to “Balloons Pops” game. Please try to pop the balloons. Use 'top' to view the top scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
 
-        private PlayGround playGround;
+        private readonly PlayGround playGround;
 
         public ConsoleRender(PlayGround playground)
         {
@@ -20,7 +18,7 @@
 
         public void ViewScore()
         {
-            ScoreHandler.PrintScoreList();
+            ScoreHandler.PrintScoreBoard();
         }
 
         public void StartNewGame()
@@ -37,6 +35,25 @@
             Console.WriteLine(outPut.ToString());
         }
 
+        public void GameOver<T>(T score)
+        {
+            int finalScore = Convert.ToInt32(score);
+            ScoreHandler.TryAddToScoreBoard(finalScore);
+
+            ScoreHandler.PrintScoreBoard();
+
+            (BalloonBoard.Instance).RePopulate();
+            Engine.StartGame();
+        }
+
+        public T GetUserInput<T>()
+        {
+            Console.Write("Enter a row and column: ");
+            string consoleInput = Console.ReadLine();
+
+            return (T)Convert.ChangeType(consoleInput, typeof(T));
+        }
+
         private static string PrintBorder()
         {
             StringBuilder border = new StringBuilder();
@@ -50,7 +67,6 @@
         private string PrintGameFieldHeader()
         {
             StringBuilder header = new StringBuilder();
-            //Header
             header.AppendLine();
             header.Append(new String(' ', 4));
             int counter = 0;
@@ -67,6 +83,7 @@
                     counter++;
                 }
             }
+
             header.AppendLine();
             header.Append(PrintBorder());
 
@@ -82,6 +99,7 @@
                 body.Append(' ');
                 body.Append('|');
                 var colCounter = 0;
+
                 for (int j = 0, len = (int)(this.playGround.Field.GetLength(1) * 2.5); j < len; j++)
                 {
                     if (j % 2 == 0)
@@ -125,31 +143,6 @@
                 default:
                     throw new ArgumentException("Wrong balloon type.");
             }
-        }
-
-
-        public void GameOver<T>(T score)
-        {
-            Console.WriteLine(ENTER_PLAYER_NAME);
-            string playerName = Console.ReadLine();
-
-            int finalScore = Convert.ToInt32(score);
-            IPlayer player = new Player(playerName, finalScore);
-
-            if (Score.TryAddItem(player))
-            {
-                ScoreHandler.Save();
-            }
-
-            ScoreHandler.PrintScoreList();
-        }
-
-        public T GetUserInput<T>()
-        {
-            Console.Write("Enter a row and column: ");
-            string consoleInput = Console.ReadLine();
-
-            return (T)Convert.ChangeType(consoleInput, typeof(T));
         }
     }
 }

@@ -53,7 +53,11 @@
         {
             get
             {
-                return shootCounts;
+                return this.shootCounts;
+            }
+            private set
+            {
+                this.shootCounts = value;
             }
         }
 
@@ -83,7 +87,7 @@
             SetBalloonToGameBoard(balloon, BalloonTypes.Deflated);
             this.ItemsCount--;
 
-            shootCounts++;
+            this.ShootCounter++;
             LandFlyingBaloons();
         }
 

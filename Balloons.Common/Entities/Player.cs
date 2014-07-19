@@ -5,11 +5,17 @@
 
     public class Player : IPlayer
     {
-        private string _name;
-        private int _score;
+        private const string UNKNOWN_PLAYER_NAME = "Unknown";
+
+        private string name;
+        private int score;
 
         public Player(string name)
             : this(name, 0)
+        { }
+
+        public Player(int score)
+            : this(UNKNOWN_PLAYER_NAME, score)
         { }
 
         public Player(string name, int score)
@@ -18,12 +24,11 @@
             this.Score = score;
         }
 
-
         public string Name
         {
             get
             {
-                return this._name;
+                return this.name;
             }
             private set
             {
@@ -42,7 +47,7 @@
                     throw new ArgumentException("Name could not be less 2 letters!");
                 }
 
-                this._name = value;
+                this.name = value;
             }
         }
 
@@ -50,7 +55,7 @@
         {
             get
             {
-                return this._score;
+                return this.score;
             }
             set
             {
@@ -59,7 +64,7 @@
                     throw new ArgumentException("Score can't be less than zero.");
                 }
 
-                this._score = value;
+                this.score = value;
             }
         }
 
@@ -67,7 +72,6 @@
         {
             return this.Score > player.Score;
         }
-
 
         public static int Compare(IPlayer firstPlayer, IPlayer secondPlayer)
         {

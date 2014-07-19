@@ -6,14 +6,13 @@
 
     public class BalloonGameEngine : IGameEngine
     {
-        private IGameRender gameRender;
-        private PlayGround playground;
-        private Shootable shootableBoard;
+        private readonly IGameRender gameRender;
+        private readonly Shootable shootableBoard;
 
         public BalloonGameEngine(IGameRender render, PlayGround playground)
         {
             this.gameRender = render;
-            this.playground = playground;
+            this.shootableBoard = playground as Shootable;
         }
 
         public void ViewScore()
@@ -26,13 +25,10 @@
             this.NewGame();
             this.ShowGameBoard();
 
-            Shootable shootableBalloonBoard = playground as Shootable;
-
             while (true)
             {
-                if (shootableBalloonBoard.ItemsCount > 0)
+                if (this.shootableBoard.ItemsCount > 0)
                 {
-
                     string input = this.gameRender.GetUserInput<string>();
                     var isCommand = Command.IsValidType(input);
 
@@ -45,14 +41,14 @@
 
                             switch (currentType)
                             {
-                                case CommandTypes.TOP:
+                                case CommandTypes.Top:
                                     this.ViewScore();
                                     break;
-                                case CommandTypes.RESTART:
+                                case CommandTypes.Restart:
                                     this.NewGame();
                                     this.ShowGameBoard();
                                     break;
-                                case CommandTypes.EXIT:
+                                case CommandTypes.Exit:
                                     return;
                                 default:
                                     throw new ArgumentException("Command value is not correct");
@@ -61,7 +57,7 @@
                         else
                         {
                             IBalloon balloon = Utils.ParseBalloon(input);
-                            shootableBalloonBoard.Shoot(balloon);
+                            this.shootableBoard.Shoot(balloon);
                             this.ShowGameBoard();
                         }
                     }
@@ -76,9 +72,7 @@
                 }
                 else
                 {
-                    this.shootableBoard = shootableBalloonBoard;
                     this.GameOver();
-
                     break;
                 }
             }
@@ -89,12 +83,10 @@
             this.gameRender.ShowGameBoard();
         }
 
-
         public void NewGame()
         {
             this.gameRender.StartNewGame();
         }
-
 
         public void GameOver()
         {
