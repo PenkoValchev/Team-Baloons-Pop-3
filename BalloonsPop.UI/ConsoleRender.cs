@@ -8,6 +8,8 @@
     internal class ConsoleRender : IGameRender
     {
         private const string BALLOON_GAME_WELCOME_MESSAGE = "Welcome to “Balloons Pops” game. Please try to pop the balloons. Use 'top' to view the top scoreboard, 'restart' to start a new game and 'exit' to quit the game.";
+        private const string GAME_COMPLETED = "Congratulations! You popped all baloons in {0} moves.";
+        private const string GOOD_BYE_MESSAGE = "Good bye!";
 
         private readonly PlayGround playGround;
 
@@ -24,10 +26,12 @@
         public void StartNewGame()
         {
             Console.WriteLine(BALLOON_GAME_WELCOME_MESSAGE);
+            (BalloonBoard.Instance).RePopulate();
         }
 
         public void Quit()
         {
+            Console.WriteLine(GOOD_BYE_MESSAGE);
             Environment.Exit(0);
         }
 
@@ -43,8 +47,9 @@
         public void GameOver<T>(T score)
         {
             int finalScore = Convert.ToInt32(score);
-            ScoreHandler.TryAddToScoreBoard(finalScore);
 
+            Console.WriteLine(GAME_COMPLETED, score);
+            ScoreHandler.TryAddToScoreBoard(finalScore);
             ScoreHandler.PrintScoreBoard();
 
             (BalloonBoard.Instance).RePopulate();

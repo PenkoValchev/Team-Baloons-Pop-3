@@ -10,7 +10,7 @@
     {
         private const string ENTER_PLAYER_NAME = "Please enter your name for the top scoreboard: ";
         private const string SCORE_BOARD = "Scoreboard:";
-        private const string EMPTY_SCORE_BOARD = "Scoreboard is empty";
+        private const string EMPTY_SCORE_BOARD = "The scoreboard is empty.";
 
         private static readonly ScoreBoardProxy scoreBoard = new ScoreBoardProxy();
 
@@ -20,7 +20,7 @@
 
             if (scoreBoard.IsTopScore(player))
             {
-                Console.WriteLine(ENTER_PLAYER_NAME);
+                Console.Write(ENTER_PLAYER_NAME);
                 string playerName = Console.ReadLine();
                 IPlayer topScorePlayer = new Player(playerName, score);
                 scoreBoard.AddPlayer(topScorePlayer);
@@ -32,11 +32,12 @@
             var scoreList = scoreBoard.ScoreBoardList;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append(SCORE_BOARD);
-            builder.AppendLine();
 
             if (scoreList.Count > 0)
             {
+                builder.Append(SCORE_BOARD);
+                builder.AppendLine();
+
                 for (int i = 0; i < scoreList.Count; i++)
                 {
                     builder.AppendFormat(string.Format("{0}. {1} --> {2}  moves", i + 1, scoreList[i].Name, scoreList[i].Score));

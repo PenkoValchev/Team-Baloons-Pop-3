@@ -65,6 +65,7 @@
         public void Shoot(IBalloon balloon)
         {
             BalloonTypes currentBallonType = ((IBalloon)this.PlayGround.Field[balloon.Row, balloon.Column]).Type;
+            balloon.Type = currentBallonType;
 
             if (currentBallonType == BalloonTypes.Deflated)
             {
