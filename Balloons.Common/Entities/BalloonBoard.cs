@@ -80,7 +80,9 @@
 
         private BalloonTypes GenerateRandomBalloonType()
         {
-            var randomNumber = Utils.random.Next(0, 4);
+            var randomGenerator = new RandomGenerator();
+            var randomNumber = randomGenerator.Next(0, 3);
+
             return (BalloonTypes)randomNumber;
         }
 

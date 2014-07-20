@@ -6,8 +6,6 @@
 
     public class Utils
     {
-        public static Random random = new Random();
-
         public static IBalloon ParseBalloon(string input)
         {
             const int NUMBER_OF_ROWS = 4;

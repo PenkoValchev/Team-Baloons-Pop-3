@@ -49,6 +49,7 @@
     <Compile Include="Actions\BalloonGameCommand.cs" />
     <Compile Include="Actions\CommandInvoker.cs" />
     <Compile Include="Actions\CommandTypes.cs" />
+    <Compile Include="Actions\RandomGenerator.cs" />
     <Compile Include="Actions\Utils.cs" />
     <Compile Include="Entities\BalloonPrototype.cs" />
     <Compile Include="Entities\BalloonTypes.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Interfaces\IGameRender.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlayGroundItem.cs" />
+    <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Interfaces\IScoreBoard.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
