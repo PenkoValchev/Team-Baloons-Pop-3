@@ -8,10 +8,12 @@
     {
         private readonly IGameRender gameRender;
         private readonly Shootable shootableBoard;
+        private readonly IGameReader gameReader;
 
-        public BalloonGameEngine(IGameRender render, PlayGround playground)
+        public BalloonGameEngine(IGameRender render,IGameReader reader, PlayGround playground)
         {
             this.gameRender = render;
+            this.gameReader = reader;
             this.shootableBoard = playground as Shootable;
         }
 
@@ -39,24 +41,15 @@
             {
                 if (IsGameOn())
                 {
-                    string input = this.gameRender.GetUserInput<string>();
+                    string input = this.gameReader.Read<string>();
 
                     try
                     {
                         commandInvoker.Execute(input);
                     }
-                    catch (ArgumentException ex)
+                    catch (Exception ex)
                     {
-                        //GameRender Exception handling
-                        Console.WriteLine(ex.Message);
-                    }
-                    catch (InvalidOperationException ioEx)
-                    {
-                        Console.WriteLine(ioEx.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
+                        this.gameRender.ErrorHandler(ex);
                     }
                 }
                 else

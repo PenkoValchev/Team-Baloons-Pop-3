@@ -1,5 +1,7 @@
 ﻿namespace BalloonsPops.Common.Interfaces
 {
+    using System;
+
     public interface IGameRender
     {
         void ViewScore();
@@ -10,6 +12,6 @@
 
         void GameOver<T>(T score);
 
-        T GetUserInput<T>();
+        void ErrorHandler(Exception exception); 
     }
 }

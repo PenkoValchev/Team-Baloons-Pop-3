@@ -62,6 +62,7 @@
     <Compile Include="Interfaces\IBalloon.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IGameEngine.cs" />
+    <Compile Include="Interfaces\IGameReader.cs" />
     <Compile Include="Interfaces\IGameRender.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlayGroundItem.cs" />

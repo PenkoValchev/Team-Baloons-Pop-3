@@ -46,12 +46,9 @@
             Engine.StartGame();
         }
 
-        public T GetUserInput<T>()
+        public void ErrorHandler(Exception exception)
         {
-            Console.Write("Enter a row and column: ");
-            string consoleInput = Console.ReadLine();
-
-            return (T)Convert.ChangeType(consoleInput, typeof(T));
+            Console.WriteLine(exception.Message);
         }
 
         private static string PrintBorder()
