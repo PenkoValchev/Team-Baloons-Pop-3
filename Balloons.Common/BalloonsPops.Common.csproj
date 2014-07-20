@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Command.cs" />
+    <Compile Include="Actions\BalloonGameCommand.cs" />
+    <Compile Include="Actions\CommandInvoker.cs" />
     <Compile Include="Actions\CommandTypes.cs" />
     <Compile Include="Actions\Utils.cs" />
     <Compile Include="Entities\BalloonPrototype.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Entities\ScoreBoardProxy.cs" />
     <Compile Include="Entities\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
+    <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IGameEngine.cs" />
     <Compile Include="Interfaces\IGameRender.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />

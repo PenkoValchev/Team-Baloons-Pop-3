@@ -13,5 +13,7 @@
         void GameOver();
 
         void ShowGameBoard();
+
+        PlayGround GameBoard { get; }
     }
 }

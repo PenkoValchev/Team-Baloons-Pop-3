@@ -1,5 +1,6 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
+    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
     using System;
 
@@ -89,6 +90,29 @@
 
             this.ShootCounter++;
             LandFlyingBaloons();
+        }
+
+        internal void Action(IGameEngine engine, CommandTypes type, string input = null)
+        {
+            switch (type)
+            {
+                case CommandTypes.Top:
+                    engine.ViewScore();
+                    break;
+                case CommandTypes.Restart:
+                    engine.NewGame();
+                    engine.ShowGameBoard();
+                    break;
+                case CommandTypes.Exit:
+                    return;
+                case CommandTypes.Shoot:
+                    IBalloon balloon = Utils.ParseBalloon(input);
+                    this.Shoot(balloon);
+                    engine.ShowGameBoard();
+                    break;
+                default:
+                    throw new ArgumentException("Command value is not correct");
+            }
         }
 
         private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, IBalloon neighbourBalloon)

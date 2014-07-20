@@ -4,6 +4,7 @@
     {
         Top,
         Restart,
-        Exit
+        Exit,
+        Shoot
     }
 }

@@ -15,6 +15,14 @@
             this.shootableBoard = playground as Shootable;
         }
 
+        public PlayGround GameBoard
+        {
+            get
+            {
+                return this.shootableBoard;
+            }
+        }
+
         public void ViewScore()
         {
             this.gameRender.ViewScore();
@@ -25,49 +33,30 @@
             this.NewGame();
             this.ShowGameBoard();
 
+            var commandInvoker = new CommandInvoker(this);
+
             while (true)
             {
-                if (this.shootableBoard.ItemsCount > 0)
+                if (IsGameOn())
                 {
                     string input = this.gameRender.GetUserInput<string>();
-                    var isCommand = Command.IsValidType(input);
 
                     try
                     {
-                        if (isCommand)
-                        {
-                            CommandTypes currentType;
-                            Enum.TryParse(input, true, out currentType);
-
-                            switch (currentType)
-                            {
-                                case CommandTypes.Top:
-                                    this.ViewScore();
-                                    break;
-                                case CommandTypes.Restart:
-                                    this.NewGame();
-                                    this.ShowGameBoard();
-                                    break;
-                                case CommandTypes.Exit:
-                                    return;
-                                default:
-                                    throw new ArgumentException("Command value is not correct");
-                            }
-                        }
-                        else
-                        {
-                            IBalloon balloon = Utils.ParseBalloon(input);
-                            this.shootableBoard.Shoot(balloon);
-                            this.ShowGameBoard();
-                        }
+                        commandInvoker.Execute(input);
                     }
                     catch (ArgumentException ex)
                     {
+                        //GameRender Exception handling
                         Console.WriteLine(ex.Message);
                     }
                     catch (InvalidOperationException ioEx)
                     {
                         Console.WriteLine(ioEx.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                 }
                 else
@@ -92,6 +81,11 @@
         {
             int playerScore = this.shootableBoard.ShootCounter;
             this.gameRender.GameOver(playerScore);
+        }
+
+        private bool IsGameOn()
+        {
+            return this.shootableBoard.ItemsCount > 0;
         }
     }
 }

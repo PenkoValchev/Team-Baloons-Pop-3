@@ -1,7 +1,7 @@
-﻿using BalloonsPops.Common.Entities;
-namespace BalloonsPops.Common.Actions
+﻿namespace BalloonsPops.Common.Actions
 {
     using BalloonsPops.Common.Interfaces;
+    using BalloonsPops.Common.Entities;
     using System;
 
     public class Utils
@@ -48,6 +48,26 @@ namespace BalloonsPops.Common.Actions
             }
 
             return new Balloon(row, column);
+        }
+
+        public static bool IsShootCommand(string input)
+        {
+            CommandTypes currentType;
+
+            int inputAsInt;
+            bool isInputInteger = int.TryParse(input, out inputAsInt);
+
+            if (!isInputInteger)
+            {
+                bool isCorrectEnum = Enum.TryParse(input, true, out currentType);
+
+                if (isCorrectEnum)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
