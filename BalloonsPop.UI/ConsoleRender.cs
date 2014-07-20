@@ -26,6 +26,11 @@
             Console.WriteLine(BALLOON_GAME_WELCOME_MESSAGE);
         }
 
+        public void Quit()
+        {
+            Environment.Exit(0);
+        }
+
         public void ShowGameBoard()
         {
             StringBuilder outPut = new StringBuilder();

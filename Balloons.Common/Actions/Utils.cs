@@ -4,7 +4,7 @@
     using BalloonsPops.Common.Entities;
     using System;
 
-    public class Utils
+    public static class Utils
     {
         public static IBalloon ParseBalloon(string input)
         {
@@ -66,6 +66,17 @@
             }
 
             return true;
+        }
+
+        public static void SetBalloonToGameBoard(PlayGround playgroung, IBalloon balloon, BalloonTypes balloonType)
+        {
+            balloon.Type = balloonType;
+            SetBalloonToGameBoard(playgroung, balloon);
+        }
+
+        public static void SetBalloonToGameBoard(PlayGround playgroung,  IBalloon balloon)
+        {
+            playgroung.Field[balloon.Row, balloon.Column] = balloon;
         }
     }
 }

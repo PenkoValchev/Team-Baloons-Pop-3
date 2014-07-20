@@ -60,6 +60,11 @@
             }
         }
 
+        public void Quit()
+        {
+            this.gameRender.Quit();
+        }
+
         public void ShowGameBoard()
         {
             this.gameRender.ShowGameBoard();

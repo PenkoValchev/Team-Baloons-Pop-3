@@ -85,14 +85,14 @@
                 }
             }
 
-            SetBalloonToGameBoard(balloon, BalloonTypes.Deflated);
+            Utils.SetBalloonToGameBoard(this ,balloon, BalloonTypes.Deflated);
             this.ItemsCount--;
 
             this.ShootCounter++;
             LandFlyingBaloons();
         }
 
-        internal void Action(IGameEngine engine, CommandTypes type, string input = null)
+        public void Action(IGameEngine engine, CommandTypes type, string input = null)
         {
             switch (type)
             {
@@ -104,7 +104,8 @@
                     engine.ShowGameBoard();
                     break;
                 case CommandTypes.Exit:
-                    return;
+                    engine.Quit();
+                    break;
                 case CommandTypes.Shoot:
                     IBalloon balloon = Utils.ParseBalloon(input);
                     this.Shoot(balloon);
@@ -119,7 +120,7 @@
         {
             if (balloonType == ((IBalloon)this.PlayGround.Field[neighbourBalloon.Row, neighbourBalloon.Column]).Type)
             {
-                SetBalloonToGameBoard(neighbourBalloon, BalloonTypes.Deflated);
+                Utils.SetBalloonToGameBoard(this, neighbourBalloon, BalloonTypes.Deflated);
                 this.ItemsCount--;
 
                 return true;
@@ -177,8 +178,8 @@
             firstBalloon.Type = secondBalloon.Type;
             secondBalloon.Type = BalloonTypes.Deflated;
 
-            SetBalloonToGameBoard(firstBalloon);
-            SetBalloonToGameBoard(secondBalloon);
+            Utils.SetBalloonToGameBoard(this, firstBalloon);
+            Utils.SetBalloonToGameBoard(this, secondBalloon);
         }
 
         private void LandFlyingBaloons()
@@ -202,17 +203,6 @@
                     }
                 }
             }
-        }
-
-        private void SetBalloonToGameBoard(IBalloon balloon, BalloonTypes balloonType)
-        {
-            balloon.Type = balloonType;
-            SetBalloonToGameBoard(balloon);
-        }
-
-        private void SetBalloonToGameBoard(IBalloon balloon)
-        {
-            this.Field[balloon.Row, balloon.Column] = balloon;
         }
     }
 }

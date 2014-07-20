@@ -8,6 +8,8 @@
 
         void StartNewGame();
 
+        void Quit();
+
         void ShowGameBoard();
 
         void GameOver<T>(T score);

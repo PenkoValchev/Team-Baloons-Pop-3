@@ -19,7 +19,7 @@
             }
             set
             {
-                throw new System.NotImplementedException();
+                this.PlayGround.Field = value;
             }
         }
     }

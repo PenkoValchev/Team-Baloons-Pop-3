@@ -1,11 +1,9 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
+    using System;
+    using System.Linq;
 
     public sealed class BalloonBoard : PlayGround
     {
@@ -73,7 +71,7 @@
                     BalloonTypes balloonType = GenerateRandomBalloonType();
                     balloon.Type = balloonType;
 
-                    SetBalloonToGameBoard(balloon);
+                    Utils.SetBalloonToGameBoard(this, balloon);
                 }
             }
         }
@@ -84,11 +82,6 @@
             var randomNumber = randomGenerator.Next(0, 3);
 
             return (BalloonTypes)randomNumber;
-        }
-
-        private void SetBalloonToGameBoard(IBalloon balloon)
-        {
-            this.Field[balloon.Row, balloon.Column] = balloon;
         }
     }
 }

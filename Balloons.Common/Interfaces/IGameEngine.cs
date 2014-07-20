@@ -8,6 +8,8 @@
 
         void Start();
 
+        void Quit();
+
         void NewGame();
 
         void GameOver();

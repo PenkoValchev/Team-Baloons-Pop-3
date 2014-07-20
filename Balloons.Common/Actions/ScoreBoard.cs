@@ -9,9 +9,6 @@
     {
         private readonly IList<IPlayer> scoreList = new List<IPlayer>();
 
-        internal ScoreBoard()
-        { }
-
         internal IList<IPlayer> ScoreList 
         {
             get

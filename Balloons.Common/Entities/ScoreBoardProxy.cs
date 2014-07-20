@@ -9,9 +9,6 @@
         private const int SCORE_BOARD_LIMIT = 5;
         private ScoreBoard realScoreBoard;
 
-        public ScoreBoardProxy()
-        { }
-
         public IList<IPlayer> ScoreBoardList 
         {
             get
