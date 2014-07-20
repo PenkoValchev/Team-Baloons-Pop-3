@@ -1,13 +1,12 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
-    using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
 
     internal class CommandInvoker
     {
-        private readonly BalloonGameEngine engine;
+        private readonly IGameEngine engine;
 
-        internal CommandInvoker(BalloonGameEngine engine)
+        internal CommandInvoker(IGameEngine engine)
         {
             this.engine = engine;
         }

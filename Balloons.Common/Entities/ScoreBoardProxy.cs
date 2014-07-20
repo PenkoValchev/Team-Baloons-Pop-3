@@ -9,7 +9,7 @@
         private const int SCORE_BOARD_LIMIT = 5;
         private ScoreBoard realScoreBoard;
 
-        public IList<IPlayer> ScoreBoardList 
+        public IList<IPlayer> ScoreBoardList
         {
             get
             {
@@ -37,7 +37,7 @@
             {
                 var scoreBoardItems = this.ScoreBoard.ScoreList;
                 scoreBoardItems.Add(player);
-                ((List<IPlayer>)scoreBoardItems).Sort(Player.Compare);
+                ((List<IPlayer>)scoreBoardItems).Sort();
 
                 while (scoreBoardItems.Count > SCORE_BOARD_LIMIT)
                 {
@@ -58,10 +58,17 @@
 
             if (scoreBoardCount >= SCORE_BOARD_LIMIT)
             {
-                ((List<IPlayer>)scoreBoardItems).Sort(Player.Compare);
+                ((List<IPlayer>)scoreBoardItems).Sort();
                 IPlayer lastPlayerInScoreList = scoreBoardItems[SCORE_BOARD_LIMIT - 1];
 
-                return lastPlayerInScoreList.ScoreCompare(player);
+                var compareResult = lastPlayerInScoreList.CompareTo(player);
+
+                if (compareResult > 0)
+                {
+                    return true;
+                }
+
+                return false;
             }
 
             return true;

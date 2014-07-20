@@ -1,11 +1,11 @@
 ﻿namespace BalloonsPops.Common.Interfaces
 {
-    public interface IPlayer
+    using System;
+
+    public interface IPlayer : IComparable<IPlayer>
     {
         string Name { get;}
 
         int Score { get; set; }
-
-        bool ScoreCompare(IPlayer player);
     }
 }

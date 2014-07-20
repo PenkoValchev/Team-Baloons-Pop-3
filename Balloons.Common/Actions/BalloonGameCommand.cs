@@ -7,11 +7,11 @@
     internal class BalloonGameCommand : ICommand
     {
         private readonly CommandTypes command;
-        private readonly BalloonGameEngine engine;
+        private readonly IGameEngine engine;
         private readonly string input;
         private readonly Shootable gameField;
 
-        public BalloonGameCommand(BalloonGameEngine engine, string input)
+        public BalloonGameCommand(IGameEngine engine, string input)
         {
             this.command = TryParseCommand(input);
             this.engine = engine;

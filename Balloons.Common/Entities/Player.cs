@@ -68,14 +68,9 @@
             }
         }
 
-        public bool ScoreCompare(IPlayer player)
+        public int CompareTo(IPlayer other)
         {
-            return this.Score > player.Score;
-        }
-
-        public static int Compare(IPlayer firstPlayer, IPlayer secondPlayer)
-        {
-            return firstPlayer.Score.CompareTo(secondPlayer.Score);
+            return this.Score.CompareTo(other.Score);
         }
     }
 }

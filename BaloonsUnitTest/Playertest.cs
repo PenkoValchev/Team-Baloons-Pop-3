@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BalloonsPops.Common.Entities;
-using BalloonsPops.Common.Actions;
-using BalloonsPops.Common.Interfaces;
-
-namespace BaloonsUnitTest
+﻿namespace BaloonsUnitTest
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
+
     [TestClass]
     public class Playertest
     {
@@ -67,7 +66,7 @@ namespace BaloonsUnitTest
              bool expected = true;
              Player firstPlayer = new Player("Pesho",10);
              Player secondPlayer = new Player("Gosho",6);
-             Assert.AreEqual(expected, firstPlayer.ScoreCompare(secondPlayer));
+             Assert.AreEqual(expected, firstPlayer.CompareTo(secondPlayer));
          }
 
 
@@ -78,7 +77,7 @@ namespace BaloonsUnitTest
              IPlayer firstPlayer = new Player("Pesho", 6);
              IPlayer secondPlayer = new Player("Gosho", 6);
 
-             Assert.AreEqual(expected, Player.Compare(firstPlayer, secondPlayer));
+             Assert.AreEqual(expected, firstPlayer.CompareTo(secondPlayer));
          }
         
         

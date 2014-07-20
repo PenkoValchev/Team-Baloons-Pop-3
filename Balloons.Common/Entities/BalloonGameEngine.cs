@@ -10,7 +10,7 @@
         private readonly Shootable shootableBoard;
         private readonly IGameReader gameReader;
 
-        public BalloonGameEngine(IGameRender render,IGameReader reader, PlayGround playground)
+        public BalloonGameEngine(IGameRender render, IGameReader reader, PlayGround playground)
         {
             this.gameRender = render;
             this.gameReader = reader;
