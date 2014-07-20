@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Linq;
+    using BalloonsPops.Common.Interfaces;
 
     internal class Balloon : BalloonPrototype, IBalloon
     {
@@ -15,7 +15,8 @@
 
         public Balloon()
             : this(MIN_VALUE, MIN_VALUE)
-        { }
+        { 
+        }
 
         public Balloon(int row, int col)
         {
@@ -29,6 +30,7 @@
             {
                 return this.row;
             }
+
             set
             {
                 if (MIN_VALUE > value || value > MAX_ROW_VALUE)
@@ -46,6 +48,7 @@
             {
                 return this.column;
             }
+
             set
             {
                 if (MIN_VALUE > value || value > MAX_COLUMN_VALUE)

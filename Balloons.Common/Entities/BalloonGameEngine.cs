@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
+    using System;
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
-    using System;
 
     public class BalloonGameEngine : IGameEngine
     {
@@ -39,7 +39,7 @@
 
             while (true)
             {
-                if (IsGameOn())
+                if (this.IsGameOn())
                 {
                     string input = this.gameReader.Read<string>();
 

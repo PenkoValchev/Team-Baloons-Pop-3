@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Common.Interfaces
 {
-    interface IScoreBoard
+    public interface IScoreBoard
     {
         void AddPlayer(IPlayer player);
 

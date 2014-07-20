@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
+    using System.Collections.Generic;
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
-    using System.Collections.Generic;
 
     public class ScoreBoardProxy : IScoreBoard
     {
@@ -22,18 +22,18 @@
         {
             get
             {
-                if (realScoreBoard == null)
+                if (this.realScoreBoard == null)
                 {
-                    realScoreBoard = new ScoreBoard();
+                    this.realScoreBoard = new ScoreBoard();
                 }
 
-                return realScoreBoard;
+                return this.realScoreBoard;
             }
         }
 
         public void AddPlayer(IPlayer player)
         {
-            if (IsTopScore(player))
+            if (this.IsTopScore(player))
             {
                 var scoreBoardItems = this.ScoreBoard.ScoreList;
                 scoreBoardItems.Add(player);

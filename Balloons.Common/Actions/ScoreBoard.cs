@@ -1,9 +1,9 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
-    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BalloonsPops.Common.Interfaces;
 
     internal class ScoreBoard : IScoreBoard
     {
@@ -19,12 +19,12 @@
 
         public void AddPlayer(IPlayer player)
         {
-            scoreList.Add(player);
+            this.scoreList.Add(player);
         }
 
         public bool RemovePlayer(IPlayer player)
         {
-            return scoreList.Remove(player);
+            return this.scoreList.Remove(player);
         }
     }
 }

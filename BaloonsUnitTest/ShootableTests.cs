@@ -1,10 +1,9 @@
 ﻿namespace BaloonsUnitTest
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPops.Common.Entities;
-    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ShootableTests
@@ -15,14 +14,14 @@
             BalloonBoard balloonBoard = BalloonBoard.Instance;
             Shootable shootableBalloonBoard = new Shootable(balloonBoard);
             IBalloon balloon = new Balloon();
-            Assert.AreEqual(50,shootableBalloonBoard.ItemsCount);
+            Assert.AreEqual(50, shootableBalloonBoard.ItemsCount);
             try
             {
                 shootableBalloonBoard.ItemsCount = -1;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                StringAssert.Contains(ex.ToString(), "Count","Error");
+                StringAssert.Contains(ex.ToString(), "Count", "Error");
             }
 
             try
@@ -33,7 +32,6 @@
             {
                 StringAssert.Contains(ex.ToString(), "Count", "Error");
             }
-
         }
 
         [TestMethod]
@@ -46,14 +44,13 @@
         }
 
         [TestMethod]
-        public void ShootableGetHeightTest() 
+        public void ShootableGetHeightTest()
         {
             BalloonBoard balloonBoard = BalloonBoard.Instance;
             Shootable shootableBalloonBoard = new Shootable(balloonBoard);
             IBalloon balloon = new Balloon();
             Assert.AreEqual(balloonBoard.Field.GetLength(0), shootableBalloonBoard.Height);
         }
-
 
         [TestMethod]
         public void ShootableGetWidthTest()

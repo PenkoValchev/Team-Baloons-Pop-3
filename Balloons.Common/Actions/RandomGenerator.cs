@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
-    using BalloonsPops.Common.Interfaces;
     using System;
+    using BalloonsPops.Common.Interfaces;
 
     public class RandomGenerator : IRandomGenerator
     {
@@ -9,7 +9,7 @@
 
         public int Next()
         {
-            return this.Next(0, Int32.MaxValue - 1);
+            return this.Next(0, int.MaxValue - 1);
         }
 
         public int Next(int maxValue)

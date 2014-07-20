@@ -1,9 +1,9 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Common.Entities;
-    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Text;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
 
     internal class ConsoleRender : IGameRender
     {
@@ -15,7 +15,7 @@
 
         public ConsoleRender(PlayGround playground)
         {
-            playGround = playground;
+            this.playGround = playground;
         }
 
         public void ViewScore()
@@ -26,7 +26,7 @@
         public void StartNewGame()
         {
             Console.WriteLine(BALLOON_GAME_WELCOME_MESSAGE);
-            (BalloonBoard.Instance).RePopulate();
+            BalloonBoard.Instance.RePopulate();
         }
 
         public void Quit()
@@ -38,8 +38,8 @@
         public void ShowGameBoard()
         {
             StringBuilder outPut = new StringBuilder();
-            outPut.Append(PrintGameFieldHeader());
-            outPut.Append(PrintGameFieldBody());
+            outPut.Append(this.PrintGameFieldHeader());
+            outPut.Append(this.PrintGameFieldBody());
 
             Console.WriteLine(outPut.ToString());
         }
@@ -52,7 +52,7 @@
             ScoreHandler.TryAddToScoreBoard(finalScore);
             ScoreHandler.PrintScoreBoard();
 
-            (BalloonBoard.Instance).RePopulate();
+            BalloonBoard.Instance.RePopulate();
             Engine.StartGame();
         }
 
@@ -61,11 +61,30 @@
             Console.WriteLine(exception.Message);
         }
 
+        private static char ParseBalloonToChar(BalloonTypes balloonType)
+        {
+            switch (balloonType)
+            {
+                case BalloonTypes.Red:
+                    return '1';
+                case BalloonTypes.Green:
+                    return '2';
+                case BalloonTypes.Blue:
+                    return '3';
+                case BalloonTypes.Yellow:
+                    return '4';
+                case BalloonTypes.Deflated:
+                    return '.';
+                default:
+                    throw new ArgumentException("Wrong balloon type.");
+            }
+        }
+
         private static string PrintBorder()
         {
             StringBuilder border = new StringBuilder();
-            border.Append(new String(' ', 3));
-            border.Append(new String('-', 21));
+            border.Append(new string(' ', 3));
+            border.Append(new string('-', 21));
             border.AppendLine();
 
             return border.ToString();
@@ -75,7 +94,7 @@
         {
             StringBuilder header = new StringBuilder();
             header.AppendLine();
-            header.Append(new String(' ', 4));
+            header.Append(new string(' ', 4));
             int counter = 0;
 
             for (int i = 0, len = this.playGround.Field.GetLength(1) * 2; i < len; i++)
@@ -124,6 +143,7 @@
                         }
                     }
                 }
+
                 body.AppendFormat("{0}{1}", ' ', '|');
                 body.AppendLine();
             }
@@ -131,25 +151,6 @@
             body.Append(PrintBorder());
 
             return body.ToString();
-        }
-
-        private static char ParseBalloonToChar(BalloonTypes balloonType)
-        {
-            switch (balloonType)
-            {
-                case BalloonTypes.Red:
-                    return '1';
-                case BalloonTypes.Green:
-                    return '2';
-                case BalloonTypes.Blue:
-                    return '3';
-                case BalloonTypes.Yellow:
-                    return '4';
-                case BalloonTypes.Deflated:
-                    return '.';
-                default:
-                    throw new ArgumentException("Wrong balloon type.");
-            }
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Common.Entities;
-    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Linq;
     using System.Text;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
 
     internal static class ScoreHandler
     {

@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.UI
 {
+    using System;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
-    using System;
 
     internal class Engine
     {
@@ -18,7 +18,7 @@
             newGame.Start();
         }
 
-        static void Main()
+        internal static void Main()
         {
             StartGame();
         }

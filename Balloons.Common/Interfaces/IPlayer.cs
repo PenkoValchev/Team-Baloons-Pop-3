@@ -4,7 +4,7 @@
 
     public interface IPlayer : IComparable<IPlayer>
     {
-        string Name { get;}
+        string Name { get; }
 
         int Score { get; set; }
     }

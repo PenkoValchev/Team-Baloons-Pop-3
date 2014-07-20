@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
-    using BalloonsPops.Common.Interfaces;
-    using BalloonsPops.Common.Entities;
     using System;
+    using BalloonsPops.Common.Entities;
+    using BalloonsPops.Common.Interfaces;
 
     public static class Utils
     {
@@ -33,7 +33,6 @@
             }
 
             string columnInput = coordinates[1].Trim();
-
 
             if (!int.TryParse(columnInput, out column))
             {

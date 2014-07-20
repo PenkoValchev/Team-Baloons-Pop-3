@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    using BalloonsPops.Common.Interfaces;
     using System;
+    using BalloonsPops.Common.Interfaces;
 
     public class Player : IPlayer
     {
@@ -12,11 +12,13 @@
 
         public Player(string name)
             : this(name, 0)
-        { }
+        { 
+        }
 
         public Player(int score)
             : this(UNKNOWN_PLAYER_NAME, score)
-        { }
+        { 
+        }
 
         public Player(string name, int score)
         {
@@ -30,6 +32,7 @@
             {
                 return this.name;
             }
+
             private set
             {
                 if (string.IsNullOrEmpty(value))
@@ -57,6 +60,7 @@
             {
                 return this.score;
             }
+
             set
             {
                 if (value < 0)

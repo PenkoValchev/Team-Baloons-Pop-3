@@ -1,18 +1,20 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
+    using System;
     using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
-    using System;
 
     public class Shootable : Decorator
     {
-        private int shootCounts = 0;
         public const int INITIAL_BALLOONS_COUNT = 50;
+
+        private int shootCounts = 0;
         private int balloonsCount = INITIAL_BALLOONS_COUNT;
 
         public Shootable(PlayGround playGround)
             : base(playGround)
-        { }
+        {
+        }
 
         public int ItemsCount
         {
@@ -20,16 +22,19 @@
             {
                 return this.balloonsCount;
             }
+
             set
             {
-                if(value<0)
+                if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Count cant be less than 0");
                 }
-                if(value>1000)
+
+                if (value > 1000)
                 {
                     throw new ArgumentOutOfRangeException("Count cant be greater than 1000");
                 }
+
                 this.balloonsCount = value;
             }
         }
@@ -56,6 +61,7 @@
             {
                 return this.shootCounts;
             }
+
             private set
             {
                 this.shootCounts = value;
@@ -79,18 +85,18 @@
                 IBalloon baseBalloon = ((Balloon)balloon).Clone();
                 while (true)
                 {
-                    if (!AllocatePopingByDirection(baseBalloon, (Directions)direction))
+                    if (!this.AllocatePopingByDirection(baseBalloon, (Directions)direction))
                     {
                         break;
                     }
                 }
             }
 
-            Utils.SetBalloonToGameBoard(this ,balloon, BalloonTypes.Deflated);
+            Utils.SetBalloonToGameBoard(this, balloon, BalloonTypes.Deflated);
             this.ItemsCount--;
 
             this.ShootCounter++;
-            LandFlyingBaloons();
+            this.LandFlyingBaloons();
         }
 
         public void Action(IGameEngine engine, CommandTypes type, string input = null)
@@ -132,20 +138,21 @@
 
         private bool TryPopNeighbours(bool isMoveUpDown, int value, IBalloon balloon)
         {
-
             IBalloon neighbourBalloon = new Balloon(balloon.Row, balloon.Column);
             try
             {
                 neighbourBalloon.ChangePositionByDirection(isMoveUpDown, value);
 
-                if (IsPopNeighbourSuccessful(balloon.Type, neighbourBalloon))
+                if (this.IsPopNeighbourSuccessful(balloon.Type, neighbourBalloon))
                 {
                     balloon.ChangePositionByDirection(isMoveUpDown, value);
+
                     return true;
                 }
             }
             catch (ArgumentException)
-            { }
+            {
+            }
 
             return false;
         }
@@ -154,21 +161,22 @@
         {
             if (direction == Directions.Up)
             {
-                return TryPopNeighbours(true, -1, balloon);
+                return this.TryPopNeighbours(true, -1, balloon);
             }
 
             if (direction == Directions.Down)
             {
-                return TryPopNeighbours(true, 1, balloon);
+                return this.TryPopNeighbours(true, 1, balloon);
             }
 
             if (direction == Directions.Left)
             {
-                return TryPopNeighbours(false, -1, balloon);
+                return this.TryPopNeighbours(false, -1, balloon);
             }
+
             if (direction == Directions.Right)
             {
-                return TryPopNeighbours(false, 1, balloon);
+                return this.TryPopNeighbours(false, 1, balloon);
             }
 
             return false;
@@ -198,7 +206,7 @@
                             if (upperOfDeflatedBalloon.Type != BalloonTypes.Deflated)
                             {
                                 IBalloon deflatedBalloon = (IBalloon)this.PlayGround.Field[swapingRow, col];
-                                SwapBalloons(deflatedBalloon, upperOfDeflatedBalloon);
+                                this.SwapBalloons(deflatedBalloon, upperOfDeflatedBalloon);
                             }
                         }
                     }

@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPops.Common.Interfaces
 {
-    interface IRandomGenerator
+    public interface IRandomGenerator
     {
         int Next();
 

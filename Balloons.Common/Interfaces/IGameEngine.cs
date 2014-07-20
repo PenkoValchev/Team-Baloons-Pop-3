@@ -4,6 +4,8 @@
 
     public interface IGameEngine
     {
+        PlayGround GameBoard { get; }
+
         void ViewScore();
 
         void Start();
@@ -15,7 +17,5 @@
         void GameOver();
 
         void ShowGameBoard();
-
-        PlayGround GameBoard { get; }
     }
 }

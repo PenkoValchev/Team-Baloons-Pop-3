@@ -1,23 +1,22 @@
 ﻿namespace BalloonsPops.Common.Entities
 {
-    using BalloonsPops.Common.Actions;
-    using BalloonsPops.Common.Interfaces;
     using System;
     using System.Linq;
+    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Interfaces;
 
     public sealed class BalloonBoard : PlayGround
     {
         private const int GAME_BOARD_WIDTH = 10;
         private const int GAME_BOARD_HEIGHT = 5;
 
-        private IBalloon[,] balloonBoard;
-
         private static readonly BalloonBoard balloonBoardInstance = new BalloonBoard();
+        private IBalloon[,] balloonBoard;
 
         private BalloonBoard()
         {
-            balloonBoard = new Balloon[GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH];
-            GenerateContent();
+            this.balloonBoard = new Balloon[GAME_BOARD_HEIGHT, GAME_BOARD_WIDTH];
+            this.GenerateContent();
         }
 
         public static BalloonBoard Instance
@@ -50,6 +49,7 @@
             {
                 return this.balloonBoard;
             }
+
             set
             {
                 this.balloonBoard = value as IBalloon[,];
@@ -58,7 +58,7 @@
 
         public void RePopulate()
         {
-            GenerateContent();
+            this.GenerateContent();
         }
 
         private void GenerateContent()
@@ -68,7 +68,7 @@
                 for (int col = 0; col < this.Width; col++)
                 {
                     IBalloon balloon = new Balloon(row, col);
-                    BalloonTypes balloonType = GenerateRandomBalloonType();
+                    BalloonTypes balloonType = this.GenerateRandomBalloonType();
                     balloon.Type = balloonType;
 
                     Utils.SetBalloonToGameBoard(this, balloon);

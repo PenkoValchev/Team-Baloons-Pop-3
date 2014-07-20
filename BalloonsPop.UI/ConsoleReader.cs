@@ -1,9 +1,9 @@
 ﻿namespace BalloonsPops.UI
 {
-    using BalloonsPops.Common.Interfaces;
     using System;
+    using BalloonsPops.Common.Interfaces;
 
-    internal class ConsoleReader: IGameReader
+    internal class ConsoleReader : IGameReader
     {
         public T Read<T>()
         {

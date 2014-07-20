@@ -1,8 +1,8 @@
 ﻿namespace BalloonsPops.Common.Actions
 {
+    using System;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
-    using System;
 
     internal class BalloonGameCommand : ICommand
     {
@@ -13,7 +13,7 @@
 
         public BalloonGameCommand(IGameEngine engine, string input)
         {
-            this.command = TryParseCommand(input);
+            this.command = this.TryParseCommand(input);
             this.engine = engine;
             this.input = input;
             this.gameField = engine.GameBoard as Shootable;
@@ -25,11 +25,11 @@
 
             if (isShootCommand)
             {
-                this.gameField.Action(engine, CommandTypes.Shoot, this.input);
+                this.gameField.Action(this.engine, CommandTypes.Shoot, this.input);
             }
             else
             {
-                this.gameField.Action(engine, command);
+                this.gameField.Action(this.engine, this.command);
             }
         }
 
