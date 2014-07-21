@@ -64,18 +64,6 @@
 
         public BalloonTypes Type { get; set; }
 
-        public void ChangePositionByDirection(bool isMoveUpDown, int value)
-        {
-            if (isMoveUpDown)
-            {
-                this.Row += value;
-            }
-            else
-            {
-                this.Column += value;
-            }
-        }
-
         public override Balloon Clone()
         {
             return this.MemberwiseClone() as Balloon;

@@ -49,6 +49,8 @@
     <Compile Include="Components\Patterns\BalloonGameCommand.cs" />
     <Compile Include="Components\Patterns\CommandInvoker.cs" />
     <Compile Include="Components\CommandTypes.cs" />
+    <Compile Include="Utilities\Extensions\BalloonExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ShootableExtensions.cs" />
     <Compile Include="Utilities\RandomGenerator.cs" />
     <Compile Include="Utilities\Utils.cs" />
     <Compile Include="Components\Patterns\BalloonPrototype.cs" />

@@ -7,7 +7,5 @@
     public interface IBalloon : IPlayGroundItem
     {
         BalloonTypes Type { get; set; }
-
-        void ChangePositionByDirection(bool isMoveUpDown, int value);
     }
 }

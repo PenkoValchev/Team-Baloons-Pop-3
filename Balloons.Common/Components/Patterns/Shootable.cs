@@ -4,6 +4,7 @@
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
     using BalloonsPops.Common.Utilities;
+    using BalloonsPops.Common.Utilities.Extensions;
 
     public class Shootable : Decorator
     {
@@ -98,30 +99,6 @@
 
             this.ShootCounter++;
             this.LandFlyingBaloons();
-        }
-
-        public void Action(IGameEngine engine, CommandTypes type, string input = null)
-        {
-            switch (type)
-            {
-                case CommandTypes.Top:
-                    engine.ViewScore();
-                    break;
-                case CommandTypes.Restart:
-                    engine.NewGame();
-                    engine.ShowGameBoard();
-                    break;
-                case CommandTypes.Exit:
-                    engine.Quit();
-                    break;
-                case CommandTypes.Shoot:
-                    IBalloon balloon = Utils.ParseBalloon(input);
-                    this.Shoot(balloon);
-                    engine.ShowGameBoard();
-                    break;
-                default:
-                    throw new ArgumentException("Command value is not correct");
-            }
         }
 
         private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, IBalloon neighbourBalloon)
