@@ -5,9 +5,32 @@
     using System.Linq;
     using BalloonsPops.Common.Interfaces;
 
-    internal class ScoreBoard : IScoreBoard
+    internal sealed class ScoreBoard : IScoreBoard
     {
+        private static volatile ScoreBoard instance;
+        private static object syncRoot = new Object();
         private readonly IList<IPlayer> scoreList = new List<IPlayer>();
+
+        private ScoreBoard() { }
+
+        internal static ScoreBoard Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new ScoreBoard();
+                        }
+                    }
+                }
+
+                return instance;
+            }
+        }
 
         internal IList<IPlayer> ScoreList 
         {

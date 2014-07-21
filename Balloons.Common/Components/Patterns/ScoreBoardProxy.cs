@@ -23,7 +23,7 @@
             {
                 if (this.realScoreBoard == null)
                 {
-                    this.realScoreBoard = new ScoreBoard();
+                    this.realScoreBoard = ScoreBoard.Instance;
                 }
 
                 return this.realScoreBoard;
