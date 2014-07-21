@@ -46,20 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\BalloonGameCommand.cs" />
-    <Compile Include="Actions\CommandInvoker.cs" />
-    <Compile Include="Actions\CommandTypes.cs" />
-    <Compile Include="Actions\RandomGenerator.cs" />
-    <Compile Include="Actions\Utils.cs" />
-    <Compile Include="Entities\BalloonPrototype.cs" />
-    <Compile Include="Entities\BalloonTypes.cs" />
+    <Compile Include="Components\Patterns\BalloonGameCommand.cs" />
+    <Compile Include="Components\Patterns\CommandInvoker.cs" />
+    <Compile Include="Components\CommandTypes.cs" />
+    <Compile Include="Utilities\RandomGenerator.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Components\Patterns\BalloonPrototype.cs" />
+    <Compile Include="Components\BalloonTypes.cs" />
     <Compile Include="Entities\Balloon.cs" />
-    <Compile Include="Entities\Decorator.cs" />
-    <Compile Include="Entities\Directions.cs" />
-    <Compile Include="Entities\BalloonGameEngine.cs" />
-    <Compile Include="Entities\PlayGround.cs" />
-    <Compile Include="Entities\ScoreBoardProxy.cs" />
-    <Compile Include="Entities\Shootable.cs" />
+    <Compile Include="Components\Patterns\Decorator.cs" />
+    <Compile Include="Components\Directions.cs" />
+    <Compile Include="Components\BalloonGameEngine.cs" />
+    <Compile Include="Components\Patterns\PlayGround.cs" />
+    <Compile Include="Components\Patterns\ScoreBoardProxy.cs" />
+    <Compile Include="Components\Patterns\Shootable.cs" />
     <Compile Include="Interfaces\IBalloon.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IGameEngine.cs" />
@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Actions\ScoreBoard.cs" />
+    <Compile Include="Components\ScoreBoard.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

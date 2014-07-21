@@ -1,7 +1,6 @@
-﻿namespace BalloonsPops.Common.Entities
+﻿namespace BalloonsPops.Common.Components.Patterns
 {
     using System.Collections.Generic;
-    using BalloonsPops.Common.Actions;
     using BalloonsPops.Common.Interfaces;
 
     public class ScoreBoardProxy : IScoreBoard

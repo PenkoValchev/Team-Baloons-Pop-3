@@ -1,8 +1,9 @@
-﻿namespace BalloonsPops.Common.Entities
+﻿namespace BalloonsPops.Common.Components.Patterns
 {
     using System;
-    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
+    using BalloonsPops.Common.Utilities;
 
     public class Shootable : Decorator
     {

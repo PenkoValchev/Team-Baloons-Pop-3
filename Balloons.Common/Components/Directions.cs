@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Common.Entities
+﻿namespace BalloonsPops.Common.Components
 {
     internal enum Directions
     {

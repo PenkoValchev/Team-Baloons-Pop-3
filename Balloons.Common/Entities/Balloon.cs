@@ -2,6 +2,8 @@
 {
     using System;
     using System.Linq;
+    using BalloonsPops.Common.Components;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Interfaces;
 
     internal class Balloon : BalloonPrototype, IBalloon

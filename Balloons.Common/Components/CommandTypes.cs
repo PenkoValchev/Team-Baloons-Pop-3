@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Common.Actions
+﻿namespace BalloonsPops.Common.Components
 {
     public enum CommandTypes
     {

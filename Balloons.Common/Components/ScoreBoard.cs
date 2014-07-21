@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Common.Actions
+﻿namespace BalloonsPops.Common.Components
 {
     using System;
     using System.Collections.Generic;

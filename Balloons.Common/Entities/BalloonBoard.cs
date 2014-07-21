@@ -2,8 +2,10 @@
 {
     using System;
     using System.Linq;
-    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Components;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Interfaces;
+    using BalloonsPops.Common.Utilities;
 
     public sealed class BalloonBoard : PlayGround
     {

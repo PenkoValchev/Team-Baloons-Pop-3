@@ -1,7 +1,7 @@
-﻿namespace BalloonsPops.Common.Entities
+﻿namespace BalloonsPops.Common.Components
 {
     using System;
-    using BalloonsPops.Common.Actions;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Interfaces;
 
     public class BalloonGameEngine : IGameEngine

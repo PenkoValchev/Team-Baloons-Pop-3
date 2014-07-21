@@ -1,5 +1,6 @@
 ﻿namespace BalloonsPops.Common.Interfaces
 {
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Entities;
 
     public interface IGameEngine

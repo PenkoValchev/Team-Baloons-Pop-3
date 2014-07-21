@@ -54,13 +54,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Balloons.Common\BalloonsPops.Common.csproj">
       <Project>{a1269ef5-33bd-4caa-927a-afa7c821b940}</Project>
       <Name>BalloonsPops.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

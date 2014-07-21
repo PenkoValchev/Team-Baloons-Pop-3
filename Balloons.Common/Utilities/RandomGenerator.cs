@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.Common.Actions
+﻿namespace BalloonsPops.Common.Utilities
 {
     using System;
     using BalloonsPops.Common.Interfaces;

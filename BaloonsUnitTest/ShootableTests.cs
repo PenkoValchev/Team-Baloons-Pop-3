@@ -1,6 +1,7 @@
 ﻿namespace BaloonsUnitTest
 {
     using System;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

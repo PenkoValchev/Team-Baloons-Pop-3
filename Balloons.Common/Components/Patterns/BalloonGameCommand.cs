@@ -1,8 +1,9 @@
-﻿namespace BalloonsPops.Common.Actions
+﻿namespace BalloonsPops.Common.Components.Patterns
 {
     using System;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
+    using BalloonsPops.Common.Utilities;
 
     internal class BalloonGameCommand : ICommand
     {

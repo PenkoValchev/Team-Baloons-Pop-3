@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using System.Text;
+    using BalloonsPops.Common.Components;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
 

@@ -1,6 +1,8 @@
 ﻿namespace BalloonsPops.UI
 {
     using System;
+    using BalloonsPops.Common.Components;
+    using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
 
