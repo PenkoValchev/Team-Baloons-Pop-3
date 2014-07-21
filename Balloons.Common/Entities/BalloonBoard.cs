@@ -11,6 +11,7 @@
     {
         private const int GAME_BOARD_WIDTH = 10;
         private const int GAME_BOARD_HEIGHT = 5;
+        private const int BALLOON_TYPE_MAX_NUMBER = 3;
 
         private static readonly BalloonBoard balloonBoardInstance = new BalloonBoard();
         private IBalloon[,] balloonBoard;
@@ -81,7 +82,7 @@
         private BalloonTypes GenerateRandomBalloonType()
         {
             var randomGenerator = new RandomGenerator();
-            var randomNumber = randomGenerator.Next(0, 3);
+            var randomNumber = randomGenerator.Next(0, BALLOON_TYPE_MAX_NUMBER);
 
             return (BalloonTypes)randomNumber;
         }

@@ -6,6 +6,7 @@
     public class Player : IPlayer
     {
         private const string UNKNOWN_PLAYER_NAME = "Unknown";
+        private const int NAME_MIN_LENGTH = 2;
 
         private string name;
         private int score;
@@ -45,7 +46,7 @@
                     throw new ArgumentException("Name could not be only whitespace!");
                 }
 
-                if (value.Length < 2)
+                if (value.Length < NAME_MIN_LENGTH)
                 {
                     throw new ArgumentException("Name could not be less 2 letters!");
                 }

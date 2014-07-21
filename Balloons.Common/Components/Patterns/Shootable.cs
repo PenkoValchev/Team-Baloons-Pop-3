@@ -31,7 +31,7 @@
                     throw new ArgumentOutOfRangeException("Count cant be less than 0");
                 }
 
-                if (value > 1000)
+                if (value > INITIAL_BALLOONS_COUNT)
                 {
                     throw new ArgumentOutOfRangeException("Count cant be greater than 1000");
                 }
