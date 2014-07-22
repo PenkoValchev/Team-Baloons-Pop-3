@@ -18,6 +18,9 @@
             var player = new Player();
 
             IGameEngine newGame = new BalloonGameEngine(consoleRender, consoleReader, shootableBalloonBoard, player);
+            ICommandInvoker invoker = new CommandInvoker(newGame);
+            newGame.Invoker = invoker;
+
             newGame.Start();
         }
 

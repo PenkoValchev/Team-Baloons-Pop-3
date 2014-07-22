@@ -6,7 +6,7 @@
     using BalloonsPops.Common.Utilities;
     using BalloonsPops.Common.Utilities.Extensions;
 
-    internal class BalloonGameCommand : ICommand
+    public class BalloonGameCommand : ICommand
     {
         private readonly CommandTypes command;
         private readonly IGameEngine engine;

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandInvoker.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="ConsoleRender.cs" />
     <Compile Include="Engine.cs" />

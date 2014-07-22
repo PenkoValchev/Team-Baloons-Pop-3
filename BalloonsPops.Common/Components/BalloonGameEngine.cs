@@ -10,6 +10,7 @@
         private readonly PlayGround shootableBoard;
         private readonly IGameReader gameReader;
         private readonly IPlayer player;
+        private ICommandInvoker invoker;
 
         public BalloonGameEngine(IGameRender render, IGameReader reader, PlayGround playground, IPlayer player)
         {
@@ -25,6 +26,24 @@
             get
             {
                 return this.shootableBoard;
+            }
+        }
+
+        public ICommandInvoker Invoker 
+        {
+            get
+            {
+                if (this.invoker == null)
+                {
+                    throw new ArgumentException("There is no command invoker passed to the Game Engine!");
+                }
+
+                return this.invoker;
+            }
+
+            set
+            {
+                this.invoker = value;
             }
         }
 
@@ -53,8 +72,6 @@
             this.NewGame();
             this.ShowGameBoard();
 
-            var commandInvoker = new CommandInvoker(this);
-
             while (true)
             {
                 if (this.IsGameOn)
@@ -63,7 +80,7 @@
 
                     try
                     {
-                        commandInvoker.Execute(input);
+                        Invoker.Execute(input);
                     }
                     catch (Exception ex)
                     {

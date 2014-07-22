@@ -9,6 +9,8 @@
 
         int GameResult { get; set; }
 
+        ICommandInvoker Invoker { get; set; }
+
         bool IsGameOn { get; set; }
 
         void ViewScore();
