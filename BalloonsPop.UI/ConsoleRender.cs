@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.UI
+﻿namespace BalloonsPops.ConsoleUI
 {
     using System;
     using System.Text;
@@ -22,7 +22,8 @@
 
         public void ViewScore()
         {
-            ScoreHandler.PrintScoreBoard();
+            string scoreData = ScoreHandler.GetScoreBoard();
+            Console.WriteLine(scoreData);
         }
 
         public void StartNewGame()
@@ -52,7 +53,7 @@
 
             Console.WriteLine(GAME_COMPLETED, score);
             ScoreHandler.TryAddToScoreBoard(finalScore);
-            ScoreHandler.PrintScoreBoard();
+            ScoreHandler.GetScoreBoard();
 
             BalloonBoard.Instance.RePopulate();
             Engine.StartGame();

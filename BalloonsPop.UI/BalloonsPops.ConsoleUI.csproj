@@ -7,8 +7,8 @@
     <ProjectGuid>{E2CE5CC3-7502-4B67-9064-A4666743B983}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BalloonsPops.UI</RootNamespace>
-    <AssemblyName>BalloonsPops.UI</AssemblyName>
+    <RootNamespace>BalloonsPops.ConsoleUI</RootNamespace>
+    <AssemblyName>BalloonsPops.ConsoleUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>BalloonsPops.UI.Engine</StartupObject>
+    <StartupObject>BalloonsPops.ConsoleUI.Engine</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

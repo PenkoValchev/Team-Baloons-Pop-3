@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.UI
+﻿namespace BalloonsPops.ConsoleUI
 {
     using System;
     using System.Linq;
@@ -29,7 +29,7 @@
             }
         }
 
-        public static void PrintScoreBoard()
+        public static string GetScoreBoard()
         {
             var scoreList = scoreBoard.ScoreBoardList;
 
@@ -52,7 +52,7 @@
                 builder.AppendLine();
             }
 
-            Console.WriteLine(builder.ToString());
+            return builder.ToString();
         }
     }
 }

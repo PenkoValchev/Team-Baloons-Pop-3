@@ -1,4 +1,4 @@
-﻿namespace BalloonsPops.UI
+﻿namespace BalloonsPops.ConsoleUI
 {
     using System;
     using BalloonsPops.Common.Interfaces;
