@@ -55,11 +55,11 @@
     <Compile Include="ShootableTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Balloons.Common\BalloonsPops.Common.csproj">
+    <ProjectReference Include="..\BalloonsPops.Common\BalloonsPops.Common.csproj">
       <Project>{a1269ef5-33bd-4caa-927a-afa7c821b940}</Project>
       <Name>BalloonsPops.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BalloonsPop.ConsoleUI\BalloonsPops.ConsoleUI.csproj">
+    <ProjectReference Include="..\BalloonsPops.ConsoleUI\BalloonsPops.ConsoleUI.csproj">
       <Project>{e2ce5cc3-7502-4b67-9064-a4666743b983}</Project>
       <Name>BalloonsPops.ConsoleUI</Name>
     </ProjectReference>
