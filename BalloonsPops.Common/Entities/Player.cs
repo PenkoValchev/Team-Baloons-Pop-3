@@ -11,14 +11,19 @@
         private string name;
         private int score;
 
+        public Player()
+            : this(UNKNOWN_PLAYER_NAME)
+        {
+        }
+
         public Player(string name)
             : this(name, 0)
-        { 
+        {
         }
 
         public Player(int score)
             : this(UNKNOWN_PLAYER_NAME, score)
-        { 
+        {
         }
 
         public Player(string name, int score)

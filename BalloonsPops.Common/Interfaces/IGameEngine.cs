@@ -7,6 +7,10 @@
     {
         PlayGround GameBoard { get; }
 
+        int GameResult { get; set; }
+
+        bool IsGameOn { get; set; }
+
         void ViewScore();
 
         void Start();

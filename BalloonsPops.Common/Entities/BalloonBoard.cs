@@ -13,7 +13,7 @@
         private const int GAME_BOARD_HEIGHT = 5;
         private const int BALLOON_TYPE_MAX_NUMBER = 3;
 
-        private static readonly BalloonBoard balloonBoardInstance = new BalloonBoard();
+        private static BalloonBoard balloonBoardInstance;
         private IBalloon[,] balloonBoard;
 
         private BalloonBoard()
@@ -26,6 +26,11 @@
         {
             get
             {
+                if (balloonBoardInstance == null)
+                {
+                    balloonBoardInstance = new BalloonBoard();
+                }
+
                 return balloonBoardInstance;
             }
         }

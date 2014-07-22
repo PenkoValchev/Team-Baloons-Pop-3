@@ -7,14 +7,17 @@
     public class BalloonGameEngine : IGameEngine
     {
         private readonly IGameRender gameRender;
-        private readonly Shootable shootableBoard;
+        private readonly PlayGround shootableBoard;
         private readonly IGameReader gameReader;
+        private readonly IPlayer player;
 
-        public BalloonGameEngine(IGameRender render, IGameReader reader, PlayGround playground)
+        public BalloonGameEngine(IGameRender render, IGameReader reader, PlayGround playground, IPlayer player)
         {
             this.gameRender = render;
             this.gameReader = reader;
-            this.shootableBoard = playground as Shootable;
+            this.shootableBoard = playground;
+            this.player = player;
+            this.IsGameOn = true;
         }
 
         public PlayGround GameBoard
@@ -24,6 +27,21 @@
                 return this.shootableBoard;
             }
         }
+
+        public int GameResult 
+        {
+            get
+            {
+                return this.player.Score;
+            }
+
+            set
+            {
+                this.player.Score = value;
+            }
+        }
+
+        public bool IsGameOn { get; set; }
 
         public void ViewScore()
         {
@@ -39,7 +57,7 @@
 
             while (true)
             {
-                if (this.IsGameOn())
+                if (this.IsGameOn)
                 {
                     string input = this.gameReader.Read<string>();
 
@@ -77,13 +95,7 @@
 
         public void GameOver()
         {
-            int playerScore = this.shootableBoard.ShootCounter;
-            this.gameRender.GameOver(playerScore);
-        }
-
-        private bool IsGameOn()
-        {
-            return this.shootableBoard.ItemsCount > 0;
+            this.gameRender.GameOver(this.player);
         }
     }
 }

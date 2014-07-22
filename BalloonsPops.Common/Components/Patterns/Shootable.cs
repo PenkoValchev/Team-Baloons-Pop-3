@@ -9,8 +9,6 @@
     public class Shootable : Decorator
     {
         public const int INITIAL_BALLOONS_COUNT = 50;
-
-        private int shootCounts = 0;
         private int balloonsCount = INITIAL_BALLOONS_COUNT;
 
         public Shootable(PlayGround playGround)
@@ -57,20 +55,7 @@
             }
         }
 
-        public int ShootCounter
-        {
-            get
-            {
-                return this.shootCounts;
-            }
-
-            private set
-            {
-                this.shootCounts = value;
-            }
-        }
-
-        public void Shoot(IBalloon balloon)
+        public bool Shoot(IBalloon balloon)
         {
             BalloonTypes currentBallonType = ((IBalloon)this.PlayGround.Field[balloon.Row, balloon.Column]).Type;
             balloon.Type = currentBallonType;
@@ -97,8 +82,9 @@
             Utils.SetBalloonToGameBoard(this, balloon, BalloonTypes.Deflated);
             this.ItemsCount--;
 
-            this.ShootCounter++;
             this.LandFlyingBaloons();
+
+            return true;
         }
 
         private bool IsPopNeighbourSuccessful(BalloonTypes balloonType, IBalloon neighbourBalloon)

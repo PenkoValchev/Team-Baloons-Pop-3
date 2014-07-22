@@ -47,13 +47,14 @@
             Console.WriteLine(outPut.ToString());
         }
 
-        public void GameOver<T>(T score)
+        public void GameOver<T>(T player)
         {
-            int finalScore = Convert.ToInt32(score);
+            IPlayer currentPlayer = (IPlayer)player;
 
-            Console.WriteLine(GAME_COMPLETED, score);
-            ScoreHandler.TryAddToScoreBoard(finalScore);
-            ScoreHandler.GetScoreBoard();
+            Console.WriteLine(GAME_COMPLETED, currentPlayer.Score);
+            ScoreHandler.TryAddToScoreBoard(currentPlayer);
+            string scoreData = ScoreHandler.GetScoreBoard();
+            Console.WriteLine(scoreData);
 
             BalloonBoard.Instance.RePopulate();
             Engine.StartGame();

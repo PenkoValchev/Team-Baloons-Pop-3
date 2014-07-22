@@ -15,8 +15,9 @@
 
             var consoleRender = new ConsoleRender(shootableBalloonBoard);
             var consoleReader = new ConsoleReader();
+            var player = new Player();
 
-            IGameEngine newGame = new BalloonGameEngine(consoleRender, consoleReader, shootableBalloonBoard);
+            IGameEngine newGame = new BalloonGameEngine(consoleRender, consoleReader, shootableBalloonBoard, player);
             newGame.Start();
         }
 

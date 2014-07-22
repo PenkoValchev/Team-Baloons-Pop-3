@@ -16,15 +16,13 @@
 
         private static readonly ScoreBoardProxy scoreBoard = new ScoreBoardProxy();
 
-        public static void TryAddToScoreBoard(int score)
+        public static void TryAddToScoreBoard(IPlayer player)
         {
-            IPlayer player = new Player(score);
-
             if (scoreBoard.IsTopScore(player))
             {
                 Console.Write(ENTER_PLAYER_NAME);
                 string playerName = Console.ReadLine();
-                IPlayer topScorePlayer = new Player(playerName, score);
+                IPlayer topScorePlayer = new Player(playerName, player.Score);
                 scoreBoard.AddPlayer(topScorePlayer);
             }
         }

@@ -7,11 +7,12 @@
 
     internal sealed class ScoreBoard : IScoreBoard
     {
-        private static volatile ScoreBoard instance;
-        private static object syncRoot = new Object();
+        private static ScoreBoard instance;
         private readonly IList<IPlayer> scoreList = new List<IPlayer>();
 
-        private ScoreBoard() { }
+        private ScoreBoard() 
+        { 
+        }
 
         internal static ScoreBoard Instance
         {
@@ -19,13 +20,7 @@
             {
                 if (instance == null)
                 {
-                    lock (syncRoot)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new ScoreBoard();
-                        }
-                    }
+                    instance = new ScoreBoard();
                 }
 
                 return instance;

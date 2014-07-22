@@ -12,7 +12,7 @@
 
         void ShowGameBoard();
 
-        void GameOver<T>(T score);
+        void GameOver<T>(T player);
 
         void ErrorHandler(Exception exception); 
     }

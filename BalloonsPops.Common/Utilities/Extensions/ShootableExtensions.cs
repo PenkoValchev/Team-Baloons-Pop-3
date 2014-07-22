@@ -22,13 +22,26 @@
                     engine.Quit();
                     break;
                 case CommandTypes.Shoot:
-                    IBalloon balloon = Utils.ParseBalloon(input);
-                    shootable.Shoot(balloon);
-                    engine.ShowGameBoard();
+                    ShootAction(shootable, engine, input);
                     break;
                 default:
                     throw new ArgumentException("Command value is not correct");
             }
+        }
+
+        private static void ShootAction(this Shootable shootable, IGameEngine engine, string input)
+        {
+            IBalloon balloon = Utils.ParseBalloon(input);
+            if (shootable.Shoot(balloon))
+            {
+                engine.GameResult++;
+                if (shootable.ItemsCount <= 0)
+                {
+                    engine.IsGameOn = false;
+                }
+            }
+
+            engine.ShowGameBoard();
         }
     }
 }
