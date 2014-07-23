@@ -62,7 +62,7 @@
         [TestMethod]
         public void PlayerIsGreaterThanAnother()
         {
-            bool expected = true;
+            int expected = 1;
             Player firstPlayer = new Player("Pesho", 10);
             Player secondPlayer = new Player("Gosho", 6);
             Assert.AreEqual(expected, firstPlayer.CompareTo(secondPlayer));
