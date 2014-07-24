@@ -29,24 +29,6 @@
             }
         }
 
-        public ICommandInvoker Invoker 
-        {
-            get
-            {
-                if (this.invoker == null)
-                {
-                    throw new ArgumentException("There is no command invoker passed to the Game Engine!");
-                }
-
-                return this.invoker;
-            }
-
-            set
-            {
-                this.invoker = value;
-            }
-        }
-
         /// <summary>
         /// Returns game result
         /// </summary>
@@ -79,7 +61,7 @@
         /// <summary>
         /// This method calls a start method of IGameRender
         /// </summary>
-        public void Start()
+        public void Start(ICommandInvoker invoker)
         {
             this.NewGame();
             this.ShowGameBoard();
@@ -92,7 +74,7 @@
 
                     try
                     {
-                        Invoker.Execute(input);
+                        invoker.Execute(input);
                     }
                     catch (Exception ex)
                     {

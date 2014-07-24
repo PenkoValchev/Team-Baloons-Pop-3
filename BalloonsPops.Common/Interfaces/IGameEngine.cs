@@ -9,13 +9,11 @@
 
         int GameResult { get; set; }
 
-        ICommandInvoker Invoker { get; set; }
-
         bool IsGameOn { get; set; }
 
         void ViewScore();
 
-        void Start();
+        void Start(ICommandInvoker invoker);
 
         void Quit();
 

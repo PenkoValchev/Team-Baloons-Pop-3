@@ -18,8 +18,6 @@
             var player = new Player();
 
             IGameEngine newGame = new BalloonGameEngine(consoleRender, consoleReader, shootableBalloonBoard, player);
-            ICommandInvoker invoker = new CommandInvoker(newGame);
-            newGame.Invoker = invoker;
 
             return newGame;
         }
@@ -27,7 +25,9 @@
         internal static void StartGame()
         {
             IGameEngine gameEngine = GenerateGameEngine();
-            gameEngine.Start();
+            ICommandInvoker invoker = new CommandInvoker(gameEngine);
+
+            gameEngine.Start(invoker);
         }
 
         internal static void Main()
