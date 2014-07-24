@@ -6,9 +6,9 @@
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
 
-    internal class Engine
+    internal static class Engine
     {
-        public static void StartGame()
+        internal static IGameEngine GenerateGameEngine()
         {
             BalloonBoard balloonBoard = BalloonBoard.Instance;
             Shootable shootableBalloonBoard = new Shootable(balloonBoard);
@@ -21,7 +21,13 @@
             ICommandInvoker invoker = new CommandInvoker(newGame);
             newGame.Invoker = invoker;
 
-            newGame.Start();
+            return newGame;
+        }
+
+        internal static void StartGame()
+        {
+            IGameEngine gameEngine = GenerateGameEngine();
+            gameEngine.Start();
         }
 
         internal static void Main()

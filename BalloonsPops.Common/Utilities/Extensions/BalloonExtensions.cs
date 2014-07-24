@@ -2,7 +2,7 @@
 {
     using BalloonsPops.Common.Interfaces;
 
-    public static class BalloonExtensions
+    internal static class BalloonExtensions
     {
         public static void ChangePositionByDirection(this IBalloon balloon, bool isMoveUpDown, int value)
         {
