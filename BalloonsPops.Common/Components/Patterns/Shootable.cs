@@ -16,6 +16,9 @@
         {
         }
 
+        /// <summary>
+        /// Returns the count of unshooted items
+        /// </summary>
         public int ItemsCount
         {
             get
@@ -55,6 +58,11 @@
             }
         }
 
+        /// <summary>
+        /// Shoot specific balloon and remove it from the playground
+        /// </summary>
+        /// <param name="balloon">Instance of IBalloon</param>
+        /// <returns>Returns true if shooting is successful</returns>
         public bool Shoot(IBalloon balloon)
         {
             BalloonTypes currentBallonType = ((IBalloon)this.PlayGround.Field[balloon.Row, balloon.Column]).Type;

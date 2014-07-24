@@ -64,6 +64,9 @@
             }
         }
 
+        /// <summary>
+        /// Generate and assign new content for the balloon board
+        /// </summary>
         public void RePopulate()
         {
             this.GenerateContent();

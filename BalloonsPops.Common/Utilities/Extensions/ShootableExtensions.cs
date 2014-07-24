@@ -7,6 +7,13 @@
 
     public static class ShootableExtensions
     {
+        /// <summary>
+        /// Extension method for Shootable. Specific action to perform when using shootable board. 
+        /// </summary>
+        /// <param name="shootable"></param>
+        /// <param name="engine">Engine to hold the specific actions</param>
+        /// <param name="type">Comman type to separate the actions</param>
+        /// <param name="input"></param>
         public static void Action(this Shootable shootable, IGameEngine engine, CommandTypes type, string input = null)
         {
             switch (type)

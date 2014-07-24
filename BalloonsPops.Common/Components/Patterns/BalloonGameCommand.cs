@@ -13,6 +13,11 @@
         private readonly string input;
         private readonly Shootable gameField;
 
+        /// <summary>
+        /// Constructor creating specific BalloonGameCommand
+        /// </summary>
+        /// <param name="engine">Instance of game engine which is used</param>
+        /// <param name="input">User input</param>
         public BalloonGameCommand(IGameEngine engine, string input)
         {
             this.command = this.TryParseCommand(input);
@@ -21,6 +26,9 @@
             this.gameField = engine.GameBoard as Shootable;
         }
 
+        /// <summary>
+        /// Execute method calls the specific realization of passed input
+        /// </summary>
         public void Execute()
         {
             bool isShootCommand = Utils.IsShootCommand(this.input);

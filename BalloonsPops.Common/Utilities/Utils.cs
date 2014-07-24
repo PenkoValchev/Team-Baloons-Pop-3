@@ -8,6 +8,11 @@
 
     public static class Utils
     {
+        /// <summary>
+        /// Try to parse balloon from string input
+        /// </summary>
+        /// <param name="input">User input</param>
+        /// <returns>Instance of IBalloon</returns>
         public static IBalloon ParseBalloon(string input)
         {
             const int NUMBER_OF_ROWS = 4;
@@ -49,6 +54,11 @@
             return new Balloon(row, column);
         }
 
+        /// <summary>
+        /// Check if the specific command is shoot command
+        /// </summary>
+        /// <param name="input">User input</param>
+        /// <returns>True if it's shoot command</returns>
         public static bool IsShootCommand(string input)
         {
             CommandTypes currentType;
@@ -69,13 +79,13 @@
             return true;
         }
 
-        public static void SetBalloonToGameBoard(PlayGround playgroung, IBalloon balloon, BalloonTypes balloonType)
+        internal static void SetBalloonToGameBoard(PlayGround playgroung, IBalloon balloon, BalloonTypes balloonType)
         {
             balloon.Type = balloonType;
             SetBalloonToGameBoard(playgroung, balloon);
         }
 
-        public static void SetBalloonToGameBoard(PlayGround playgroung,  IBalloon balloon)
+        internal static void SetBalloonToGameBoard(PlayGround playgroung,  IBalloon balloon)
         {
             playgroung.Field[balloon.Row, balloon.Column] = balloon;
         }
