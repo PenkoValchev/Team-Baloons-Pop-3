@@ -61,6 +61,7 @@
         /// <summary>
         /// This method calls a start method of IGameRender
         /// </summary>
+        /// <param name="invoker">Instance of command invoker</param>
         public void Start(ICommandInvoker invoker)
         {
             this.NewGame();
