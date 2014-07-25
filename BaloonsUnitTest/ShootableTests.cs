@@ -1,13 +1,14 @@
 ﻿namespace BaloonsUnitTest
 {
     using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BalloonsPops.Common.Components;
     using BalloonsPops.Common.Components.Patterns;
     using BalloonsPops.Common.Entities;
     using BalloonsPops.Common.Interfaces;
-    using BalloonsPops.Common.Components;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BalloonsPops.Common.Utilities;
     using BalloonsPops.Common.Utilities.Extensions;
+    using BalloonsPops.ConsoleUI;
 
     [TestClass]
     public class ShootableTests
@@ -70,7 +71,7 @@
 
         [TestMethod]
         public void TestShootableShootTest()
-        {              
+        {
             BalloonBoard balloonBoard = BalloonBoard.Instance;
             Shootable shootableBalloonBoard = new Shootable(balloonBoard);
             IBalloon balloon = new Balloon();
@@ -79,34 +80,57 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException),"Wrong move:Cannot pop missing balloon!")]
-        public void TestShootableTryShootDeflatedBaloon()
+        public void TestShooting()
         {
             BalloonBoard balloonBoard = BalloonBoard.Instance;
+            balloonBoard.RePopulate();
             Shootable shootableBalloonBoard = new Shootable(balloonBoard);
-            IBalloon balloon = new Balloon();
 
-            balloon.Type = BalloonTypes.Deflated;
-                       bool actual = shootableBalloonBoard.Shoot(balloon);
-           
+            IGameReader reader = new ConsoleReader();
+            IGameRender render = new ConsoleRender(shootableBalloonBoard);
+            IPlayer pesho = new Player("Pesho");
+
+            BalloonGameEngine gameEngine = new BalloonGameEngine(render, reader, shootableBalloonBoard, pesho);
+
+            shootableBalloonBoard.Action(gameEngine, CommandTypes.Shoot, "0 0");
+
+            Assert.AreEqual(((IBalloon)shootableBalloonBoard.Field[0, 0]).Type, BalloonTypes.Deflated);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "Wrong move:Cannot pop missing balloon!")]
+        public void TestShootingDeflatedBalloon()
+        {
+            BalloonBoard balloonBoard = BalloonBoard.Instance;
+            balloonBoard.RePopulate();
+            Shootable shootableBalloonBoard = new Shootable(balloonBoard);
 
-       // [TestMethod]
-       //// [ExpectedException(typeof(InvalidOperationException), "Wrong move:Cannot pop missing balloon!")]
-       // public void TestShootableTryShootDeflatedBaloo1n()
-       // {
-       //     BalloonBoard balloonBoard = BalloonBoard.Instance;
-       //     Shootable shootableBalloonBoard = new Shootable(balloonBoard);
-       //     IBalloon balloon = new Balloon();
-       //      IBalloon balloon2 = new Balloon();
-       //     balloon.Type = BalloonTypes.Deflated;
-       //     balloon2.Type = BalloonTypes.Green;
-       //     PrivateObject po = new PrivateObject(typeof(Shootable));
-       //     po.Invoke("SwapBalloons",balloon),new object {balloon2});
-          
+            IGameReader reader = new ConsoleReader();
+            IGameRender render = new ConsoleRender(shootableBalloonBoard);
+            IPlayer pesho = new Player("Pesho");
 
-       // }
-        
+            BalloonGameEngine gameEngine = new BalloonGameEngine(render, reader, shootableBalloonBoard, pesho);
+
+            shootableBalloonBoard.Action(gameEngine, CommandTypes.Shoot, "0 0");
+            shootableBalloonBoard.Action(gameEngine, CommandTypes.Shoot, "0 0");
+        }
+
+        [TestMethod]
+        public void TestSwappingDeflatedBalloons()
+        {
+            BalloonBoard balloonBoard = BalloonBoard.Instance;
+            balloonBoard.RePopulate();
+            Shootable shootableBalloonBoard = new Shootable(balloonBoard);
+
+            IGameReader reader = new ConsoleReader();
+            IGameRender render = new ConsoleRender(shootableBalloonBoard);
+            IPlayer pesho = new Player("Pesho");
+
+            BalloonGameEngine gameEngine = new BalloonGameEngine(render, reader, shootableBalloonBoard, pesho);
+
+            shootableBalloonBoard.Action(gameEngine, CommandTypes.Shoot, "4 0");
+
+            Assert.AreEqual(((IBalloon)shootableBalloonBoard.Field[0, 0]).Type, BalloonTypes.Deflated);
+        }
     }
 }
