@@ -51,10 +51,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BalloonBoardTest.cs" />
-    <Compile Include="Playertest.cs" />
+    <Compile Include="PlayerUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGeneratorUnitTest.cs" />
     <Compile Include="ShootableTests.cs" />
+    <Compile Include="UtilsUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BalloonsPops.Common\BalloonsPops.Common.csproj">

@@ -15,6 +15,11 @@
         /// <returns>Instance of IBalloon</returns>
         public static IBalloon ParseBalloon(string input)
         {
+            if (String.IsNullOrEmpty(input))
+            {
+                throw new ArgumentException("The given input should have some value");
+            }
+
             const int NUMBER_OF_ROWS = 4;
             const int NUMBER_OF_COLS = 9;
             int row, column;
@@ -34,7 +39,7 @@
                 throw new InvalidOperationException("Invalid move or command!");
             }
 
-            if (row < 0 && row > NUMBER_OF_ROWS)
+            if (row < 0 || row > NUMBER_OF_ROWS)
             {
                 throw new ArgumentException("Wrong row coordinates");
             }
@@ -61,6 +66,11 @@
         /// <returns>True if it's shoot command</returns>
         public static bool IsShootCommand(string input)
         {
+            if (String.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
             CommandTypes currentType;
 
             int inputAsInt;
@@ -85,7 +95,7 @@
             SetBalloonToGameBoard(playgroung, balloon);
         }
 
-        internal static void SetBalloonToGameBoard(PlayGround playgroung,  IBalloon balloon)
+        internal static void SetBalloonToGameBoard(PlayGround playgroung, IBalloon balloon)
         {
             playgroung.Field[balloon.Row, balloon.Column] = balloon;
         }

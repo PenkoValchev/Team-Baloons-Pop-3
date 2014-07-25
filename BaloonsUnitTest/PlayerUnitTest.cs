@@ -6,7 +6,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class Playertest
+    public class PlayerUnitTest
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException), "Name could not be empty or null!")]
