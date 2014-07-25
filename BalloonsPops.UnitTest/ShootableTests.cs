@@ -132,5 +132,30 @@
 
             Assert.AreEqual(((IBalloon)shootableBalloonBoard.Field[0, 0]).Type, BalloonTypes.Deflated);
         }
+
+        [TestMethod]
+        public void TestRestartShootable()
+        {
+            BalloonBoard balloonBoard = BalloonBoard.Instance;
+            balloonBoard.RePopulate();
+            Shootable shootableBalloonBoard = new Shootable(balloonBoard);
+
+            IGameReader reader = new ConsoleReader();
+            IGameRender render = new ConsoleRender(shootableBalloonBoard);
+            IPlayer pesho = new Player("Pesho");
+
+            BalloonGameEngine gameEngine = new BalloonGameEngine(render, reader, shootableBalloonBoard, pesho);
+
+            BalloonTypes type1 = ((IBalloon)shootableBalloonBoard.Field[0, 0]).Type;
+            BalloonTypes type2 = ((IBalloon)shootableBalloonBoard.Field[0, 1]).Type;
+
+            shootableBalloonBoard.Action(gameEngine, CommandTypes.Restart);
+
+            BalloonTypes newType1 = ((IBalloon)shootableBalloonBoard.Field[0, 0]).Type;
+            BalloonTypes newType2 = ((IBalloon)shootableBalloonBoard.Field[0, 1]).Type;
+
+            Assert.AreNotEqual(type1, newType1);
+            Assert.AreNotEqual(type2, newType2);
+        }
     }
 }
