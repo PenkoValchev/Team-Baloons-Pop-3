@@ -54,6 +54,7 @@
     <Compile Include="PlayerUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGeneratorUnitTest.cs" />
+    <Compile Include="ScoreBoardProxyUnitTest.cs" />
     <Compile Include="ShootableTests.cs" />
     <Compile Include="UtilsUnitTest.cs" />
   </ItemGroup>

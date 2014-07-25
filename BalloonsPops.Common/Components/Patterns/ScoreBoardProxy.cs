@@ -1,5 +1,6 @@
 ﻿namespace BalloonsPops.Common.Components.Patterns
 {
+    using System.Linq;
     using System.Collections.Generic;
     using BalloonsPops.Common.Interfaces;
 
@@ -44,7 +45,7 @@
 
                 while (scoreBoardItems.Count > SCORE_BOARD_LIMIT)
                 {
-                    this.RemovePlayer(scoreBoardItems[SCORE_BOARD_LIMIT]);
+                    this.RemovePlayer(scoreBoardItems[0]);
                 }
             }
         }
@@ -72,9 +73,11 @@
             if (scoreBoardCount >= SCORE_BOARD_LIMIT)
             {
                 ((List<IPlayer>)scoreBoardItems).Sort();
-                IPlayer lastPlayerInScoreList = scoreBoardItems[SCORE_BOARD_LIMIT - 1];
+                var orderedList = scoreBoardItems.OrderByDescending(x => x.Score).ToList();
 
-                var compareResult = lastPlayerInScoreList.CompareTo(player);
+                IPlayer lastPlayerInScoreList = orderedList[SCORE_BOARD_LIMIT - 1];
+
+                var compareResult = player.CompareTo(lastPlayerInScoreList);
 
                 if (compareResult > 0)
                 {
