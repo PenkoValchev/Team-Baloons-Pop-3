@@ -55,9 +55,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Documentation\Quality-Code-Team-Project-Balloons-Pops.docx" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BalloonsPop.Common\BalloonsPop.Common.csproj">
       <Project>{a1269ef5-33bd-4caa-927a-afa7c821b940}</Project>
       <Name>BalloonsPop.Common</Name>
