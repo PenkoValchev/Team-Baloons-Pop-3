@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A1269EF5-33BD-4CAA-927A-AFA7C821B940}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BalloonsPop.Common</RootNamespace>
+    <AssemblyName>BalloonsPop.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\Patterns\BalloonGameCommand.cs" />
+    <Compile Include="Components\CommandTypes.cs" />
+    <Compile Include="Interfaces\ICommandInvoker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Extensions\BalloonExtensions.cs" />
+    <Compile Include="Utilities\Extensions\ShootableExtensions.cs" />
+    <Compile Include="Utilities\RandomGenerator.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Components\Patterns\BalloonPrototype.cs" />
+    <Compile Include="Components\BalloonTypes.cs" />
+    <Compile Include="Entities\Balloon.cs" />
+    <Compile Include="Components\Patterns\Decorator.cs" />
+    <Compile Include="Components\Directions.cs" />
+    <Compile Include="Components\BalloonGameEngine.cs" />
+    <Compile Include="Components\Patterns\PlayGround.cs" />
+    <Compile Include="Components\Patterns\ScoreBoardProxy.cs" />
+    <Compile Include="Components\Patterns\Shootable.cs" />
+    <Compile Include="Interfaces\IBalloon.cs" />
+    <Compile Include="Interfaces\ICommand.cs" />
+    <Compile Include="Interfaces\IGameEngine.cs" />
+    <Compile Include="Interfaces\IGameReader.cs" />
+    <Compile Include="Interfaces\IGameRender.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IPlayGroundItem.cs" />
+    <Compile Include="Interfaces\IRandomGenerator.cs" />
+    <Compile Include="Interfaces\IScoreBoard.cs" />
+    <Compile Include="Entities\BalloonBoard.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Components\ScoreBoard.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
