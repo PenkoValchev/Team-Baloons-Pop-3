@@ -1,4 +1,4 @@
-﻿namespace BalloonsPop.Common.Interfaces
+﻿namespace BalloonsPop.Common.Contracts
 {
     using BalloonsPop.Common.Components.Patterns;
 

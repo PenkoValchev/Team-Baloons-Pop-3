@@ -4,7 +4,7 @@
     using System.Linq;
     using BalloonsPop.Common.Components;
     using BalloonsPop.Common.Components.Patterns;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     internal class Balloon : BalloonPrototype, IBalloon
     {

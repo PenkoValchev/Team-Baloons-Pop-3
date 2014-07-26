@@ -4,8 +4,8 @@
     using System.Text;
     using BalloonsPop.Common.Components;
     using BalloonsPop.Common.Components.Patterns;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Entities;
-    using BalloonsPop.Common.Interfaces;
 
     internal class ConsoleRender : IGameRender
     {

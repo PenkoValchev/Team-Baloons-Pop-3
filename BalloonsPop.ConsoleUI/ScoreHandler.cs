@@ -4,8 +4,8 @@
     using System.Linq;
     using System.Text;
     using BalloonsPop.Common.Components.Patterns;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Entities;
-    using BalloonsPop.Common.Interfaces;
 
     internal static class ScoreHandler
     {

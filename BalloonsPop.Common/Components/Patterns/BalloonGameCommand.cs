@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.Common.Components.Patterns
 {
     using System;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Utilities;
     using BalloonsPop.Common.Utilities.Extensions;
 

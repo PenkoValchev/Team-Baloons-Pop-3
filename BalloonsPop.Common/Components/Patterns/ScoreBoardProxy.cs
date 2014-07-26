@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     public class ScoreBoardProxy : IScoreBoard
     {

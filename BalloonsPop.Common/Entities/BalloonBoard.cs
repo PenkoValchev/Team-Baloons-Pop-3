@@ -4,7 +4,7 @@
     using System.Linq;
     using BalloonsPop.Common.Components;
     using BalloonsPop.Common.Components.Patterns;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Utilities;
 
     public sealed class BalloonBoard : PlayGround

@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Components\Patterns\BalloonGameCommand.cs" />
     <Compile Include="Components\CommandTypes.cs" />
-    <Compile Include="Interfaces\ICommandInvoker.cs" />
+    <Compile Include="Contracts\ICommandInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Extensions\BalloonExtensions.cs" />
     <Compile Include="Utilities\Extensions\ShootableExtensions.cs" />
@@ -63,15 +63,15 @@
     <Compile Include="Components\Patterns\PlayGround.cs" />
     <Compile Include="Components\Patterns\ScoreBoardProxy.cs" />
     <Compile Include="Components\Patterns\Shootable.cs" />
-    <Compile Include="Interfaces\IBalloon.cs" />
-    <Compile Include="Interfaces\ICommand.cs" />
-    <Compile Include="Interfaces\IGameEngine.cs" />
-    <Compile Include="Interfaces\IGameReader.cs" />
-    <Compile Include="Interfaces\IGameRender.cs" />
-    <Compile Include="Interfaces\IPlayer.cs" />
-    <Compile Include="Interfaces\IPlayGroundItem.cs" />
-    <Compile Include="Interfaces\IRandomGenerator.cs" />
-    <Compile Include="Interfaces\IScoreBoard.cs" />
+    <Compile Include="Contracts\IBalloon.cs" />
+    <Compile Include="Contracts\ICommand.cs" />
+    <Compile Include="Contracts\IGameEngine.cs" />
+    <Compile Include="Contracts\IGameReader.cs" />
+    <Compile Include="Contracts\IGameRender.cs" />
+    <Compile Include="Contracts\IPlayer.cs" />
+    <Compile Include="Contracts\IPlayGroundItem.cs" />
+    <Compile Include="Contracts\IRandomGenerator.cs" />
+    <Compile Include="Contracts\IScoreBoard.cs" />
     <Compile Include="Entities\BalloonBoard.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Components\ScoreBoard.cs" />

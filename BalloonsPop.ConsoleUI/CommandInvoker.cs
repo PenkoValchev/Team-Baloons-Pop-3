@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using BalloonsPop.Common.Components.Patterns;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     internal class CommandInvoker : ICommandInvoker
     {

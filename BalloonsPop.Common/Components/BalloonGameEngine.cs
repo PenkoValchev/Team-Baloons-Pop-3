@@ -2,7 +2,7 @@
 {
     using System;
     using BalloonsPop.Common.Components.Patterns;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     public class BalloonGameEngine : IGameEngine
     {

@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.Common.Utilities
 {
     using System;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     public class RandomGenerator : IRandomGenerator
     {

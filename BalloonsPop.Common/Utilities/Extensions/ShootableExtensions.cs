@@ -3,7 +3,7 @@
     using System;
     using BalloonsPop.Common.Components;
     using BalloonsPop.Common.Components.Patterns;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     public static class ShootableExtensions
     {

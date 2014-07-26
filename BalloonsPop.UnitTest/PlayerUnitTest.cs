@@ -1,8 +1,8 @@
 ﻿namespace BaloonsUnitTest
 {
     using System;
+    using BalloonsPop.Common.Contracts;
     using BalloonsPop.Common.Entities;
-    using BalloonsPop.Common.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

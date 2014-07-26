@@ -1,7 +1,7 @@
 ﻿namespace BalloonsPop.ConsoleUI
 {
     using System;
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     internal class ConsoleReader : IGameReader
     {

@@ -1,6 +1,6 @@
 ﻿namespace BalloonsPop.Common.Utilities.Extensions
 {
-    using BalloonsPop.Common.Interfaces;
+    using BalloonsPop.Common.Contracts;
 
     internal static class BalloonExtensions
     {
