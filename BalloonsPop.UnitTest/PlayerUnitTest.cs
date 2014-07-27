@@ -11,7 +11,7 @@
         [TestMethod]
         public void PlayerIfSetterIsNullOrEmpty()
         {
-            string message = "";
+            string message = string.Empty;
 
             try
             {
@@ -21,13 +21,14 @@
             {
                 message = ex.ToString();
             }
+
             StringAssert.Contains(message, "Name could not be empty or null!");
         }
 
         [TestMethod]
         public void PlayerIfSetterIsEmpty()
         {
-            string message="";
+            string message = string.Empty;
 
             try
             {
@@ -37,13 +38,14 @@
             {
                 message = ex.ToString();
             }
-            StringAssert.Contains(message,"Name could not be empty or null!");
+
+            StringAssert.Contains(message, "Name could not be empty or null!");
         }
 
         [TestMethod]
         public void PlayerIfSetterIsWhiteSpace()
         {
-            string message = "";
+            string message = string.Empty;
 
             try
             {
@@ -53,22 +55,21 @@
             {
                 message = ex.ToString();
             }
+
             StringAssert.Contains(message, "Name could not be only whitespace!");
         }
 
         [TestMethod]
         public void PlayerIfLenghtIsLessByTwo()
         {
-
             try
             {
                 Player player = new Player("a");
             }
             catch (ArgumentException ex)
             {
-                StringAssert.Contains(ex.ToString(),"Name could not be less 2 letters!");
+                StringAssert.Contains(ex.ToString(), "Name could not be less 2 letters!");
             }
-           
         }
 
         [TestMethod]
@@ -85,7 +86,6 @@
             try
             {
                 Player player = new Player("Pesho", -1);
-              
             }
             catch (ArgumentException ex)
             {
@@ -111,7 +111,6 @@
             Assert.AreEqual(expect, player.Name);
             Assert.AreEqual(12, player.Score);
         }
-
 
         [TestMethod]
         public void PlayerIfScoreIsSaveCorrect()

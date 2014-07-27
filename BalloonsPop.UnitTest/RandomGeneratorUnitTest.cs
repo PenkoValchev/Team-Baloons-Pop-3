@@ -24,6 +24,5 @@
 
             Assert.AreEqual(true, number >= 0 || number <= 20);
         }
-
     }
 }

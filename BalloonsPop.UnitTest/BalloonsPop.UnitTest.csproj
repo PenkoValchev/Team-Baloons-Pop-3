@@ -56,7 +56,7 @@
     <Compile Include="RandomGeneratorUnitTest.cs" />
     <Compile Include="ScoreBoardProxyUnitTest.cs" />
     <Compile Include="ShootableTests.cs" />
-    <Compile Include="ScoreHandlerTeest.cs" />
+    <Compile Include="ScoreHandlerTest.cs" />
     <Compile Include="UtilsUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

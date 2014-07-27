@@ -83,7 +83,7 @@
         [TestMethod]
         public void ParseBalloonWithWrongInputOfNull()
         {
-            string message = "";
+            string message = string.Empty;
             try
             {
                 IBalloon balloon = Utils.ParseBalloon(null);
@@ -92,23 +92,23 @@
             {
                 message = ex + "The given input should have some value";
             }
+
             StringAssert.Contains(message, "The given input should have some value");
-            
         }
 
         [TestMethod]
-       // [ExpectedException(typeof(ArgumentException), "The given input should have some value")]
         public void ParseBalloonWithEmptyInput()
         {
-            string message = "";
+            string message = string.Empty;
             try
             {
-                IBalloon balloon = Utils.ParseBalloon(String.Empty);
+                IBalloon balloon = Utils.ParseBalloon(string.Empty);
             }
             catch (ArgumentException ex)
             {
                 message = ex + "The given input should have some value";
             }
+
             StringAssert.Contains(message, "The given input should have some value");
         }
 
@@ -131,7 +131,7 @@
         [TestMethod]
         public void CheckIsShootCommandIfInputIsEmptyString()
         {
-            bool isShoot = Utils.IsShootCommand(String.Empty);
+            bool isShoot = Utils.IsShootCommand(string.Empty);
 
             Assert.AreEqual(false, isShoot);
         }
