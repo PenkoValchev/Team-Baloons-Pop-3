@@ -9,31 +9,66 @@
     public class PlayerUnitTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name could not be empty or null!")]
         public void PlayerIfSetterIsNullOrEmpty()
         {
-            Player player = new Player(null);
+            string message = "";
+
+            try
+            {
+                Player player = new Player(null);
+            }
+            catch (ArgumentNullException ex)
+            {
+                message = ex.ToString();
+            }
+            StringAssert.Contains(message, "Name could not be empty or null!");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name could not be empty or null!")]
         public void PlayerIfSetterIsEmpty()
         {
-            Player player = new Player(string.Empty);
+            string message="";
+
+            try
+            {
+                Player player = new Player(string.Empty);
+            }
+            catch (ArgumentNullException ex)
+            {
+                message = ex.ToString();
+            }
+            StringAssert.Contains(message,"Name could not be empty or null!");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Name could not be only whitespace!")]
         public void PlayerIfSetterIsWhiteSpace()
         {
-            Player player = new Player(" ");
+            string message = "";
+
+            try
+            {
+                Player player = new Player(" ");
+            }
+            catch (ArgumentException ex)
+            {
+                message = ex.ToString();
+            }
+            StringAssert.Contains(message, "Name could not be only whitespace!");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Name could not be less 2 letters!")]
         public void PlayerIfLenghtIsLessByTwo()
         {
-            Player player = new Player("1");
+
+            try
+            {
+                Player player = new Player("a");
+            }
+            catch (ArgumentException ex)
+            {
+                StringAssert.Contains(ex.ToString(),"Name could not be less 2 letters!");
+            }
+           
         }
 
         [TestMethod]
@@ -45,11 +80,38 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Score can't be less than zero.")]
         public void PlayerIfScoreLessThanZero()
         {
-            Player player = new Player("Pesho", -1);
+            try
+            {
+                Player player = new Player("Pesho", -1);
+              
+            }
+            catch (ArgumentException ex)
+            {
+                StringAssert.Contains(ex.ToString(), "Score can't be less than zero.");
+            }
         }
+
+        [TestMethod]
+      
+        public void PlayerIfNameIsNull()
+        {
+            Player player = new Player();
+            string expect = "Unknown";
+            Assert.AreEqual(expect, player.Name);
+        }
+
+        [TestMethod]
+
+        public void PlayerIfNameIsNullAndScoreIsNotNull()
+        {
+            Player player = new Player(12);
+            string expect = "Unknown";
+            Assert.AreEqual(expect, player.Name);
+            Assert.AreEqual(12, player.Score);
+        }
+
 
         [TestMethod]
         public void PlayerIfScoreIsSaveCorrect()

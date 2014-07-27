@@ -81,17 +81,35 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "The given input should have some value")]
         public void ParseBalloonWithWrongInputOfNull()
         {
-            IBalloon balloon = Utils.ParseBalloon(null);
+            string message = "";
+            try
+            {
+                IBalloon balloon = Utils.ParseBalloon(null);
+            }
+            catch (ArgumentException ex)
+            {
+                message = ex + "The given input should have some value";
+            }
+            StringAssert.Contains(message, "The given input should have some value");
+            
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "The given input should have some value")]
+       // [ExpectedException(typeof(ArgumentException), "The given input should have some value")]
         public void ParseBalloonWithEmptyInput()
         {
-            IBalloon balloon = Utils.ParseBalloon(String.Empty);
+            string message = "";
+            try
+            {
+                IBalloon balloon = Utils.ParseBalloon(String.Empty);
+            }
+            catch (ArgumentException ex)
+            {
+                message = ex + "The given input should have some value";
+            }
+            StringAssert.Contains(message, "The given input should have some value");
         }
 
         [TestMethod]

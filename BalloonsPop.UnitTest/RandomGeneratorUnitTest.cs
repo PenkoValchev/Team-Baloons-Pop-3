@@ -25,12 +25,5 @@
             Assert.AreEqual(true, number >= 0 || number <= 20);
         }
 
-        public void IsRandomReturnNumberBetweenMinAndMaxInput()
-        {
-            RandomGenerator random = new RandomGenerator();
-            int number = random.Next(-20, 20);
-
-            Assert.AreEqual(true, number >= -20 || number <= 20);
-        }
     }
 }
